@@ -477,7 +477,7 @@ function gameRenderPost() {
 	if (gameBottomTopText)
 		gameDrawHudText(gameBottomTopText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
 
-	if (player) player.renderTop(); // On top of everything !
+	// if (player) player.renderTop(); // On top of everything !
 
 	if (inputPlaybackDemo) {
 		if ((time * 2) % 2 > 1) {

@@ -2,57 +2,18 @@
 
 class Player extends EngineObject {
 	constructor(pos) {
-		super(pos, vec2(0.6, 0.95), tile());
-
-		// this.hitWallTime = time;
-		// this.jumpTime = -1;
+		super(pos, vec2(2, 1), tile());
 
 		this.drawSize = vec2(1.3);
 		this.renderOrder = 10;
-		// this.walkCyclePercent = 0;
 		this.alive = true;
 
 		this.setCollision(true, true);
 
-		// this.lastBlockXTime = time;
+		this.gravityScale = .1; // default gravity
 
-		// this.friction = 1;
-		// this.walkFrame = 0;
-
-		// this.forceJumpY = 0.3;
-		// this.forceWallJumpX = 0.15;
-
-		// this.maxXSpeed = 0.2;
-		// this.xAccelGround = 0.006;
-
-		// this.xSpeed = 0;
-
-		// this.jumpBreaked = false;
-
-		// this.jumpingOffScreen = false;
-		// this.doFlap = false;
-		// this.groundTime = -1; // last time we touched ground
+		this.xSpeed = 1;
 	}
-
-	// jumpToNextLevel() {
-	// 	this.setCollision(false, false, false);
-
-	// 	let height = (levelSize.y - this.pos.y) / levelSize.y;
-
-	// 	this.forceJumpY = 0.15 + height / 4;
-
-	// 	this.velocity.x /= 2;
-	// 	this.jumpingOffScreen = true;
-	// 	this.gravityScale = 0.1;
-	// 	this.angleDamping = 0.9;
-	// 	this.damping = 0.99;
-	// 	this.doFlap = false;
-
-	// 	if (this.mirror) {
-	// 		this.velocity.x *= -1;
-	// 		this.mirror = false;
-	// 	}
-	// }
 
 	update() {
 		if (gameState == GameState.GAME_OVER) return;
@@ -186,53 +147,36 @@ class Player extends EngineObject {
 		super.update();
 	}
 
-	render() {}
+	// render() {}
 
 	kill(resetTime = false) {
 		if (!this.alive) return;
 
 		// gameLastDiedOnLevel = level;
 
-		// sound_splat.play(this.pos);
-		// makeBlood(this.pos, 100);
-
-		// setTimeout(() => sound_squark.play(this.pos, 2, 0.8), 200);
+		sound_splat.play(this.pos);
+		makeBlood(this.pos, 100);
 
 		// //sound_die.play(this.pos);
 
-		// this.alive = false;
+		this.alive = false;
 
-		// this.size = this.size.scale(0.5);
-		// this.angleDamping = 0.9;
-		// this.renderOrder = -1; // move to back layer
+		this.size = this.size.scale(0.5);
+		
+		this.setCollision(false, false);
 
-		// this.setCollision(false, false);
+		lives--;
 
-		// lives--;
+		setTimeout(() => {
+			if (lives == 0) {
+				gameSetState(GameState.GAME_OVER);
+				return;
+			}
 
-		// setTimeout(() => {
-		// 	if (lives == 0) {
-		// 		gameSetState(GameState.GAME_OVER);
-		// 		return;
-		// 	}
-
-		// 	levelSpawnPlayer();
-		// 	if (resetTime) levelStartTime = time;
-		// }, 1000);
+			levelSpawnPlayer();
+			if (resetTime) levelStartTime = time;
+		}, 1000);
 	}
-
-	// onBlockedX() {
-	// 	if (time - this.lastBlockXTime < 0.1) return;
-	// 	this.lastBlockXTime = time;
-
-	// 	this.mirror = !this.mirror;
-	// 	this.velocity.x = -this.xSpeed / 3;
-
-	// 	this.hitWallTime = time;
-
-	// 	sound_dodge.play(this.pos);
-	// 	makeSmoke(this.pos.add(vec2(this.mirror ? 0.5 : -0.5, 0)));
-	// }
 
 	collideWithTile(tile, pos) {
 		this.kill(true);

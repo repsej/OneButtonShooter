@@ -54,7 +54,7 @@ function levelLoad(levelNumber) {
 	// create table for tiles in the level tilemap
 	const tileLookup = {
 		coin: 2,
-		player: 0,
+		player: 1,
 		ground: 5,
 		water: 4,
 
@@ -87,18 +87,17 @@ function levelLoad(levelNumber) {
 			switch (tile) {
 				case tileLookup.coin:
 					new Coin(objectPos);
-					continue;
+					break;
 
 				case tileLookup.player:
 					playerStartPos = objectPos;
-					continue;
+					break;
 
 				default: // Stuff with collision
 					levelSetTileData(pos, 0, tile);
 					setTileCollisionData(pos, tileType_ground);
 
-					let direction = 0,
-						mirror = 0;
+					let direction = 0, mirror = 0;
 
 					// if (tile == tileLookup.ground) {
 					// 	direction = randInt(4);
