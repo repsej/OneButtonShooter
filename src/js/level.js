@@ -55,15 +55,15 @@ function levelLoad(levelNumber) {
 	const tileLookup = {
 		empty: 0,
 		player: 1,
-		coin: 2,
-		water: 4,
-		ground: 5,
+		coin: 3,
+		water: 5,
+		ground: 6,
 
-		islandBeachLeft: 6,
-		islandSandPalmLower: 7,
-		islandSand: 8,
-		islandBeachRight: 9,
-		palmUpper: 10,
+		islandBeachLeft: 7,
+		islandSandPalmLower: 8,
+		islandSand: 9,
+		islandBeachRight: 10,
+		palmUpper: 11,
 	};
 
 	// set all level data tiles

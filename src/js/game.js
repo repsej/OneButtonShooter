@@ -51,7 +51,7 @@ function gameInit() {
 	lives = LIVES_START;
 	titleSize = 7;
 
-	musicOn = IS_RELEASE;
+	musicOn = false; // XXX For now
 
 	levelBuild(level);
 	musicInit(level);
@@ -138,6 +138,8 @@ function gameUpdate() {
 
 	musicUpdate();
 
+ 	cameraPos = cameraPos.lerp(player.pos, 0.05);
+
 	switch (gameState) {
 		case GameState.WON:
 			// if (gameBonusUpdate()) {
@@ -145,7 +147,6 @@ function gameUpdate() {
 			// }
 
 			// VictoryRocket.spawnRandom();
-			// cameraPos = cameraPos.lerp(player.pos, 0.05);
 			// if (time - levelStartTime > 7) {
 			// 	if (!gameBottomText) sound_exitAppear.play();
 			// 	gameBottomText = "[Press jump to start new game]";
