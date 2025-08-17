@@ -3,31 +3,37 @@
 ///////////////////////////////////////////////////////////////////////////////
 // sound effects
 
-//const sound_die = new Sound([1.4, , 100, 0.07, 0.02, 0.04, 2, 0.5, , , -500, 0.2, , , 0.1, , 0.1, 0.86, 0.38, , 15]);
-const sound_jump = new Sound([0.4, 0.2, 250, 0.04, , 0.04, , , 1, , , , , 3]);
-const sound_dodge = new Sound([0.4, 0.2, 150, 0.05, , 0.05, , , -1, , , , , 4, , , , , 0.02]);
-const sound_walk = new Sound([0.3, 0.1, 50, 0.005, , 0.01, 4, , , , , , , , 10, , , 0.5]);
+const sound_wind = new Sound([,.01,500,.1,.3,,,0,,,,,,2,,,,,,,1e3]); // Random 6 - Mutation 3
+const sound_engine =new Sound([2.1,,1e3,.1,.3,.03,1,.5,,,,.03,.06,.9,33,,,.54,,.37]); // Random 8
+
 const sound_score = new Sound([1.04, 0, 2e3, , 0.02, 0.01, , 2.2, , , 50, , , , , , , 0.5, 0.01]); // Loaded Sound 1197
-
-// prettier-ignore
-const sound_splat = new Sound([2,.1,523.2511,.13,,.12,4,1.23,-46.2,,-100,.01,.01,,114,,.21,.85,.05]); // Loaded Sound 1385
-
-// prettier-ignore
-const sound_squark = new Sound([1, 0.2, 600, 0.05, 0.13, 0.13, 2, 0.5, 50, , 10, 0.11, 0.02, , 20, 0.12, , , , 0.5, 5e3 ]);
+const sound_shoot =new Sound([2,,438,,,.08,3,1.2,-11,,,,,,,.5,.2,.55,.07,,208]); // Shoot 43
 
 // prettier-ignore
 const sound_explosion = new Sound([4,.5,802,.1,.05,.5,4,4.59,,,,,,1.2,,2,.21,.31,.1,.1]);
 
+
+
+// const sound_jump = new Sound([0.4, 0.2, 250, 0.04, , 0.04, , , 1, , , , , 3]);
+// const sound_dodge = new Sound([0.4, 0.2, 150, 0.05, , 0.05, , , -1, , , , , 4, , , , , 0.02]);
+// const sound_walk = new Sound([0.3, 0.1, 50, 0.005, , 0.01, 4, , , , , , , , 10, , , 0.5]);
+
 // prettier-ignore
-const sound_exit = new Sound([.7,,118,.03,.28,.41,1,.2,-6,-162,-109,.05,.1,,,,,.51,.27,.06,496]); // Powerup 1173
+// const sound_splat = new Sound([2,.1,523.2511,.13,,.12,4,1.23,-46.2,,-100,.01,.01,,114,,.21,.85,.05]); // Loaded Sound 1385
 
-const sound_exitAppear = new Sound([, , 336, 0.03, 0.21, 0.3, , 2.1, , -22, , , 0.1, 0.4, , , , 0.77, 0.12]); // Powerup 1180
+// prettier-ignore
+// const sound_squark = new Sound([1, 0.2, 600, 0.05, 0.13, 0.13, 2, 0.5, 50, , 10, 0.11, 0.02, , 20, 0.12, , , , 0.5, 5e3 ]);
 
-const sound_rocketFly = new Sound([0.2, 0.1, 1e3, , 0.2, 2, , 0, -0.1, , , , , 0.3, , , , , 0.15]);
 
-// No getting fainter w range
-sound_explosion.range = 0;
-sound_rocketFly.range = 0;
+// prettier-ignore
+// const sound_exit = new Sound([.7,,118,.03,.28,.41,1,.2,-6,-162,-109,.05,.1,,,,,.51,.27,.06,496]); // Powerup 1173
+
+// const sound_exitAppear = new Sound([, , 336, 0.03, 0.21, 0.3, , 2.1, , -22, , , 0.1, 0.4, , , , 0.77, 0.12]); // Powerup 1180
+
+// const sound_rocketFly = new Sound([0.2, 0.1, 1e3, , 0.2, 2, , 0, -0.1, , , , , 0.3, , , , , 0.15]);
+
+// // No getting fainter w range
+// sound_rocketFly.range = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // special effects

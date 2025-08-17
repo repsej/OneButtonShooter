@@ -16,7 +16,7 @@ class Player extends EngineObject {
 		this.setCollision(true, true);
 
 		this.gravityScale = .5; 
-		this.xSpeed = .05;
+		this.xSpeed = .075;
 		this.yPower = MAX_YPOWER;
 	}
 
@@ -43,6 +43,18 @@ class Player extends EngineObject {
 
 		this.velocity.x = this.xSpeed;
 
+		if (frame % 17 == 0 )
+		{
+			sound_wind.play(this.pos, .01 + this.velocity.length() / 10);
+		}
+
+		if (frame % 13 == 0)
+		{
+			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
+		}
+
+
+
 		if (inputJumpPressed())
 		{
 			// spawn bullet in front of plane
@@ -65,7 +77,7 @@ class Player extends EngineObject {
 
 		// gameLastDiedOnLevel = level;
 
-		sound_splat.play(this.pos);
+		sound_explosion.play(this.pos);
 		makeBlood(this.pos, 100);
 
 		// //sound_die.play(this.pos);

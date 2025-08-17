@@ -9,8 +9,9 @@ class Sky extends EngineObject {
 		this.renderOrder = -1e4;
 		this.seed = randInt(1e9);
 
-		this.skyColor = rgb(0, 0, 0.3);
-		this.horizonColor = rgb(0.2, 0.0, 0.0);
+		this.skyTopColor = rgb(0, 0, 1);
+		this.skyMiddleColor = rgb(0, .5, 1);
+		this.skyBottomColor = rgb(1, 0.5, .5);
 	}
 
 	render() {
@@ -18,9 +19,13 @@ class Sky extends EngineObject {
 		const gradient = mainContext.createLinearGradient(0, 0, 0, mainCanvas.height);
 
 		// @ts-ignore
-		gradient.addColorStop(0, this.skyColor);
+		gradient.addColorStop(0, this.skyTopColor);
+
 		// @ts-ignore
-		gradient.addColorStop(1, this.horizonColor);
+		gradient.addColorStop(0.5, this.skyMiddleColor);
+
+		// @ts-ignore
+		gradient.addColorStop(1, this.skyBottomColor);
 
 		// let horizon = 0.8;
 		// let islandThickness = 0.05;
@@ -41,9 +46,9 @@ class Sky extends EngineObject {
 		mainContext.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 		mainContext.globalCompositeOperation = "lighter";
 
-		// draw stars
+		// draw clouds
 		const random = new RandomGenerator(this.seed);
-		for (let i = 100 + Math.floor((mainCanvas.width * mainCanvas.height) / 1500); i--; ) {
+		for (let i = 100 + Math.floor((mainCanvas.width * mainCanvas.height) / 15000); i--; ) {
 			const size = random.float(0.5, 2) ** 2;
 
 			const speed = random.float() < 0.95 ? 0 : random.float(-99, 99);
