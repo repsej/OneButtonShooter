@@ -138,7 +138,8 @@ function gameUpdate() {
 
 	musicUpdate();
 
- 	cameraPos = cameraPos.lerp(player.pos, 0.05);
+	// TODO: figure out how to make this better
+ 	cameraPos = cameraPos.lerp(player.pos.add(vec2(10, 0)), 0.05);
 
 	switch (gameState) {
 		case GameState.WON:

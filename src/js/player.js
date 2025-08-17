@@ -2,7 +2,8 @@
 
 const MAX_YSPEED = .2;
 const MAX_YPOWER = .1;
-const DY_POWER = .001;
+const DY_POWER = .0008;
+
 
 class Player extends EngineObject {
 	constructor(pos) {
@@ -16,11 +17,12 @@ class Player extends EngineObject {
 
 		this.gravityScale = .5; 
 		this.xSpeed = .05;
-		this.yPower = 0;
+		this.yPower = MAX_YPOWER;
 	}
 
 	update() {
 		if (!this.alive || gameState == GameState.GAME_OVER) return;
+
 
 		if (inputJumpHeld())
 		{
@@ -28,21 +30,32 @@ class Player extends EngineObject {
 		}
 		else
 		{
-			this.yPower /= 1.5;
+			this.yPower /= 1.4;
 		}
 
 		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
 
 		this.velocity.y += this.yPower;
 
-
-		this.angle = -this.velocity.y * 2;
+		this.angle = -this.velocity.y * 3;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
 
 		this.velocity.x = this.xSpeed;
 
+		if (inputJumpPressed())
+		{
+			// spawn bullet in front of plane
+			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
+			bulletSpeed = bulletSpeed.add(this.velocity)
+
+			const bulletPos = this.pos.add(bulletSpeed);
+
+			new Bullet(bulletPos, bulletSpeed.normalize(.3));
+		}
+
 		super.update();
+
 	}
 
 	// render() {}
