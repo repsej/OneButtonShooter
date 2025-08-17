@@ -4,7 +4,13 @@ grunt prod --force
 
 #npx uglifyjs dist/js/index_prod.js  --compress unsafe --mangle --toplevel > dist/i.ugly.js
 
-npx uglifyjs dist/js/index_prod.js  --compress unsafe --mangle --toplevel > dist/i.ugly.js
+#npx uglifyjs dist/js/index_prod.js  --compress unsafe --mangle --toplevel > dist/i.ugly.js
+
+echo "uglify-js start"
+
+npx uglify-js dist/js/index_prod.js --compress unsafe --mangle --toplevel > dist/i.ugly.js
+
+echo "uglify-js done"
 
 #cp dist/js/index_prod.js dist/i.ugly.js
 #cp dist/i.ugly.js dist/i.js
