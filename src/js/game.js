@@ -36,7 +36,7 @@ function gameInit() {
 	spriteAtlas = {
 		coin: tile(2),
 		blob: tile(3),
-		playerPlane: tile(vec2(0), vec2(32, 16)),
+		playerPlane: tile(vec2(0,0), vec2(32, 16)),
 		//title: tile(vec2(48, 32), vec2(48, 32)),
 	};
 
@@ -50,6 +50,8 @@ function gameInit() {
 
 	lives = LIVES_START;
 	titleSize = 7;
+
+	musicOn = IS_RELEASE;
 
 	levelBuild(level);
 	musicInit(level);

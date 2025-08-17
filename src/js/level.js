@@ -53,10 +53,11 @@ function levelLoad(levelNumber) {
 
 	// create table for tiles in the level tilemap
 	const tileLookup = {
-		coin: 2,
+		empty: 0,
 		player: 1,
-		ground: 5,
+		coin: 2,
 		water: 4,
+		ground: 5,
 
 		islandBeachLeft: 6,
 		islandSandPalmLower: 7,
@@ -85,6 +86,9 @@ function levelLoad(levelNumber) {
 
 			// Create objects
 			switch (tile) {
+				case tileLookup.empty:
+					break;
+
 				case tileLookup.coin:
 					new Coin(objectPos);
 					break;

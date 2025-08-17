@@ -2,7 +2,7 @@
 
 class Player extends EngineObject {
 	constructor(pos) {
-		super(pos, vec2(2, 1), tile());
+		super(pos, vec2(2, 1), spriteAtlas.playerPlane);
 
 		this.drawSize = vec2(1.3);
 		this.renderOrder = 10;
@@ -179,6 +179,8 @@ class Player extends EngineObject {
 	}
 
 	collideWithTile(tile, pos) {
+		console.log("Hit tile", tile, pos);
+
 		this.kill(true);
 
 		return true;
