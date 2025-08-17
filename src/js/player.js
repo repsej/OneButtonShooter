@@ -1,5 +1,9 @@
 /** @format */
 
+const MAX_YSPEED = .2;
+const MAX_YPOWER = .1;
+const DY_POWER = .001;
+
 class Player extends EngineObject {
 	constructor(pos) {
 		super(pos, vec2(2, 1), spriteAtlas.playerPlane);
@@ -10,26 +14,31 @@ class Player extends EngineObject {
 
 		this.setCollision(true, true);
 
-
-		
 		this.gravityScale = .5; 
-
 		this.xSpeed = .05;
+		this.yPower = 0;
 	}
 
 	update() {
 		if (!this.alive || gameState == GameState.GAME_OVER) return;
 
-
 		if (inputJumpHeld())
 		{
-			this.velocity.y += this.gravityScale * .05;
+			this.yPower += DY_POWER;
 		}
+		else
+		{
+			this.yPower /= 1.5;
+		}
+
+		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
+
+		this.velocity.y += this.yPower;
+
 
 		this.angle = -this.velocity.y * 2;
 
-
-		this.velocity.y = clamp(this.velocity.y, -1, 1);
+		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
 
 		this.velocity.x = this.xSpeed;
 
