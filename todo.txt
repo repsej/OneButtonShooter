@@ -1,3 +1,4 @@
 TODO:
- - Make plane fly
- - 
+ - Make zip smaller ?? Why so big ?  Wrong littlejs.js ??
+ - Add enemies: planes, balloons, ships, ??
+ - Make level much much longer ... or generate ?

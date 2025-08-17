@@ -138,7 +138,7 @@ function makeSmoke(pos, force = 1) {
 		rgb(1, 1, 1),
 		rgb(1, 1, 1),
 		0.4, // time
-		0.3 + 0.1 * force, // sizeStart
+		0.1 + 0.1 * force, // sizeStart
 		0.01, // sizeEnd
 		force * 0.001, // speed
 		0.1, // angleSpeed

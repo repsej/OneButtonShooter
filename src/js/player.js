@@ -1,8 +1,9 @@
 /** @format */
 
 const MAX_YSPEED = .2;
-const MAX_YPOWER = .1;
-const DY_POWER = .0008;
+const MAX_YPOWER = .01;
+const DY_POWER = .0005;
+const PLAYER_GRAVITY = .4;
 
 
 class Player extends EngineObject {
@@ -15,7 +16,7 @@ class Player extends EngineObject {
 
 		this.setCollision(true, true);
 
-		this.gravityScale = .5; 
+		this.gravityScale = PLAYER_GRAVITY; 
 		this.xSpeed = .075;
 		this.yPower = MAX_YPOWER;
 	}
@@ -34,25 +35,11 @@ class Player extends EngineObject {
 		}
 
 		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
-
 		this.velocity.y += this.yPower;
-
 		this.angle = -this.velocity.y * 3;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
-
 		this.velocity.x = this.xSpeed;
-
-		if (frame % 17 == 0 )
-		{
-			sound_wind.play(this.pos, .01 + this.velocity.length() / 10);
-		}
-
-		if (frame % 13 == 0)
-		{
-			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
-		}
-
 
 
 		if (inputJumpPressed())
@@ -68,6 +55,17 @@ class Player extends EngineObject {
 
 		super.update();
 
+		if (frame % 17 == 0 )
+		{
+			sound_wind.play(this.pos, .01 + this.velocity.length() / 10);
+		}
+
+		if (frame % 13 == 0)
+		{
+			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
+		}
+
+		makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
 	}
 
 	// render() {}
