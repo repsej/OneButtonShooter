@@ -18,8 +18,10 @@ class Bullet extends EngineObject {
 		super.destroy();
 
 		sound_shoot.play(this.pos, .5, .3);
-		makeCollectEffect(this.pos, 0.1);
-		makeDebris(this.pos, new Color(0.5, 1, 1), randInt(5, 10), 0.05, 0.1, 0.05);		
+		makeSmoke(this.pos,1);
+		
+		//makeCollectEffect(this.pos, 0.1);
+		//makeDebris(this.pos, new Color(0.5, 1, 1), randInt(5, 10), 0.05, 0.1, 0.05);		
 	}
 
 	collideWithTile(pos, layer) {

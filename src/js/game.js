@@ -24,6 +24,7 @@ let gameNewHiscoreStatus = undefined;
 let gameBlinkFrames = 0;
 let cameraShake = vec2();
 let gameLastDiedOnLevel = undefined;
+let showHeight = 20;
 
 let title;
 
@@ -63,7 +64,9 @@ function gameInit() {
 	gameBottomTopText = undefined;
 	gameBlinkFrames = 15;
 
-	// inputPlaybackDemo = false;
+	showHeight = levelSize.y * 1.5; // Show some more air above the level
+
+	cameraScale = mainCanvas.height / showHeight;
 
 	if (isTouchDevice) particleEmitRateScale = 0.5;
 }
@@ -120,8 +123,18 @@ function gameUpdate() {
 
 	musicUpdate();
 
-	// TODO: figure out how to make this better
- 	cameraPos = cameraPos.lerp(player.pos.add(vec2(10, 0)), 0.05);
+
+	let camSize = getCameraSize();
+
+	// Camera follows the player
+ 	cameraPos = cameraPos.lerp(player.pos.add(vec2(camSize.x / 3, 0)), 0.05);
+
+	// Clamp camera's y position downwards
+	cameraPos.y = max(cameraPos.y, camSize.y / 2);
+
+
+	// gameBottomText = "camY=" +cameraPos.y.toFixed(2) + "    playerY=" + player.pos.y.toFixed(2);
+
 
 	switch (gameState) {
 		case GameState.WON:
@@ -214,7 +227,7 @@ function gameUpdate() {
 			// 	gameBottomText = "Chamber " + level + " of 13";
 			// 	// if (levelTexts[level]) gameBottomText += ". " + levelTexts[level];
 			// }
-			// cameraScale = min(mainCanvas.width / levelSize.x, mainCanvas.height / levelSize.y);
+
 			// cameraPos = levelSize.scale(0.5);
 			break;
 	}

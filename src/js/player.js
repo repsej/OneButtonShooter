@@ -5,6 +5,8 @@ const MAX_YPOWER = .01;
 const DY_POWER = .0005;
 const PLAYER_GRAVITY = .4;
 
+const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxygen left up here ... qed
+
 
 class Player extends EngineObject {
 	constructor(pos) {
@@ -25,7 +27,7 @@ class Player extends EngineObject {
 		if (!this.alive || gameState == GameState.GAME_OVER) return;
 
 
-		if (inputJumpHeld())
+		if (inputJumpHeld() && this.pos.y < MAX_FLYING_HEIGHT)
 		{
 			this.yPower += DY_POWER;
 		}
@@ -65,7 +67,7 @@ class Player extends EngineObject {
 			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
 		}
 
-		makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
+		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
 	}
 
 	// render() {}
