@@ -78,12 +78,19 @@ class Player extends EngineObject {
 		// gameLastDiedOnLevel = level;
 
 		sound_explosion.play(this.pos);
-		makeBlood(this.pos, 100);
+		//makeBlood(this.pos, 100);
 
-		// //sound_die.play(this.pos);
+		// smoke
+		for (let i = 0; i < 10; i++) {
+			setTimeout( () => makeSmoke(this.pos.add(randInCircle(.1)), rand(5,10)), i * 30);
+		}
+
+		// explosion ... ugly !
+		makeDebris(this.pos, new Color(1, 1, 0), randInt(5, 10), 0.15, 0.1, 0.05);
+		makeDebris(this.pos, new Color(1, 0, 0), randInt(5, 10), 0.15, 0.1, 0.05);
 
 		this.alive = false;
-
+		
 		this.size = this.size.scale(0.5);
 		
 		this.setCollision(false, false);

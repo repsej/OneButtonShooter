@@ -1,10 +1,11 @@
 TODO: 
+
  - Press to start
- - Clouds
  - Enemy planes
  - Barrage balloons
  - Ships
  - AA guns
+ - Nicer explosions
 
  - Make level much much longer ... or generate ?
 

@@ -6,7 +6,7 @@ class Bullet extends EngineObject {
 		this.setCollision(true, false, true);
 		this.velocity = vel;
 		this.gravityScale = 0;
-
+		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, 1);
 	}
 
@@ -18,9 +18,8 @@ class Bullet extends EngineObject {
 		super.destroy();
 
 		sound_shoot.play(this.pos, .5, .3);
-		makeSmoke(this.pos,1);
+		makeSmoke(this.pos, rand(1,2));
 		
-		//makeCollectEffect(this.pos, 0.1);
 		//makeDebris(this.pos, new Color(0.5, 1, 1), randInt(5, 10), 0.05, 0.1, 0.05);		
 	}
 
