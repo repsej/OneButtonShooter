@@ -136,7 +136,10 @@ function gameUpdate() {
 			break;
 
 		case GameState.GAME_OVER:
-			// gameBottomText = "Chamber " + level + " of 13";
+			if (inputJumpReleased(true)) gameInit();
+
+
+		// gameBottomText = "Chamber " + level + " of 13";
 
 			// if (time - levelStartTime > 5) {
 			// 	if (!gameBottomText) sound_exitAppear.play();
@@ -386,7 +389,7 @@ function gameRenderPost() {
 			gameDrawScoreStuff(halfTile);
 
 			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.15, 5);
-			gameDrawHudText("Beware the danger of 13 !", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 2);
+			// gameDrawHudText("Beware the danger of 13 !", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 2);
 
 			break;
 

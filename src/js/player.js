@@ -57,7 +57,7 @@ class Player extends EngineObject {
 
 		if (frame % 17 == 0 )
 		{
-			sound_wind.play(this.pos, .01 + this.velocity.length() / 10);
+			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
 		}
 
 		if (frame % 13 == 0)

@@ -1,4 +1,11 @@
-TODO:
- - Make zip smaller ?? Why so big ?  Wrong littlejs.js ??
- - Add enemies: planes, balloons, ships, ??
+TODO: 
+ - Press to start
+ - Clouds
+ - Enemy planes
+ - Barrage balloons
+ - Ships
+ - AA guns
+
  - Make level much much longer ... or generate ?
+
+
