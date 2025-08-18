@@ -34,6 +34,8 @@ function gameInit() {
 		coin: tile(2),
 		blob: tile(3),
 		playerPlane: tile(vec2(0,0), vec2(32, 16)),
+		cloud: tile(10),
+
 		//title: tile(vec2(48, 32), vec2(48, 32)),
 	};
 

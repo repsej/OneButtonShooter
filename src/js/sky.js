@@ -45,26 +45,38 @@ class Sky extends EngineObject {
 		mainContext.fillStyle = gradient;
 		mainContext.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 		mainContext.globalCompositeOperation = "lighter";
+		// mainContext.restore();
+
 
 		// draw clouds
 		const random = new RandomGenerator(this.seed);
-		for (let i = 100 + Math.floor((mainCanvas.width * mainCanvas.height) / 15000); i--; ) {
-			const size = random.float(0.5, 2) ** 2;
+		let clouds = mainCanvas.width / 150;
 
-			const speed = random.float() < 0.95 ? 0 : random.float(-99, 99);
-			const color = hsl(random.float(-0.3, 0.2), random.float(), random.float());
-			const w = mainCanvas.width,
-				h = mainCanvas.height;
+		for (let i = clouds; i > 0; i-- ) {
+			const size = 50 * random.float(1, 2) ** 2;
+			const speed = 0; // random.float() < 0.95 ? 0 : random.float(-99, 99);
+			const w = mainCanvas.width * 2,
+				h = mainCanvas.height / 10;
 
-			let camMult = size * 3;
+			let camMult = size / 10;
 
 			const screenPos = vec2(
 				mod(random.float(w) + time * speed - cameraPos.x * camMult, w),
-				mod(random.float(h) + time * abs(speed) * random.float() + cameraPos.y * camMult, h)
+				random.float(h) + time * abs(speed) * random.float() + cameraPos.y * camMult - size
 			);
+
+			//screenPos.y -= mainCanvas.height * 0.5;
+			screenPos.x -= mainCanvas.width * 0.5;
+
 			// @ts-ignore
-			mainContext.fillStyle = color;
-			mainContext.fillRect(screenPos.x, screenPos.y, size, size);
+			// mainContext.fillStyle = color;
+			// mainContext.fillRect(screenPos.x, screenPos.y, size, size);
+
+
+			// drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
+			//drawRect(screenPos, vec2(size, size), new Color(1, 1, 1, .1), 0, undefined, true);
+
+			drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
 
 			// reflection
 			// mainContext.fillRect(
