@@ -12,19 +12,32 @@ class Player extends EngineObject {
 	constructor(pos) {
 		super(pos, vec2(2, 1), spriteAtlas.playerPlane);
 
-		this.drawSize = vec2(1.3);
+		//this.drawSize = vec2(1.3);
 		this.renderOrder = 10;
 		this.alive = true;
 
 		this.setCollision(true, true);
 
-		this.gravityScale = PLAYER_GRAVITY; 
-		this.xSpeed = .075;
-		this.yPower = MAX_YPOWER;
+		gameBottomText = "[Click to start flying]";
+
+		this.gravityScale = 0;
 	}
 
 	update() {
 		if (!this.alive || gameState == GameState.GAME_OVER) return;
+
+		if (this.gravityScale == 0)
+		{
+			if (inputJumpPressed()){
+				gameBottomText = undefined;
+
+				this.yPower = MAX_YPOWER / 2;
+				this.gravityScale = PLAYER_GRAVITY; 
+				this.xSpeed = .075;
+			}
+
+			return;
+		}
 
 
 		if (inputJumpHeld() && this.pos.y < MAX_FLYING_HEIGHT)
@@ -90,8 +103,8 @@ class Player extends EngineObject {
 		makeDebris(this.pos, new Color(1, 0, 0), randInt(5, 10), 0.15, 0.1, 0.05);
 
 		this.alive = false;
-		
-		this.size = this.size.scale(0.5);
+
+		//this.size = this.size.scale(0.5);
 		
 		this.setCollision(false, false);
 
@@ -105,7 +118,7 @@ class Player extends EngineObject {
 
 			levelSpawnPlayer();
 			if (resetTime) levelStartTime = time;
-		}, 1000);
+		}, 2000);
 	}
 
 	collideWithTile(tile, pos) {

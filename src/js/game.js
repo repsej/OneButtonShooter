@@ -60,11 +60,12 @@ function gameInit() {
 	// title.setCollision(false, false, false);
 	// title.gravityScale = 0;
 
-	gameBottomText = undefined;
-	gameBottomTopText = undefined;
-	gameBlinkFrames = 15;
+	// gameBottomText = undefined;
+	// gameBottomTopText = undefined;
+	// gameBlinkFrames = 15;
 
-	showHeight = levelSize.y * 1.5; // Show some more air above the level
+	
+	showHeight = levelSize.y * 1.2; // Show some more air above the level
 
 	cameraScale = mainCanvas.height / showHeight;
 
@@ -131,6 +132,9 @@ function gameUpdate() {
 
 	// Clamp camera's y position downwards
 	cameraPos.y = max(cameraPos.y, camSize.y / 2);
+
+	// Clamp camera's x position
+	cameraPos.x = clamp(cameraPos.x, camSize.x / 2, levelSize.x - camSize.x / 2);
 
 
 	// gameBottomText = "camY=" +cameraPos.y.toFixed(2) + "    playerY=" + player.pos.y.toFixed(2);
