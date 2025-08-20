@@ -8,7 +8,7 @@ class Bullet extends EngineObject {
 		this.gravityScale = 0;
 		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, 1);
-		this.life=60;
+		this.life=80;
 	}
 
 	update() {

@@ -33,19 +33,19 @@ function savefileUpdateNumber(key, value, defaultValue = 0.0) {
 }
 
 function savefileHiscoreGet() {
-	return savefileGetNumber("dodo_hs", 0);
+	return savefileGetNumber("bcs_hs", 0);
 }
 
 function savefileHiscoreUpdate(score) {
-	return savefileUpdateNumber("dodo_hs", score);
+	return savefileUpdateNumber("bcs_hs", score);
 }
 
 function savefileTimeGet(level) {
-	return savefileGetNumber("dodo_level" + level);
+	return savefileGetNumber("bcs_level" + level);
 }
 
 function savefileTimeBonusUpdate(level, time) {
-	return savefileUpdateNumber("dodo_level" + level, time);
+	return savefileUpdateNumber("bcs_level" + level, time);
 }
 
 function savefileSet(key, val) {
