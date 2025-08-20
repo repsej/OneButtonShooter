@@ -12,6 +12,17 @@ class Sky extends EngineObject {
 		this.skyTopColor = rgb(0, 0, 1);
 		this.skyMiddleColor = rgb(0, .5, 1);
 		this.skyBottomColor = rgb(1, 0.5, .5);
+
+		this.cloudCount = mainCanvas.width / 150;
+		this.clouds = [];
+
+		for (let i = 0; i < this.cloudCount; i++ ) {
+			const cloud = new EngineObject();
+			cloud.tileInfo = spriteAtlas.cloud;
+			this.clouds.push(cloud);
+		}
+
+		//drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
 	}
 
 	render() {
@@ -45,23 +56,22 @@ class Sky extends EngineObject {
 		mainContext.fillStyle = gradient;
 		mainContext.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 		mainContext.globalCompositeOperation = "lighter";
-		// mainContext.restore();
+		mainContext.restore();
 
 
 		// draw clouds
 		const random = new RandomGenerator(this.seed);
-		let clouds = mainCanvas.width / 150;
 
-		for (let i = clouds; i > 0; i-- ) {
-			const size = 50 * random.float(1, 2) ** 2;
+		for (let i = 0; i < this.cloudCount; i++ ) {
+			const size = random.float(1, 2) ** 2;
 			const speed = 0; // random.float() < 0.95 ? 0 : random.float(-99, 99);
 			const w = mainCanvas.width * 2,
 				h = mainCanvas.height / 10;
 
-			let camMult = size / 10;
+			let camMult = size;
 
 			const screenPos = vec2(
-				mod(random.float(w) + time * speed - cameraPos.x * camMult, w),
+				mod(random.float(w) + time * speed - cameraPos.x * camMult * 10, w),
 				random.float(h) + time * abs(speed) * random.float() + cameraPos.y * camMult - size
 			);
 
@@ -76,7 +86,12 @@ class Sky extends EngineObject {
 			// drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
 			//drawRect(screenPos, vec2(size, size), new Color(1, 1, 1, .1), 0, undefined, true);
 
-			drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
+			let cloud = this.clouds[i];
+			cloud.pos = screenToWorld(screenPos);
+			cloud.size = vec2(size * random.float(0.8, 2), size);
+			cloud.renderOrder = size;
+
+			//drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
 
 			// reflection
 			// mainContext.fillRect(
@@ -86,6 +101,6 @@ class Sky extends EngineObject {
 			// 	size
 			// );
 		}
-		mainContext.restore();
+		// mainContext.restore();
 	}
 }

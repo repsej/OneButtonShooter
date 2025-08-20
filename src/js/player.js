@@ -18,9 +18,12 @@ class Player extends EngineObject {
 
 		this.setCollision(true, true);
 
+		cameraPos = this.pos.copy();
+
 		gameBottomText = "[Click to start flying]";
 
 		this.gravityScale = 0;
+		gameBlinkFrames = 15;
 	}
 
 	update() {
@@ -83,7 +86,13 @@ class Player extends EngineObject {
 		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
 	}
 
-	// render() {}
+	render() {
+
+		// blink before starting level
+		if (this.gravityScale == 0 && (frame / 10) % 2 < 1) return;
+
+		super.render();
+	}
 
 	kill(resetTime = false) {
 		if (!this.alive) return;
