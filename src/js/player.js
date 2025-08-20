@@ -62,7 +62,7 @@ class Player extends EngineObject {
 		this.velocity.x = this.xSpeed;
 
 
-		if (inputJumpPressed())
+		if (inputJumpPressed() || inputJumpReleased())
 		{
 			// spawn bullet in front of plane
 			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
