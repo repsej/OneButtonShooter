@@ -46,6 +46,20 @@ module.exports = function (grunt) {
 			},
 		},
 
+
+		copy: {
+			images: {
+				files: [
+				{
+					expand: true,
+					cwd: 'src/gfx/',
+					src: ['tiles.png'],
+					dest: 'dist/',
+				},
+				],
+			},
+		},
+
 		image: {
 			dev: {
 				options: {
@@ -188,11 +202,11 @@ module.exports = function (grunt) {
 
 	grunt.registerTask("dev", ["watch"]);
 
-	grunt.registerTask("build", ["clean", "processMap", "setIsNotRelease", "concat:dev", "concat:shared", "image:dev"]);
+	grunt.registerTask("build", ["clean", "processMap", "setIsNotRelease", "concat:dev", "concat:shared", "copy:images", "image:dev"]);
 
 	grunt.registerTask("default", ["build", "http-server", "dev"]);
 
-	grunt.registerTask("prod", ["clean", "processMap", "setIsRelease", "image:prod", "concat:shared", "concat:prod"]);
+	grunt.registerTask("prod", ["clean", "processMap", "setIsRelease", "copy:images", "image:prod", "concat:shared", "concat:prod"]);
 
 	grunt.registerTask("web", ["http-server", "dev"]);
 };

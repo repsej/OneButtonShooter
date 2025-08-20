@@ -17,7 +17,7 @@ const LIVE_BONUS_SCORE = 5000;
 const LIVES_START = 3;
 
 let gameBottomText = undefined;
-let gameBottomTopText = undefined;
+//let gameBottomTopText = undefined;
 let lives = undefined;
 let titleSize;
 let gameNewHiscoreStatus = undefined;
@@ -74,7 +74,7 @@ function gameInit() {
 
 function gameSetState(newState) {
 	gameBottomText = undefined;
-	gameBottomTopText = undefined;
+	//gameBottomTopText = undefined;
 
 	gameState = newState;
 
@@ -266,14 +266,6 @@ function gameUpdate() {
 		// Next level
 		if (keyWasPressed("KeyN")) gameNextLevel();
 
-		// Start demo
-		if (keyWasPressed("KeyD")) {
-			if (level == 0) {
-				gameNextLevel();
-				inputPlaybackDemo = true;
-			}
-		}
-
 		// Retry level
 		if (keyWasPressed("KeyR")) gameSkipToLevel(level);
 	}
@@ -292,7 +284,15 @@ function gameCameraShake(strength = 1) {
 	cameraShake = cameraShake.add(randInCircle(strength, strength / 2));
 }
 
-function gameUpdatePost() {}
+function gameUpdatePost() {
+
+	if (!IS_RELEASE)
+	{
+		if (keyWasPressed("KeyP")) {
+			paused = !paused;
+		}
+	}
+}
 
 function gameSkipToLevel(newLevel) {
 	// gameBottomText = undefined;
@@ -429,10 +429,11 @@ function gameRenderPost() {
 			break;
 	}
 
-	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile);
+	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
 
-	if (gameBottomTopText)
-		gameDrawHudText(gameBottomTopText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
+
+	// if (gameBottomTopText)
+	// 	gameDrawHudText(gameBottomTopText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
 
 	// if (player) player.renderTop(); // On top of everything !
 

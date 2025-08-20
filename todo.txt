@@ -1,6 +1,7 @@
 TODO: 
 
- - Press to start
+
+ - Blink plane while waiting to start
  - Enemy planes
  - Barrage balloons
  - Ships
@@ -9,4 +10,5 @@ TODO:
 
  - Make level much much longer ... or generate ?
 
+ - Enable webgl rendering (and remove non webgl) ??? Doable w newer Littljs ?
 
