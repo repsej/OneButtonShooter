@@ -10,9 +10,9 @@ const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxy
 
 class Player extends EngineObject {
 	constructor(pos) {
-		super(pos, vec2(2, 1), spriteAtlas.playerPlane);
+		super(pos, vec2(2, .5), spriteAtlas.playerPlane);
 
-		//this.drawSize = vec2(1.3);
+		this.drawSize = vec2(2,1);
 		this.renderOrder = 10;
 		this.alive = true;
 
@@ -27,6 +27,9 @@ class Player extends EngineObject {
 	}
 
 	update() {
+		super.update();
+		this.angle = -this.velocity.y * 3;
+		
 		if (!this.alive || gameState == GameState.GAME_OVER) return;
 
 		if (this.gravityScale == 0)
@@ -54,7 +57,6 @@ class Player extends EngineObject {
 
 		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
 		this.velocity.y += this.yPower;
-		this.angle = -this.velocity.y * 3;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
 		this.velocity.x = this.xSpeed;
@@ -70,8 +72,6 @@ class Player extends EngineObject {
 
 			new Bullet(bulletPos, bulletSpeed.normalize(.3));
 		}
-
-		super.update();
 
 		if (frame % 17 == 0 )
 		{
@@ -94,27 +94,11 @@ class Player extends EngineObject {
 		super.render();
 	}
 
-	kill(resetTime = false) {
+	kill() {
 		if (!this.alive) return;
 
-		// gameLastDiedOnLevel = level;
-
-		sound_explosion.play(this.pos);
-		//makeBlood(this.pos, 100);
-
-		// smoke
-		for (let i = 0; i < 10; i++) {
-			setTimeout( () => makeSmoke(this.pos.add(randInCircle(.1)), rand(5,10)), i * 30);
-		}
-
-		// explosion ... ugly !
-		makeDebris(this.pos, new Color(1, 1, 0), randInt(5, 10), 0.15, 0.1, 0.05);
-		makeDebris(this.pos, new Color(1, 0, 0), randInt(5, 10), 0.15, 0.1, 0.05);
-
+		makeExplosion(this.pos);
 		this.alive = false;
-
-		//this.size = this.size.scale(0.5);
-		
 		this.setCollision(false, false);
 
 		lives--;
@@ -126,14 +110,13 @@ class Player extends EngineObject {
 			}
 
 			levelSpawnPlayer();
-			if (resetTime) levelStartTime = time;
 		}, 2000);
 	}
 
 	collideWithTile(tile, pos) {
 		console.log("Hit tile", tile, pos);
 
-		this.kill(true);
+		this.kill();
 
 		return true;
 	}

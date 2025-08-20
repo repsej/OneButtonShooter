@@ -8,22 +8,19 @@ class Bullet extends EngineObject {
 		this.gravityScale = 0;
 		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, 1);
+		this.life=60;
 	}
 
 	update() {
 		super.update();
-	}
-
-	destroy() {
-		super.destroy();
-
-		sound_shoot.play(this.pos, .5, .3);
-		makeSmoke(this.pos, rand(1,2));
-		
-		//makeDebris(this.pos, new Color(0.5, 1, 1), randInt(5, 10), 0.05, 0.1, 0.05);		
+		this.life--;
+		if (this.life <= 0) this.destroy();
 	}
 
 	collideWithTile(pos, layer) {
+		sound_shoot.play(this.pos, .5, .3);
+		makeSmoke(this.pos, rand(1,2));
+
 		this.destroy();
 		return false;
 	}

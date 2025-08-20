@@ -90,7 +90,8 @@ function levelLoad(levelNumber) {
 					break;
 
 				case tileLookup.coin:
-					new Coin(objectPos);
+					//new Coin(objectPos);
+					new Balloon(objectPos);
 					break;
 
 				case tileLookup.player:

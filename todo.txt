@@ -1,9 +1,8 @@
 TODO: 
 
+ - Destroy bullets when they go out the screen ... or max life ?
 
- - Blink plane while waiting to start
  - Enemy planes
- - Barrage balloons
  - Ships
  - AA guns
  - Nicer explosions

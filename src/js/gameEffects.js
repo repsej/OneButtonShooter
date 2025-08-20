@@ -121,3 +121,20 @@ function makeSmoke(pos, force = 1) {
 		0 // renderOrder
 	);
 }
+
+function makeExplosion(pos, force=1)
+{
+	// TODO: make force count !
+
+	sound_explosion.play(pos);
+	//makeBlood(pos, 100);
+
+	// smoke
+	for (let i = 0; i < 10; i++) {
+		setTimeout( () => makeSmoke(pos.add(randInCircle(.1)), rand(5,10)), i * 30);
+	}
+
+	// explosion ... ugly TODO: FIX!
+	makeDebris(pos, new Color(1, 1, 0), randInt(5, 10), 0.15, 0.1, 0.05);
+	makeDebris(pos, new Color(1, 0, 0), randInt(5, 10), 0.15, 0.1, 0.05);
+}
