@@ -30,7 +30,10 @@ class Player extends EngineObject {
 		super.update();
 		this.angle = -this.velocity.y * 3;
 		
-		if (!this.alive || gameState == GameState.GAME_OVER) return;
+		if (!this.alive || gameState == GameState.GAME_OVER){
+			if (frame % 3 == 0) makeSmoke(this.pos, rand(1,4));
+			return;
+		} 
 
 		if (this.gravityScale == 0)
 		{
@@ -70,7 +73,7 @@ class Player extends EngineObject {
 
 			const bulletPos = this.pos.add(bulletSpeed);
 
-			new Bullet(bulletPos, bulletSpeed.normalize(.3));
+			new Bullet(bulletPos, bulletSpeed.normalize(.3), this);
 		}
 
 		if (frame % 17 == 0 )

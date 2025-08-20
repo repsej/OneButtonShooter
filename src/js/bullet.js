@@ -1,7 +1,7 @@
 /** @format */
 
 class Bullet extends EngineObject {
-	constructor(pos, vel) {
+	constructor(pos, vel, shooter) {
 		super(pos, vec2(.2));
 		this.setCollision(true, false, true);
 		this.velocity = vel;
@@ -9,6 +9,7 @@ class Bullet extends EngineObject {
 		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, 1);
 		this.life=80;
+		this.shooter = shooter;
 	}
 
 	update() {
@@ -20,13 +21,17 @@ class Bullet extends EngineObject {
 	collideWithTile(pos, layer) {
 		sound_shoot.play(this.pos, .5, .3);
 		makeSmoke(this.pos, rand(1,2));
-
 		this.destroy();
 		return false;
 	}
 
 	collideWithObject(o) {
-		if (o == player) return false;
+		if (o == this.shooter) return false; // don't hit self
+
+		if (o.hit) o.hit(this);
+
+		sound_shoot.play(this.pos, .5, .3);
+		makeSmoke(this.pos, rand(1,2));
 		this.destroy();
 		return false;
 	}

@@ -8,6 +8,7 @@ class Balloon extends EngineObject {
 		this.drawSize = vec2(4,2)
 
 		this.setCollision(true, true, false);
+		this.hp = 3;
 	}
 
 	update(o) {
@@ -22,15 +23,9 @@ class Balloon extends EngineObject {
 		super.render();
 	}
 
-
-	collideWithObject(o) {
-		
-		if (o == player) {
-			o.kill();
-			return;
-		}
-
-		if (o instanceof Bullet) {
+	hit(b) {
+		this.hp -= 1;
+		if (this.hp <= 0) {
 			score += 10;
 			sound_score.play(this.pos);
 
@@ -40,7 +35,14 @@ class Balloon extends EngineObject {
 			new Coin(this.pos);
 			return;
 		}
+	}
 
+
+	collideWithObject(o) {		
+		if (o == player) {
+			o.kill();
+			return;
+		}
 
 		return false;
 	}
