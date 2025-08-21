@@ -126,15 +126,17 @@ function makeExplosion(pos, force=1)
 {
 	// TODO: make force count !
 
-	sound_explosion.play(pos);
+	sound_explosion.play(pos, force);
 	//makeBlood(pos, 100);
 
 	// smoke
-	for (let i = 0; i < 10; i++) {
-		setTimeout( () => makeSmoke(pos.add(randInCircle(.1)), rand(5,10)), i * 30);
+	for (let i = 0; i < 10*force; i++) {
+		setTimeout( () => {
+			makeSmoke(pos.add(randInCircle(.1)), rand(5,10)*force);
+
+			// sparks
+			makeDebris(pos, new Color(1, rand(1), 0), 1, rand(0.05, 0.15), 0, rand(0.2));
+		}, i * 30);
 	}
 
-	// explosion ... ugly TODO: FIX!
-	makeDebris(pos, new Color(1, 1, 0), randInt(5, 10), 0.15, 0.1, 0.05);
-	makeDebris(pos, new Color(1, 0, 0), randInt(5, 10), 0.15, 0.1, 0.05);
 }

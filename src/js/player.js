@@ -31,7 +31,11 @@ class Player extends EngineObject {
 		this.angle = -this.velocity.y * 3;
 		
 		if (!this.alive || gameState == GameState.GAME_OVER){
-			if (frame % 3 == 0) makeSmoke(this.pos, rand(1,4));
+			if (frame % 3 == 0){
+				makeSmoke(this.pos, rand(1,4));
+				sound_explosion.play(this.pos, rand(0.1, 0.2));
+			} 
+			
 			return;
 		} 
 
@@ -100,7 +104,8 @@ class Player extends EngineObject {
 	kill() {
 		if (!this.alive) return;
 
-		makeExplosion(this.pos);
+		makeExplosion(this.pos, 2);
+
 		this.alive = false;
 		this.setCollision(false, false);
 
