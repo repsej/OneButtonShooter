@@ -9,8 +9,9 @@ class Sky extends EngineObject {
 		this.renderOrder = -1e4;
 		this.seed = randInt(1e9);
 
-		this.skyTopColor = rgb(0, 0, 1);
-		this.skyMiddleColor = rgb(0, .5, 1);
+
+		this.skyTopColor = rgb(0, 0, .5);
+		this.skyMiddleColor = rgb(0, .25, .5);
 		this.skyBottomColor = rgb(1, 0.5, .5);
 
 		this.cloudCount = mainCanvas.width / 150;

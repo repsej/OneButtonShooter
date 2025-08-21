@@ -30,10 +30,11 @@ class Player extends EngineObject {
 		super.update();
 		this.angle = -this.velocity.y * 3;
 		
+		
 		if (!this.alive || gameState == GameState.GAME_OVER){
 			if (frame % 3 == 0){
 				makeSmoke(this.pos, rand(1,4));
-				sound_explosion.play(this.pos, rand(0.1, 0.2));
+				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
 			} 
 			
 			return;
