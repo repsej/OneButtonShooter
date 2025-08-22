@@ -33,7 +33,7 @@ class Bullet extends EngineObject {
 
 		sound_hit.play(this.pos, 1);
 		sound_shoot.play(this.pos, .5, .3);
-		makeExplosion(this.pos, .2);		
+		makeHit(this.pos, 1);
 		this.destroy();
 		return false;
 	}

@@ -1,6 +1,6 @@
 /** @format */
 
-class Balloon extends EngineObject {
+class Balloon extends Enemy {
 
 	constructor(pos) {
 		super(pos, vec2(3,1.5), spriteAtlas.balloon);
@@ -21,33 +21,5 @@ class Balloon extends EngineObject {
 	{
 		drawLine(this.pos, vec2(this.pos.x, 1), .05, new Color(0, 0, 0));
 		super.render();
-	}
-
-	hit(b) {
-		if(this.hp <= 0) return;
-
-		this.hp -= 1;
-		if (this.hp <= 0) {
-			score += 10;
-			sound_score.play(this.pos);
-
-			this.destroy();
-			makeExplosion(this.pos, 1.5);
-
-			new Coin(this.pos);
-			return;
-		}
-	}
-
-
-	collideWithObject(o) {		
-		if(this.hp <= 0) return;
-
-		if (o == player) {
-			o.kill();
-			return;
-		}
-
-		return false;
 	}
 }

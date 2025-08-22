@@ -62,6 +62,12 @@ function makeDebris(pos, color = hsl(), amount = 50, size = 0.2, elasticity = 0.
 	return emitter;
 }
 
+function makeSparks(pos, count = 5)
+{
+	makeDebris(pos, new Color(1, rand(1), 0), count, rand(0.05, 0.15), 0, rand(0.2));
+}
+
+
 function makeCollectEffect(pos, force = 1) {
 	new ParticleEmitter(
 		pos,
@@ -125,16 +131,44 @@ function makeSmoke(pos, force = 1) {
 	);
 }
 
+
+function makeFlash(pos, size=1)
+{
+	let flash = new EngineObject(pos.copy(), vec2(size), spriteAtlas.fullCircle);
+	flash.gravityScale = 0;
+	flash.renderOrder = 1000;
+	flash.color = rgb(1, 1, 1, 1);
+
+	flash.update = () => {
+		flash.size = flash.size.lerp(vec2(0), 0.05);
+	};
+
+	setTimeout(() => {
+		flash.destroy();
+	}, 500);
+}
+
+function makeHit(pos, force=1)
+{
+	sound_hit.play(pos, force);
+	makeFlash(pos, force);
+	makeSmoke(pos, rand(5,10)*force);
+	makeSparks(pos, force);
+}
+
 function makeExplosion(pos, force=1)
 {
 	sound_explosion.play(pos, force);
 
+	makeFlash(pos);
+
 	for (let i = 0; i < 2 + 8*force; i++) {
 		setTimeout( () => {
-			makeSmoke(pos.add(randInCircle(.1)), rand(5,10)*force);
+			let p = pos.add(randInCircle(force*.5));
 
-			// sparks
-			makeDebris(pos, new Color(1, rand(1), 0), 1, rand(0.05, 0.15), 0, rand(0.2));
+			if (i % 2 == 0) makeFlash(p, rand(force, force*2));
+			makeSmoke(p, rand(5,10)*force);
+			makeSparks(p, force);
 		}, i * 30);
 	}
 
