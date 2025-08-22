@@ -24,6 +24,9 @@ class Player extends EngineObject {
 
 		this.gravityScale = 0;
 		gameBlinkFrames = 15;
+
+		this.deathAngle = 0;
+
 	}
 
 	update() {
@@ -35,8 +38,12 @@ class Player extends EngineObject {
 			if (frame % 3 == 0){
 				makeSmoke(this.pos, rand(1,4));
 				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
-			} 
-			
+			} 			
+
+
+			if (this.pos.y < 1) this.velocity = this.velocity.scale(.5);
+			this.angle = this.deathAngle;
+
 			return;
 		} 
 
@@ -104,11 +111,14 @@ class Player extends EngineObject {
 
 	kill() {
 		if (!this.alive) return;
+		this.deathAngle = this.angle;
 
 		makeExplosion(this.pos, 2);
 
 		this.alive = false;
 		this.setCollision(false, false);
+
+		this.setCollision(false,false,false); // fall out of the screen
 
 		lives--;
 
@@ -123,10 +133,7 @@ class Player extends EngineObject {
 	}
 
 	collideWithTile(tile, pos) {
-		console.log("Hit tile", tile, pos);
-
 		this.kill();
-
 		return true;
 	}
 }
