@@ -334,9 +334,9 @@ function gameDrawHudText(
 	fillColor = "#fff",
 	outlineColor = "#000"
 ) {
-	let fontSize = overlayCanvas.width / 40;
+	let fontSize = overlayCanvas.height / 20;
 
-	fontSize = clamp(fontSize, 10, 20);
+	fontSize = clamp(fontSize, 5, 40);
 	fontSize *= sizeFactor;
 
 	let outlineWidth = fontSize / 10;
@@ -365,7 +365,7 @@ function gameDrawHudText(
 function gameRender() {}
 
 function gameRenderPost() {
-	let halfTile = (overlayCanvas.height * 0.5) / levelSize.y;
+	let ySpacing = overlayCanvas.height / 20;
 
 	switch (gameState) {
 		case GameState.TRANSITION:
@@ -397,16 +397,16 @@ function gameRenderPost() {
 		// fall-thru !
 
 		case GameState.PLAY:
-			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 1) / 4, halfTile);
-			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, halfTile);
+			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 1) / 4, ySpacing);
+			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
 
 
-			if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, halfTile * 3, 0.7);
+			if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, ySpacing * 3, 0.7);
 
 			break;
 
 		case GameState.GAME_OVER:
-			gameDrawScoreStuff(halfTile);
+			gameDrawScoreStuff(ySpacing);
 
 			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.15, 5);
 			// gameDrawHudText("Beware the danger of 13 !", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 2);
@@ -414,23 +414,23 @@ function gameRenderPost() {
 			break;
 
 		case GameState.WON:
-			gameDrawScoreStuff(halfTile);
+			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("FREEBIRD", overlayCanvas.width / 2, overlayCanvas.height - halfTile * 8, 4);
-			gameDrawHudText("YOU TAEK-WON-DODO", overlayCanvas.width / 2, overlayCanvas.height - halfTile * 5, 2);
+			gameDrawHudText("FREEBIRD", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 8, 4);
+			gameDrawHudText("YOU TAEK-WON-DODO", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 5, 2);
 
 			if (!isTouchDevice) {
 				gameDrawHudText(
 					"[Page up/down to change music.  Chamber " + level + "]",
 					(overlayCanvas.width * 2) / 4,
-					overlayCanvas.height - halfTile * 3
+					overlayCanvas.height - ySpacing * 3
 				);
 			}
 
 			break;
 	}
 
-	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
+	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - ySpacing * 3);
 
 
 	// if (gameBottomTopText)

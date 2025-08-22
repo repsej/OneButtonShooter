@@ -24,13 +24,15 @@ class Balloon extends EngineObject {
 	}
 
 	hit(b) {
+		if(this.hp <= 0) return;
+
 		this.hp -= 1;
 		if (this.hp <= 0) {
 			score += 10;
 			sound_score.play(this.pos);
 
 			this.destroy();
-			makeExplosion(this.pos);
+			makeExplosion(this.pos, 1.5);
 
 			new Coin(this.pos);
 			return;
@@ -39,6 +41,8 @@ class Balloon extends EngineObject {
 
 
 	collideWithObject(o) {		
+		if(this.hp <= 0) return;
+
 		if (o == player) {
 			o.kill();
 			return;

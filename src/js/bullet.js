@@ -7,7 +7,7 @@ class Bullet extends EngineObject {
 		this.velocity = vel;
 		this.gravityScale = 0;
 		this.color = rgb(1, 1, 0);
-		sound_shoot.play(this.pos, 1);
+		sound_shoot.play(this.pos, .5);
 		this.life=80;
 		this.shooter = shooter;
 	}
@@ -25,13 +25,15 @@ class Bullet extends EngineObject {
 		return false;
 	}
 
+
 	collideWithObject(o) {
 		if (o == this.shooter) return false; // don't hit self
 
 		if (o.hit) o.hit(this);
 
+		sound_hit.play(this.pos, 1);
 		sound_shoot.play(this.pos, .5, .3);
-		makeSmoke(this.pos, rand(1,2));
+		makeExplosion(this.pos, .2);		
 		this.destroy();
 		return false;
 	}
