@@ -411,7 +411,7 @@ function gameRenderPost() {
 		case GameState.GAME_OVER:
 			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.15, 5);
+			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
 			// gameDrawHudText("Beware the danger of 13 !", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 2);
 
 			break;
