@@ -17,7 +17,6 @@ class Player extends EngineObject {
 		this.alive = true;
 
 		this.setCollision(true, true);
-
 		cameraPos = this.pos.copy();
 
 		gameBottomText = "[Click to start flying]";
@@ -112,7 +111,7 @@ class Player extends EngineObject {
 		super.render();
 	}
 
-	kill() {
+	hit() {
 		if (!this.alive) return;
 
 		makeExplosion(this.pos, 2);
@@ -130,12 +129,12 @@ class Player extends EngineObject {
 				return;
 			}
 
-			levelSpawnPlayer();
+			levelBuild(level);
 		}, 2000);
 	}
 
 	collideWithTile(tile, pos) {
-		this.kill();
+		this.hit();
 		return true;
 	}
 }

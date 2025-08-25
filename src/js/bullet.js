@@ -29,7 +29,7 @@ class Bullet extends EngineObject {
 	collideWithObject(o) {
 		if (o == this.shooter) return false; // don't hit self
 
-		if (o.hit) o.hit(this);
+		if (o.hit) o.hit(1);
 
 		sound_hit.play(this.pos, 1);
 		sound_shoot.play(this.pos, .5, .3);

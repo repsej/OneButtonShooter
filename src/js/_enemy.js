@@ -5,18 +5,32 @@ class Enemy extends EngineObject {
 	constructor(pos, size, sprite) {
 		super(pos, size, sprite);
 		this.setCollision(true, true, false);
+		this.gravityScale = 0;
 		this.hp = 3;
+		this.deathGravity = 1;
 	}
 
-	hit(b) {
+	update()
+	{
+		this.angle = 3*this.velocity.y;
+		super.update();
+	}
+
+
+	hit(damage=1) {
 		if(this.hp <= 0) return;
 
-		this.hp -= 1;
+		this.hp -= damage;
 		if (this.hp <= 0) {
 			score += 10;
 			sound_score.play(this.pos);
 
-			this.destroy();
+			this.setCollision(false, false, false);
+
+			this.gravityScale = this.deathGravity;
+
+			setTimeout(() => this.destroy(), 500 );
+
 			makeExplosion(this.pos, 1.5);
 
 			new Coin(this.pos);
@@ -28,7 +42,8 @@ class Enemy extends EngineObject {
 		if(this.hp <= 0) return;
 
 		if (o == player) {
-			o.kill();
+			o.hit();
+			this.hit(this.hp)
 			return;
 		}
 

@@ -1,6 +1,6 @@
 /** @format */
 
-let spriteAtlas, score, level, transitionFrames;
+let spriteAtlas, score, level, transitionFrames, cameraSize;
 
 let bonusText, bonusAmmount, bonusGivenTime;
 
@@ -37,7 +37,7 @@ function gameInit() {
 		playerPlane: tile(vec2(0,0), vec2(32, 16)),
 		cloud: tile(10),
 		balloon: tile(11),
-		enemyPlane: tile(12, vec2(32, 16)),
+		enemyPlane: tile(vec2(12*16, 0), vec2(32, 16)),
 		fullCircle: tile(14),
 
 		
@@ -129,16 +129,16 @@ function gameUpdate() {
 	musicUpdate();
 
 
-	let camSize = getCameraSize();
+	cameraSize = getCameraSize();
 
 	// Camera follows the player
- 	cameraPos = cameraPos.lerp(player.pos.add(vec2(camSize.x / 3, 0)), 0.05);
+ 	cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x / 3, 0)), 0.05);
 
 	// Clamp camera's y position downwards
-	cameraPos.y = max(cameraPos.y, camSize.y / 2);
+	cameraPos.y = max(cameraPos.y, cameraSize.y / 2);
 
 	// Clamp camera's x position
-	cameraPos.x = clamp(cameraPos.x, camSize.x / 2, levelSize.x - camSize.x / 2);
+	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
 
 
 	// gameBottomText = "camY=" +cameraPos.y.toFixed(2) + "    playerY=" + player.pos.y.toFixed(2);
@@ -255,7 +255,7 @@ function gameUpdate() {
 		// GAME OVER
 		if (keyWasPressed("KeyG")) {
 			lives = 1;
-			player?.kill();
+			player?.hit();
 		}
 
 		// WIN
@@ -265,7 +265,7 @@ function gameUpdate() {
 		}
 
 		// KILL
-		if (keyWasPressed("KeyK")) player.kill();
+		if (keyWasPressed("KeyK")) player.hit();
 
 		// Next level
 		if (keyWasPressed("KeyN")) gameNextLevel();

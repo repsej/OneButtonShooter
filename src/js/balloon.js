@@ -9,12 +9,8 @@ class Balloon extends Enemy {
 
 		this.setCollision(true, true, false);
 		this.hp = 3;
-	}
 
-	update(o) {
-		//super.update(); // NO super update !
-
-		//this.pos.y = this.yOrig + Math.sin(this.index / 5 + (time - levelStartTime) * 15) / 15;
+		this.deathGravity = .3;
 	}
 
 	render()

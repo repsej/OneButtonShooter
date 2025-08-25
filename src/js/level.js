@@ -6,8 +6,6 @@ const tileType_spike = 2;
 
 
 let player, playerStartPos, tileData, tileLayers, sky;
-let exitStartPos = undefined;
-let demoDoorStartPos = undefined;
 let exit = undefined;
 let levelSize;
 let levelStartTime = -1;
@@ -19,10 +17,6 @@ const levelGetTileData = (pos, layer) =>
 	pos.arrayCheck(tileCollisionSize) ? tileData[layer][((pos.y | 0) * tileCollisionSize.x + pos.x) | 0] : 0;
 
 function levelBuild(level) {
-	Coin.count = 0;
-
-	exitStartPos = undefined;
-	demoDoorStartPos = undefined;
 	exit = undefined;
 
 	playerStartPos = undefined;
@@ -59,11 +53,14 @@ function levelLoad(levelNumber) {
 		water: 5,
 		ground: 6,
 
-		islandBeachLeft: 7,
-		islandSandPalmLower: 8,
-		islandSand: 9,
-		islandBeachRight: 10,
-		palmUpper: 11,
+		// islandBeachLeft: 7,
+		// islandSandPalmLower: 8,
+		// islandSand: 9,
+		// islandBeachRight: 10,
+		// palmUpper: 11,
+
+		balloon: 12,
+		enemyPlane: 13,
 	};
 
 	// set all level data tiles
@@ -90,12 +87,17 @@ function levelLoad(levelNumber) {
 					break;
 
 				case tileLookup.coin:
+				case tileLookup.balloon:
 					//new Coin(objectPos);
 					new Balloon(objectPos);
 					break;
 
 				case tileLookup.player:
 					playerStartPos = objectPos;
+					break;
+
+				case tileLookup.enemyPlane:
+					new EnemyPlane(objectPos);
 					break;
 
 				default: // Stuff with collision
