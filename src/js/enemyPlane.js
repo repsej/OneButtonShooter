@@ -13,9 +13,11 @@ class EnemyPlane extends Enemy {
 	}
 
 	update() {
-		if (this.pos.x < cameraPos.x + cameraSize.x/2)
+		super.update(); 
+
+		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 && this.hp > 0)
 		{
-			if(this.framesToShoot-- < 0 && this.hp > 0)
+			if(this.framesToShoot-- < 0 && this.pos.x > cameraPos.x)
 			{
 				this.framesToShoot = rand(100,200);
 			
@@ -25,6 +27,12 @@ class EnemyPlane extends Enemy {
 			}
 
 			this.velocity.x = -0.05;
+
+			if (rand() < 0.1) {
+				this.velocity.y = rand(-0.01, 0.01);
+				sound_engine.play(this.pos, .2, 2);
+			}
+
 		}
 
 		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2)
@@ -32,7 +40,6 @@ class EnemyPlane extends Enemy {
 			this.destroy();
 		}
 
-		super.update(); 
 	}
 
 }

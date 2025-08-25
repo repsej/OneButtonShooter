@@ -21,6 +21,8 @@ class Player extends EngineObject {
 
 		gameBottomText = "[Click to start flying]";
 
+		
+
 		this.gravityScale = 0;
 		gameBlinkFrames = 15;
 
@@ -32,6 +34,9 @@ class Player extends EngineObject {
 	}
 
 	update() {
+
+		cameraMicPos = this.pos;
+
 		super.update();
 		this.angle = -this.velocity.y * 3;
 		
@@ -50,7 +55,7 @@ class Player extends EngineObject {
 				this.velocity = this.velocity.scale(.5);
 				this.angle = this.deathAngle;
 			}
-			
+
 			return;
 		} 
 

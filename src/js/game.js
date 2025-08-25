@@ -318,6 +318,7 @@ function gameRenderPost() {
 		case GameState.PLAY:
 			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 1) / 4, ySpacing);
 			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
+			gameDrawHudText("Level " + (level+1), (overlayCanvas.width * 3) / 4, ySpacing);
 
 
 			if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, ySpacing * 3, 0.7);

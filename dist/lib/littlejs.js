@@ -1195,6 +1195,13 @@ class Timer
  *  @memberof Settings */
 let cameraPos = vec2();
 
+/**
+ * Position of camera microphone in world space
+ *  @type {Vector2}
+ *  @default Vector2()
+ *  @memberof Settings */
+let cameraMicPos = vec2();
+
 /** Scale of camera in world space
  *  @type {Number}
  *  @default
@@ -1394,13 +1401,13 @@ let soundVolume = .5;
  *  @type {Number}
  *  @default
  *  @memberof Settings */
-let soundDefaultRange = 40;
+let soundDefaultRange = 60;
 
 /** Default range percent to start tapering off sound (0-1)
  *  @type {Number}
  *  @default
  *  @memberof Settings */
-let soundDefaultTaper = .7;
+let soundDefaultTaper = 0.1;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Medals settings
@@ -3053,13 +3060,14 @@ class Sound
         if (!soundEnable || !this.sampleChannels) return;
 
         let pan;
+
         if (pos)
         {
             const range = this.range;
             if (range)
             {
                 // apply range based fade
-                const lengthSquared = cameraPos.distanceSquared(pos);
+                const lengthSquared = cameraMicPos.distanceSquared(pos);
                 if (lengthSquared > range*range)
                     return; // out of range
 

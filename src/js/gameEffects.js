@@ -3,6 +3,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 // sound effects
 
+
+
 const sound_wind = new Sound([,.01,500,.1,.3,,,0,,,,,,2,,,,,,,1e3]); // Random 6 - Mutation 3
 const sound_engine =new Sound([2.1,,1e3,.1,.3,.03,1,.5,,,,.03,.06,.9,33,,,.54,,.37]); // Random 8
 
@@ -10,7 +12,8 @@ const sound_score = new Sound([1.04, 0, 2e3, , 0.02, 0.01, , 2.2, , , 50, , , , 
 const sound_shoot =new Sound([2,,438,,,.08,3,1.2,-11,,,,,,,.5,.2,.55,.07,,208]); // Shoot 43
 
 // const sound_hit = new Sound([2.1,,1000,,.01,.02,1,1.2,,,,,,.5,,.1,,.43,.02]);
-const sound_hit = new Sound([1,,1000,,.01,.01,2,0,,,,,,.2,,.2,,.43,.01])
+// const sound_hit = new Sound([1,,1000,,.01,.01,2,0,,,,,,.2,,.2,,.43,.01])
+const sound_hit =new Sound([1,,1500,,.08,,,1.7,,,,,,.1,12,.4,,.1,.02]); 
 
 // prettier-ignore
 const sound_explosion = new Sound([4,.5,802,.1,.05,.5,4,4.59,,,,,,1.2,,2,.21,.31,.1,.1]);
