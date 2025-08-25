@@ -2,7 +2,7 @@
 
 let spriteAtlas, score, level, transitionFrames, cameraSize;
 
-let bonusText, bonusAmmount, bonusGivenTime;
+//let bonusText, bonusAmmount, bonusGivenTime;
 
 let GameState = {
 	PLAY: 0,
@@ -17,7 +17,6 @@ const LIVE_BONUS_SCORE = 5000;
 const LIVES_START = 3;
 
 let gameBottomText = undefined;
-//let gameBottomTopText = undefined;
 let lives = undefined;
 let titleSize;
 let gameNewHiscoreStatus = undefined;
@@ -320,8 +319,14 @@ function gameRenderPost() {
 			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
 			gameDrawHudText("Level " + (level+1), (overlayCanvas.width * 3) / 4, ySpacing);
 
+			if (player.isPaused())
+			{
+				gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
+				gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
+			}
 
-			if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, ySpacing * 3, 0.7);
+
+			//if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, ySpacing * 3, 0.7);
 
 			break;
 
@@ -391,10 +396,10 @@ function gameDrawScoreStuff(halfTile) {
 
 // BONUS STUFF
 
-function gameBonusSet(text, ammount, initPause = 1) {
-	bonusText = text;
-	bonusAmmount = ammount;
-}
+// function gameBonusSet(text, ammount, initPause = 1) {
+// 	bonusText = text;
+// 	bonusAmmount = ammount;
+// }
 
 // // Returns true on the frame it is done counting
 // function gameBonusUpdate() {

@@ -19,9 +19,7 @@ class Player extends EngineObject {
 		this.setCollision(true, true);
 		cameraPos = this.pos.copy();
 
-		gameBottomText = "[Click to start flying]";
-
-		
+		gameBottomText = "[Click to start]";
 
 		this.gravityScale = 0;
 		gameBlinkFrames = 15;
