@@ -160,6 +160,9 @@ function makeExplosion(pos, force=1)
 {
 	sound_explosion.play(pos, force);
 
+	gameBlinkFrames = 10;
+	cameraShake = randInCircle(1, .5);
+
 	makeFlash(pos);
 
 	for (let i = 0; i < 2 + 8*force; i++) {

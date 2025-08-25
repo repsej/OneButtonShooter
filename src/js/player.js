@@ -130,7 +130,7 @@ class Player extends EngineObject {
 			}
 
 			levelBuild(level);
-		}, 2000);
+		}, 3000);
 	}
 
 	collideWithTile(tile, pos) {

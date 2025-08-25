@@ -12,6 +12,11 @@ class Enemy extends EngineObject {
 
 	update()
 	{
+		if (this.hp <= 0)
+		{
+			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
+		}
+
 		this.angle = 3*this.velocity.y;
 		super.update();
 	}
@@ -29,7 +34,7 @@ class Enemy extends EngineObject {
 
 			this.gravityScale = this.deathGravity;
 
-			setTimeout(() => this.destroy(), 500 );
+			setTimeout(() => this.destroy(), 2000 );
 
 			makeExplosion(this.pos, 1.5);
 

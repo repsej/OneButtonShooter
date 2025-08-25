@@ -15,7 +15,7 @@ class Balloon extends Enemy {
 
 	render()
 	{
-		drawLine(this.pos, vec2(this.pos.x, 1), .05, new Color(0, 0, 0));
+		if(this.pos.y > 1) drawLine(this.pos, vec2(this.pos.x, 1), .05, new Color(0, 0, 0));
 		super.render();
 	}
 }
