@@ -1,11 +1,9 @@
 TODO: 
 
- - Destroy bullets when they go out the screen ... or max life ?
-
- - Enemy planes
  - Ships
  - AA guns
- - Nicer explosions
+
+ - Remove coin.js
 
  - Make level much much longer ... or generate ?
 

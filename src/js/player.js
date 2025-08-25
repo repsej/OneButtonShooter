@@ -27,6 +27,10 @@ class Player extends EngineObject {
 		this.deathAngle = undefined;
 	}
 
+	isPaused() {
+		return this.gravityScale == 0;
+	}
+
 	update() {
 		super.update();
 		this.angle = -this.velocity.y * 3;
@@ -38,14 +42,15 @@ class Player extends EngineObject {
 				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
 			} 			
 
+			while (rand() < 0.2) makeFlash(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
+
 			if (this.pos.y < 1)
 			{
 				if (this.deathAngle === undefined) this.deathAngle = this.angle;
 				this.velocity = this.velocity.scale(.5);
 				this.angle = this.deathAngle;
 			}
-				
-
+			
 			return;
 		} 
 

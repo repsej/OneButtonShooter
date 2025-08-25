@@ -6,7 +6,6 @@ const tileType_spike = 2;
 
 
 let player, playerStartPos, tileData, tileLayers, sky;
-let exit = undefined;
 let levelSize;
 let levelStartTime = -1;
 
@@ -17,7 +16,6 @@ const levelGetTileData = (pos, layer) =>
 	pos.arrayCheck(tileCollisionSize) ? tileData[layer][((pos.y | 0) * tileCollisionSize.x + pos.x) | 0] : 0;
 
 function levelBuild(level) {
-	exit = undefined;
 
 	playerStartPos = undefined;
 	tileData = undefined;
@@ -28,6 +26,8 @@ function levelBuild(level) {
 	sky = new Sky();
 	levelSpawnPlayer();
 	levelStartTime = time;
+
+	levelFramesUntilNextWave = rand(100,200);
 }
 
 function levelSpawnPlayer() {
@@ -96,9 +96,9 @@ function levelLoad(levelNumber) {
 					playerStartPos = objectPos;
 					break;
 
-				case tileLookup.enemyPlane:
-					new EnemyPlane(objectPos);
-					break;
+				// case tileLookup.enemyPlane:
+				// 	new EnemyPlane(objectPos);
+				// 	break;
 
 				default: // Stuff with collision
 					levelSetTileData(pos, 0, tile);
@@ -117,3 +117,22 @@ function levelLoad(levelNumber) {
 	tileLayer.redraw();
 }
 
+
+let levelFramesUntilNextWave;
+
+function levelUpdate()
+{
+	if (!player || player.isPaused()) return;
+
+	if (levelFramesUntilNextWave-- < 0)
+	{
+		levelFramesUntilNextWave = rand(100,200);
+
+		const enemyCount = rand(1, 3);
+		for (let i = 0; i < enemyCount; i++) {
+			const spawnPos = vec2(cameraPos.x + cameraSize.x/2 + rand(5,10), rand(5, levelSize.y - 5));
+			new EnemyPlane(spawnPos);
+		}
+	}
+
+}

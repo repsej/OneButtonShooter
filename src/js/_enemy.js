@@ -27,6 +27,8 @@ class Enemy extends EngineObject {
 
 		this.hp -= damage;
 		if (this.hp <= 0) {
+
+
 			score += 10;
 			sound_score.play(this.pos);
 
@@ -36,9 +38,9 @@ class Enemy extends EngineObject {
 
 			setTimeout(() => this.destroy(), 2000 );
 
-			makeExplosion(this.pos, 1.5);
+			makeExplosion(this.pos, 1);
 
-			new Coin(this.pos);
+			// new Coin(this.pos);
 			return;
 		}
 	}

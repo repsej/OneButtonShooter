@@ -2,20 +2,33 @@
 
 class Bullet extends EngineObject {
 	constructor(pos, vel, shooter) {
-		super(pos, vec2(.2));
+		super(pos, vec2(.15));
 		this.setCollision(true, false, true);
 		this.velocity = vel;
 		this.gravityScale = 0;
 		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, .5);
-		this.life=80;
 		this.shooter = shooter;
+		this.renderOrder = 1500;
+
+		this.outerShot = new EngineObject(vec2(0), vec2(0.25));
+		this.outerShot.color = rgb(1, 0, 0);
+		this.addChild(this.outerShot)
 	}
 
 	update() {
+		// if ((frame/10)%2<1)
+		// {
+		// 	this.color= rgb(1, 1, 0);
+		// }
+		// else
+		// {
+		// 	this.color= rgb(1, 0, 0);
+		// }
+
 		super.update();
-		this.life--;
-		if (this.life <= 0) this.destroy();
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 || this.pos.x > cameraPos.x + cameraSize.x/2	) 
+			this.destroy();
 	}
 
 	collideWithTile(pos, layer) {

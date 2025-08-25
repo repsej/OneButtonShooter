@@ -17,7 +17,7 @@ class EnemyPlane extends Enemy {
 		{
 			if(this.framesToShoot-- < 0 && this.hp > 0)
 			{
-				this.framesToShoot = rand(50,100);
+				this.framesToShoot = rand(100,200);
 			
 				let bulletSpeed = player.pos.subtract(this.pos).normalize(.15);
 				const bulletPos = this.pos.add(bulletSpeed);
@@ -27,7 +27,7 @@ class EnemyPlane extends Enemy {
 			this.velocity.x = -0.05;
 		}
 
-		if (this.pos.x < cameraPos.x - cameraSize.x/2)
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2)
 		{
 			this.destroy();
 		}

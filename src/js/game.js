@@ -135,7 +135,9 @@ function gameUpdate() {
  	cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x / 3, 0)), 0.05);
 
 	// Clamp camera's y position downwards
-	cameraPos.y = max(cameraPos.y, cameraSize.y / 2);
+	// cameraPos.y = max(cameraPos.y, cameraSize.y / 2);
+
+	cameraPos.y = cameraSize.y / 2;
 
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
@@ -146,105 +148,19 @@ function gameUpdate() {
 
 	switch (gameState) {
 		case GameState.WON:
-			// if (gameBonusUpdate()) {
-			// 	if (!inputPlaybackDemo) gameNewHiscoreStatus = savefileHiscoreUpdate(score);
-			// }
-
-			// VictoryRocket.spawnRandom();
-			// if (time - levelStartTime > 7) {
-			// 	if (!gameBottomText) sound_exitAppear.play();
-			// 	gameBottomText = "[Press jump to start new game]";
-			// 	if (inputJumpReleased(true)) gameInit();
-			// }
 			break;
 
 		case GameState.GAME_OVER:
 			if (inputJumpReleased(true)) gameInit();
-
-
-		// gameBottomText = "Chamber " + level + " of 13";
-
-			// if (time - levelStartTime > 5) {
-			// 	if (!gameBottomText) sound_exitAppear.play();
-			// 	gameBottomTopText = "[Press jump to start new game]";
-			// 	if (inputJumpReleased(true)) gameInit();
-			// }
-			// cameraScale = min(mainCanvas.width / levelSize.x, mainCanvas.height / levelSize.y);
-			// cameraPos = levelSize.scale(0.5);
 			break;
 
 		case GameState.TRANSITION:
-			// let transProgress = (TRANSITION_FRAMES - transitionFrames) / TRANSITION_FRAMES;
-			// cameraPos = cameraPos.lerp(player.pos, transProgress / 10);
-
-			// if (level > 0) gameBottomText = "Chamber " + level + " of 13";
-
-			// if (transitionFrames > 0) {
-			// 	// Bonus
-			// 	if (level > 0) gameBonusUpdate();
-
-			// 	// Camera
-
-			// 	cameraPos.y += levelSize.y * 0.035 * transProgress;
-			// 	cameraScale *= 0.992;
-			// 	titleSize *= 0.992;
-
-			// 	player.drawSize = player.drawSize.scale(1.017);
-
-			// 	transitionFrames--;
-
-			// 	if (transitionFrames <= 0) {
-			// 		if (inputPlaybackDemo) {
-			// 			gameSkipToLevel(++level);
-			// 		} else {
-			// 			bonusText = undefined;
-
-			// 			if (!gameBottomTopText) sound_exitAppear.play();
-			// 			gameBottomTopText = "[Jump to continue]";
-
-			// 			if (level == 0) {
-			// 				score = 0;
-			// 				gameSkipToLevel(++level);
-			// 			}
-			// 		}
-			// 	}
-			// } else {
-			// 	if (inputJumpReleased(true)) {
-			// 		gameSkipToLevel(++level);
-			// 	}
-			// }
-
 			break;
 
 		case GameState.PLAY:
-			// if (player) timeLeft = TIME_MAX - (time - levelStartTime);
-
-			// if (timeLeft < 0 && level != 0) {
-			// 	player.kill(true);
-			// }
-
-			// timeLeft = max(timeLeft, 0);
-
-			// if (level == 0) {
-			// 	gameBottomText = isTouchDevice
-			// 		? "[Tap to jump.  Hold for wall jump.]"
-			// 		: "[Space to jump.  Hold for wall jump.]";
-
-			// 	timeLeft = 0;
-			// } else {
-			// 	gameBottomText = "Chamber " + level + " of 13";
-			// 	// if (levelTexts[level]) gameBottomText += ". " + levelTexts[level];
-			// }
-
-			// cameraPos = levelSize.scale(0.5);
+			levelUpdate();
 			break;
 	}
-
-	// // quit demo playback
-	// if (inputPlaybackDemo && inputJumpPressed(true)) {
-	// 	gameInit();
-	// 	return;
-	// }
 
 	if (!IS_RELEASE) {
 		// Toggle music on

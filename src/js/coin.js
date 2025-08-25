@@ -5,6 +5,7 @@ class Coin extends EngineObject {
 	constructor(pos) {
 		super(pos, vec2(1.5), spriteAtlas.coin);
 		this.yOrig = pos.y;
+		this.renderOrder = 2000;
 		this.setCollision(true, false, false);
 	}
 
