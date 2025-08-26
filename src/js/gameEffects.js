@@ -163,7 +163,7 @@ function makeExplosion(pos, force=1)
 {
 	sound_explosion.play(pos, force);
 
-	gameBlinkFrames = 5;
+	gameBlinkFrames = 4 + force * 4;
 	cameraShake = randInCircle(force/2, force/4);
 
 	makeFlash(pos);

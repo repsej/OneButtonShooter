@@ -133,7 +133,7 @@ function levelUpdate()
 
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {
-			const spawnPos = vec2(cameraPos.x + cameraSize.x/2 + rand(5,10), rand(5, levelSize.y - 5));
+			const spawnPos = vec2(cameraPos.x + cameraSize.x/2 + rand(5,10), rand(10, levelSize.y));
 			new EnemyPlane(spawnPos);
 		}
 	}

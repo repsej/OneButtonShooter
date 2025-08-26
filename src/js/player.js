@@ -24,6 +24,7 @@ class Player extends EngineObject {
 		this.gravityScale = 0;
 		gameBlinkFrames = 15;
 
+		this.deathFrame = undefined;
 		this.deathAngle = undefined;
 	}
 
@@ -40,6 +41,12 @@ class Player extends EngineObject {
 		
 		
 		if (!this.alive || gameState == GameState.GAME_OVER){
+
+			if (frame - this.deathFrame > 180) {
+				return;
+			}
+
+
 			if (frame % 3 == 0){
 				makeSmoke(this.pos, rand(1,4));
 				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
@@ -128,6 +135,8 @@ class Player extends EngineObject {
 		this.setCollision(false, false);
 
 		this.setCollision(false,false,false); // fall out of the screen
+
+		this.deathFrame = frame;
 
 		lives--;
 
