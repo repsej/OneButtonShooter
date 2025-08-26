@@ -119,7 +119,7 @@ class Player extends EngineObject {
 		super.render();
 	}
 
-	hit() {
+	hit(damage=1) {
 		if (!this.alive) return;
 
 		makeExplosion(this.pos, 2);
