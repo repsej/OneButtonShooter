@@ -19,7 +19,7 @@ class AABattery extends Enemy {
 		{
 			if(this.framesToShoot-- < 0 && this.pos.x > cameraPos.x)
 			{
-				this.framesToShoot = rand(50,150);
+				this.framesToShoot = rand(100,150);
 			
 				let bulletSpeed = vec2(-.07,.07);
 				const bulletPos = this.pos.add(bulletSpeed.normalize(1));
