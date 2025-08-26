@@ -97,8 +97,7 @@ function gameSetState(newState) {
 			// level = 31;
 			// musicInit(level);
 			// // musicOn = true;
-
-			gameBonusSet("Lives bonus ", lives * LIVE_BONUS_SCORE, 2);
+			//gameBonusSet("Lives bonus ", lives * LIVE_BONUS_SCORE, 2);
 			break;
 
 		case GameState.TRANSITION:

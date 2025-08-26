@@ -9,7 +9,7 @@ class EnemyPlane extends Enemy {
 		this.hp = 1;
 
 		this.framesToShoot = rand(50,100);
-
+		this.frame = 0;
 	}
 
 	update() {
@@ -28,11 +28,13 @@ class EnemyPlane extends Enemy {
 
 			this.velocity.x = -0.05;
 
-			if (rand() < 0.1) {
+			if (rand() < 0.05) {
 				this.velocity.y = rand(-0.01, 0.01);
-				sound_engine.play(this.pos, .2, 2);
 			}
 
+			if (this.frame++ % 11 == 0) {
+				sound_engine.play(this.pos, .2, 2);
+			}
 		}
 
 		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2)
