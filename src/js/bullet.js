@@ -14,6 +14,8 @@ class Bullet extends EngineObject {
 		this.outerShot = new EngineObject(vec2(0), vec2(0.25));
 		this.outerShot.color = rgb(1, 0, 0);
 		this.addChild(this.outerShot)
+
+		makeFlash(this.pos, .3);
 	}
 
 	update() {

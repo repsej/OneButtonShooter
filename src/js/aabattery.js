@@ -1,9 +1,9 @@
 /** @format */
 
-class EnemyPlane extends Enemy {
+class AABattery extends Enemy {
 
 	constructor(pos) {
-		super(pos, vec2(2,1), spriteAtlas.enemyPlane);
+		super(pos, vec2(1), spriteAtlas.aaBattery);
 
 		this.setCollision(true, true, false);
 		this.hp = 1;
@@ -19,21 +19,11 @@ class EnemyPlane extends Enemy {
 		{
 			if(this.framesToShoot-- < 0 && this.pos.x > cameraPos.x)
 			{
-				this.framesToShoot = rand(100,200);
+				this.framesToShoot = rand(50,100);
 			
-				let bulletSpeed = player.pos.subtract(this.pos).normalize(.15);
+				let bulletSpeed = vec2(-.15,.15);
 				const bulletPos = this.pos.add(bulletSpeed.normalize(1));
 				new Bullet(bulletPos, bulletSpeed, this);
-			}
-
-			this.velocity.x = -0.05;
-
-			if (rand() < 0.05) {
-				this.velocity.y = rand(-0.01, 0.01);
-			}
-
-			if (this.frame++ % 11 == 0) {
-				sound_engine.play(this.pos, .2, 2);
 			}
 		}
 	}

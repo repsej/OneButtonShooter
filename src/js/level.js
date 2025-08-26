@@ -61,6 +61,7 @@ function levelLoad(levelNumber) {
 
 		balloon: 12,
 		enemyPlane: 13,
+		aaBattery: 16,
 	};
 
 	// set all level data tiles
@@ -86,14 +87,16 @@ function levelLoad(levelNumber) {
 				case tileLookup.empty:
 					break;
 
-				case tileLookup.coin:
 				case tileLookup.balloon:
-					//new Coin(objectPos);
 					new Balloon(objectPos);
 					break;
 
 				case tileLookup.player:
 					playerStartPos = objectPos;
+					break;
+
+				case tileLookup.aaBattery:
+					new AABattery(objectPos);
 					break;
 
 				// case tileLookup.enemyPlane:
@@ -126,7 +129,7 @@ function levelUpdate()
 
 	if (levelFramesUntilNextWave-- < 0)
 	{
-		levelFramesUntilNextWave = rand(100,200);
+		levelFramesUntilNextWave = rand(200,400);
 
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {

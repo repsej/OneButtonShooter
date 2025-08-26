@@ -12,6 +12,11 @@ class Enemy extends EngineObject {
 
 	update()
 	{
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2)
+		{
+			this.destroy();
+		}
+
 		if (this.hp <= 0)
 		{
 			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
