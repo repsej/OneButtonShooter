@@ -93,9 +93,9 @@ class Player extends EngineObject {
 			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
 			bulletSpeed = bulletSpeed.add(this.velocity)
 
-			const bulletPos = this.pos.add(bulletSpeed.normalize(1));
+			const bulletPos = this.pos.add(bulletSpeed.normalize(1.5));
 
-			new Bullet(bulletPos, bulletSpeed.normalize(.3), this);
+			new Bullet(bulletPos, bulletSpeed.normalize(.3), this, 1.2);
 		}
 
 		if (frame % 17 == 0 )

@@ -135,7 +135,7 @@ function makeSmoke(pos, force = 1) {
 }
 
 
-function makeFlash(pos, size=1)
+function makeFlash(pos, size=1, life=500)
 {
 	let flash = new EngineObject(pos.copy(), vec2(size), spriteAtlas.explosion);
 	flash.gravityScale = 0;
@@ -148,7 +148,7 @@ function makeFlash(pos, size=1)
 
 	setTimeout(() => {
 		flash.destroy();
-	}, 500);
+	}, life);
 }
 
 function makeHit(pos, force=1)

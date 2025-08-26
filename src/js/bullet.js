@@ -1,8 +1,14 @@
 /** @format */
 
 class Bullet extends EngineObject {
-	constructor(pos, vel, shooter) {
-		super(pos, vec2(.15));
+	constructor(pos, vel, shooter, size = 2) {
+		super(pos, vec2(.15*size));
+
+		if (player.isPaused()){
+			this.destroy();
+			return;
+		}
+
 		this.setCollision(true, false, true);
 		this.velocity = vel;
 		this.gravityScale = 0;
@@ -11,11 +17,11 @@ class Bullet extends EngineObject {
 		this.shooter = shooter;
 		this.renderOrder = 1500;
 
-		this.outerShot = new EngineObject(vec2(0), vec2(0.25));
+		this.outerShot = new EngineObject(vec2(0), vec2(0.25*size));
 		this.outerShot.color = rgb(1, 0, 0);
 		this.addChild(this.outerShot)
 
-		makeFlash(this.pos, .3);
+		makeFlash(this.pos, .5, 50);
 	}
 
 	update() {
@@ -29,7 +35,7 @@ class Bullet extends EngineObject {
 		// }
 
 		super.update();
-		if (this.pos.x < cameraPos.x - cameraSize.x/2 || this.pos.x > cameraPos.x + cameraSize.x/2	) 
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.x > cameraPos.x + cameraSize.x/2 + 2) 
 			this.destroy();
 	}
 
