@@ -128,7 +128,7 @@ function makeExplosion(pos, force=1)
 	if (explosionCount > 3) return; // limit simultaneous explosions
 
 	explosionCount++;
-	console.log(`Explosion count: ${explosionCount}`);
+	// console.log(`Explosion count: ${explosionCount}`);
 
 	for (let i = 0; i < 2 + 4*force; i++) {
 		setTimeout( () => {
@@ -142,6 +142,6 @@ function makeExplosion(pos, force=1)
 
 	setTimeout(() => {
 		explosionCount--;
-		console.log(`Explosion count: ${explosionCount}`);
+		// console.log(`Explosion count: ${explosionCount}`);
 	}, 1500);
 }
