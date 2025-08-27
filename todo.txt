@@ -1,9 +1,6 @@
 TODO: 
 
  - Ships
- - AA guns
-
- - Remove coin.js
 
  - Make level much much longer ... or generate ?
 

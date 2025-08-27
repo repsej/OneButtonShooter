@@ -44,8 +44,6 @@ class Enemy extends EngineObject {
 			setTimeout(() => this.destroy(), 2000 );
 
 			makeExplosion(this.pos, 1);
-
-			// new Coin(this.pos);
 			return;
 		}
 	}

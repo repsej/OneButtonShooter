@@ -31,7 +31,7 @@ let title;
 function gameInit() {
 	// create a table of all sprites
 	spriteAtlas = {
-		coin: tile(2),
+		bullet: tile(2),
 		blob: tile(3),
 		playerPlane: tile(vec2(0,0), vec2(32, 16)),
 		cloud: tile(10),

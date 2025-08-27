@@ -2,7 +2,9 @@
 
 class Bullet extends EngineObject {
 	constructor(pos, vel, shooter, size = 2) {
-		super(pos, vec2(.15*size));
+		super(pos, vec2(.25), spriteAtlas.bullet);
+
+		this.drawSize = vec2(.5*size);
 
 		if (player.isPaused()){
 			this.destroy();
@@ -12,14 +14,9 @@ class Bullet extends EngineObject {
 		this.setCollision(true, false, true);
 		this.velocity = vel;
 		this.gravityScale = 0;
-		this.color = rgb(1, 1, 0);
 		sound_shoot.play(this.pos, .5);
 		this.shooter = shooter;
 		this.renderOrder = 1500;
-
-		this.outerShot = new EngineObject(vec2(0), vec2(0.25*size));
-		this.outerShot.color = rgb(1, 0, 0);
-		this.addChild(this.outerShot)
 
 		makeFlash(this.pos, .5, 50);
 	}

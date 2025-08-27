@@ -49,7 +49,6 @@ function levelLoad(levelNumber) {
 	const tileLookup = {
 		empty: 0,
 		player: 1,
-		coin: 3,
 		water: 5,
 		ground: 6,
 
