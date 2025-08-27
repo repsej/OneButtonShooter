@@ -38,7 +38,7 @@ function gameInit() {
 		balloon: tile(11),
 		enemyPlane: tile(vec2(12*16, 0), vec2(32, 16)),
 		explosion: tile(14),
-		aaBattery: tile(15),
+		aaGun: tile(15),
 
 		//title: tile(vec2(48, 32), vec2(48, 32)),
 	};

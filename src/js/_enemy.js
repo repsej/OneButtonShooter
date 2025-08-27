@@ -33,10 +33,7 @@ class Enemy extends EngineObject {
 
 		this.hp -= damage;
 		if (this.hp <= 0) {
-
-
 			score += 10;
-			sound_score.play(this.pos);
 
 			this.setCollision(false, false, false);
 

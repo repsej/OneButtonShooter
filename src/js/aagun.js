@@ -1,6 +1,6 @@
 /** @format */
 
-class AABattery extends Enemy {
+class AAGun extends Enemy {
 
 	constructor(pos, tileIndex) {
 		super(pos, vec2(1), tile(tileIndex));
@@ -9,7 +9,6 @@ class AABattery extends Enemy {
 		this.hp = 1;
 
 		this.framesToShoot = rand(50,100);
-		this.frame = 0;
 	}
 
 	update() {

@@ -61,7 +61,7 @@ function levelLoad(levelNumber) {
 
 		balloon: 12,
 		enemyPlane: 13,
-		aaBattery: 16,
+		aaGun: 16,
 
 		shipStern: 17,
 		shipMid: 18,
@@ -103,12 +103,12 @@ function levelLoad(levelNumber) {
 					playerStartPos = objectPos;
 					break;
 
-				case tileLookup.aaBattery:
-					new AABattery(objectPos, tile-1);
+				case tileLookup.aaGun:
+					new AAGun(objectPos, tile-1);
 					break;
 
 				case tileLookup.shipAAGun:
-					new AABattery(objectPos, tile-1);
+					new ShipPart(objectPos, tile-1, true);
 					break;
 
 				case tileLookup.shipStern:

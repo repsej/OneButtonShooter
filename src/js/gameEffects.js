@@ -8,7 +8,7 @@
 const sound_wind = new Sound([,.01,500,.1,.3,,,0,,,,,,2,,,,,,,1e3]); // Random 6 - Mutation 3
 const sound_engine =new Sound([2.1,,1e3,.1,.3,.03,1,.5,,,,.03,.06,.9,33,,,.54,,.37]); // Random 8
 
-const sound_score = new Sound([1.04, 0, 2e3, , 0.02, 0.01, , 2.2, , , 50, , , , , , , 0.5, 0.01]); // Loaded Sound 1197
+//const sound_score = new Sound([1.04, 0, 2e3, , 0.02, 0.01, , 2.2, , , 50, , , , , , , 0.5, 0.01]); // Loaded Sound 1197
 const sound_shoot =new Sound([2,,438,,,.08,3,1.2,-11,,,,,,,.5,.2,.55,.07,,208]); // Shoot 43
 
 // const sound_hit = new Sound([2.1,,1000,,.01,.02,1,1.2,,,,,,.5,,.1,,.43,.02]);

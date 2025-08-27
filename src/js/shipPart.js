@@ -11,7 +11,7 @@ function shipReset()
 
 class ShipPart extends Enemy {
 
-	constructor(pos, tileIndex = 18) {
+	constructor(pos, tileIndex = 18, isAAGun = false) {
 		super(pos, vec2(1,1), tile(tileIndex));
 
 		this.deathTimeSecs = 10;
@@ -19,7 +19,7 @@ class ShipPart extends Enemy {
 		this.setCollision(true, true, false);
 		this.deathGravity = .01;
 		shipParts.push(this);
-	}
+		}
 
 	update()
 	{
@@ -33,18 +33,19 @@ class ShipPart extends Enemy {
 		if (shipHp <= 0) return;
 	}
 
+	superHit(dam)
+	{
+		super.hit(dam);
+	}
+
 	hit(dam=1)
 	{
-		console.log(dam, shipHp)
-
-
-		if (shipHp < 0){
-			super.hit(this.hp);
+		if (this.hp < 0 || shipHp < 0){
 			return;
 		}
 
 		for (const s of shipParts) {
-			s.velocity = vec2(.05, 0);
+			s.velocity = vec2(.01, 0);
 		}
 
 		shipHp -= dam;
@@ -53,10 +54,8 @@ class ShipPart extends Enemy {
 
 		if (shipHp < 0)
 		{
-			debugger;
-
 			for (const s of shipParts) {
-				s.hit(s.hp);
+				s.superHit(s.hp);
 			}
 		}
 	}
