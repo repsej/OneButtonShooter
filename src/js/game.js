@@ -52,7 +52,7 @@ function gameInit() {
 	lives = LIVES_START;
 	titleSize = 7;
 
-	musicOn = false; // XXX For now
+	musicOn = true; // XXX For now
 
 	levelBuild(level);
 	musicInit(level);

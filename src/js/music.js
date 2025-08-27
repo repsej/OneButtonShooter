@@ -103,100 +103,75 @@ function createMutatedMelody(melody, swaps = 5, mutations = 5, rng, dHafltones) 
 	return melody;
 }
 
-function createMusic(level) {
-	const rng = new RandomGenerator(376176 + (level + 1) * 9999);
 
-	musicTempo = rng.float(4, 5);
-	console.log("musicTempo", musicTempo);
+
+function createMusic(level) {
+	//const rng = new RandomGenerator(376176 + (level + 1) * 9999);
+	const p = undefined;
 
 	// Instruments
 
-	instrumentList = [];
-	for (const i of instrumentParamaters) {
-		instrumentList.push(i.slice()); // copy array !
-	}
-	for (let i = 0; i < instrumentList.length; i++) {
-		const instrument = instrumentList[i];
-		mutateInstrumentParams(instrument, rng);
-	}
+	instrumentList = instrumentParamaters;
 	songData[0] = instrumentList;
 
 	createInstruments();
 
 	// prettier-ignore
-	// let chordStarts = [
-	// 	0, 0,
-	// 	0, 0,
-	// 	5, 5,
-	// 	0, 0,
-	// 	7, 5,
-	// 	0, 0,
-	// ];
+	let chordStarts = [
+		0, 0,
+		0, 0,
+		5, 5,
+		0, 0,
+		7, 5,
+		0, 0,
+	];
 
 	patterns = [[], []];
 
-	//let chords = [0, 2, 4, 7, 9];
-
-	let chords = [0, 5, 7]; // safe minor
-	// let chords = [0, 3, 5, 7, 10]; // minor
-	let chordStarts = [0, 0];
-	for (let i = 0; i < 3; i++) {
-		let c1 = chords[rng.int(chords.length)];
-		chordStarts.push(c1, c1);
-
-		// let c1 = chords[rng.int(chords.length)];
-		// let c2 = chords[rng.int(chords.length)];
-
-		// if (rng.int(2) < 1) {
-		// 	chordStarts.push(c1, c1);
-		// } else {
-		// 	chordStarts.push(c1, c2);
-		// }
-	}
-
-	// console.log(chordStarts);
-
 	// Melody
 
-	let melodyShift = [-2, -1, -1, 0, 0, 0, 0, 1, 1, 2];
+	// let melodyShift = [-2, -1, -1, 0, 0, 0, 0, 1, 1, 2];
 
-	let lastNodeIndex = 5; // middle node
+	// let lastNodeIndex = 5; // middle node
 
-	let melodyRythm = [1, 0, rng.int(0, 2), rng.int(0, 2), 1, 0, rng.int(0, 2), rng.int(0, 2)];
-	melodyRythm = createMutatedMelody(melodyRythm, 10, 0, rng);
+	// let melodyRythm = [1, 0, rng.int(0, 2), rng.int(0, 2), 1, 0, rng.int(0, 2), rng.int(0, 2)];
+	// melodyRythm = createMutatedMelody(melodyRythm, 10, 0, rng);
 
-	let melodyOffset = 24;
+	// let melodyOffset = 24;
 
-	let melody = [];
-	for (let i = 0; i < chordStarts.length * 2 - 1; i++) {
-		if (melodyRythm[i % melodyRythm.length]) {
-			lastNodeIndex += melodyShift[rng.int(melodyShift.length)];
-			lastNodeIndex = clamp(lastNodeIndex, 0, melodyNodes.length - 1);
-			melody.push(melodyOffset + melodyNodes[lastNodeIndex]);
-		} else {
-			melody.push(undefined);
-		}
-	}
-	melody.push(undefined); // last node always a pause
+	// let melody = [];
+	// for (let i = 0; i < chordStarts.length * 2 - 1; i++) {
+	// 	if (melodyRythm[i % melodyRythm.length]) {
+	// 		lastNodeIndex += melodyShift[rng.int(melodyShift.length)];
+	// 		lastNodeIndex = clamp(lastNodeIndex, 0, melodyNodes.length - 1);
+	// 		melody.push(melodyOffset + melodyNodes[lastNodeIndex]);
+	// 	} else {
+	// 		melody.push(undefined);
+	// 	}
+	// }
+	// melody.push(undefined); // last node always a pause
 
-	let mutatedMelody = createMutatedMelody(melody, 5, 3, rng, melodyOffset);
-	let mutatedMelody2 = createMutatedMelody(mutatedMelody, 5, 3, rng, melodyOffset);
+	// let mutatedMelody = createMutatedMelody(melody, 5, 3, rng, melodyOffset);
+	// let mutatedMelody2 = createMutatedMelody(mutatedMelody, 5, 3, rng, melodyOffset);
 
-	let reversedMutation = mutatedMelody.slice(); // copy
-	reversedMutation.reverse();
+	// let reversedMutation = mutatedMelody.slice(); // copy
+	// reversedMutation.reverse();
 
-	let fullMeleody = [3, 0];
-	fullMeleody = fullMeleody.concat(melody);
-	fullMeleody = fullMeleody.concat(mutatedMelody);
-	fullMeleody = fullMeleody.concat(reversedMutation);
-	fullMeleody = fullMeleody.concat(mutatedMelody2);
-	patterns[0].push(fullMeleody);
+	// let fullMeleody = [3, 0];
+	// fullMeleody = fullMeleody.concat(melody);
+	// fullMeleody = fullMeleody.concat(mutatedMelody);
+	// fullMeleody = fullMeleody.concat(reversedMutation);
+	// fullMeleody = fullMeleody.concat(mutatedMelody2);
+	// patterns[0].push(fullMeleody);
 
 	// Bass
-	let randHit = () => (rng.float() < 0.5 ? undefined : 0);
+	//let randHit = () => (rng.float() < 0.5 ? undefined : 0);
 
-	//let bassPattern = [0, 4, 7, 4, 0, 4, 7, 4];
-	let bassPattern = [0, randHit(), randHit(), randHit(), 0, randHit(), randHit(), 12];
+	//let bassPattern = [0, p, 2, p, 4, p, 7, p, 9, p, 7,p, 4, p, 2, p]; // major pent
+	//let bassPattern = [0, p, 3, p, 5, p, 7, p, 10, p, 7, p, 5, p, 3, p]; // minor pent
+	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
+
+	// 0, 4, 7, 9, 10
 
 	let bassNodes = unfoldPattern(0, -0.1, 24, bassPattern, chordStarts);
 	patterns[0].push(bassNodes);
@@ -211,34 +186,19 @@ function createMusic(level) {
 	let bdStarts = Array(chordStarts.length).fill(0);
 	let snareStarts = Array(chordStarts.length / 2).fill(0);
 
-	let bdPattern = [0, undefined, randHit(), undefined, 0, undefined, randHit(), undefined];
+	let bdPattern = [0, p, p, p, 0, p, p, p];
 	let snarePattern = [
-		undefined,
-		randHit(),
-		0,
-		randHit(),
-
-		undefined,
-		randHit(),
-		0,
-		randHit(),
-
-		undefined,
-		randHit(),
-		0,
-		randHit(),
-
-		undefined,
-		undefined,
-		0,
-		0,
+		p, p, 0, p,
+		p, p, 0, p,
+		p, p, 0, p,
+		p, p, 0, 0,
 	];
 
 	patterns[0].push(unfoldPattern(1, 0, 7, bdPattern, bdStarts));
 	patterns[0].push(unfoldPattern(2, 0.1, 7, snarePattern, snareStarts));
 }
 
-let vol = 0.2;
+let vol = .5;
 let musicOn = true;
 
 let musicStartTime = 0;
@@ -250,16 +210,23 @@ function musicInit(level) {
 }
 
 let musicLastPlayedBeat = -1;
-let musicTempo = 5;
+let musicTempo = 6;
+
+let beatFloat = 0;
 
 function musicUpdate() {
-	let timeSinceStart = time - musicStartTime;
+	beatFloat += musicTempo / 60;
 
-	if (timeSinceStart < 0) return;
-
-	let beat = Math.floor(timeSinceStart * musicTempo) % musicSongLength;
+	let beat = Math.floor(beatFloat) % musicSongLength;
 
 	if (beat == musicLastPlayedBeat) return;
+
+	// Swing it baby !
+	if (beat % 2 == 0) {
+		musicTempo = 6;
+	} else {
+		musicTempo = 5;
+	}
 
 	musicLastPlayedBeat = beat;
 
