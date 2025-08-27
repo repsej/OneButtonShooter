@@ -19,17 +19,6 @@ const sound_hit =new Sound([1,,1500,,.08,,,1.7,,,,,,.1,12,.4,,.1,.02]);
 const sound_explosion = new Sound([4,.5,802,.1,.05,.5,4,4.59,,,,,,1.2,,2,.21,.31,.1,.1]);
 
 
-
-// const sound_rocketFly = new Sound([0.2, 0.1, 1e3, , 0.2, 2, , 0, -0.1, , , , , 0.3, , , , , 0.15]);
-
-// // No getting fainter w range
-// sound_rocketFly.range = 0;
-
-function makeBlood(pos, amount) {
-	let emitter = makeDebris(pos, hsl(0, 1, 0.5), amount, 0.2, 0);
-	emitter.gravityScale = 1.2;
-}
-
 function makeDebris(pos, color = hsl(), amount = 50, size = 0.2, elasticity = 0.3, speed = 0.1) {
 	const color2 = color.lerp(hsl(), 0.5);
 	const fadeColor = color.copy();
@@ -61,45 +50,12 @@ function makeDebris(pos, color = hsl(), amount = 50, size = 0.2, elasticity = 0.
 		true
 	);
 	emitter.elasticity = elasticity;
-	//emitter.particleDestroyCallback = persistentParticleDestroyCallback;
 	return emitter;
 }
 
 function makeSparks(pos, count = 5)
 {
 	makeDebris(pos, new Color(1, rand(1), 0), count, rand(0.05, 0.15), 0, rand(0.2));
-}
-
-
-function makeCollectEffect(pos, force = 1) {
-	new ParticleEmitter(
-		pos,
-		0, // angle
-		0.5, // eimtSize
-		0.1, // emitTime
-		100 * force, // emitRate
-		PI / 2, // emitConeAngle
-		undefined, // tileinfo
-		rgb(1, 1, 1),
-		rgb(1, 1, 1),
-		rgb(0, 1, 1, 0),
-		rgb(1, 1, 1, 0),
-		0.5, // particleTime
-		0.1, // sizeStart
-		0.4, // sizeEnd
-		0.01, // speed
-		0.05, // damp
-		0.9, // angledamp
-		1, // angleDamp
-		-0.2, // gravityScale
-		PI, // particleConeAngle
-		0.05, // fadeRate
-		0.0, // randomness
-		false, // col tile
-		!isTouchDevice, // additive
-		true, // linearColor
-		5 // renderOrder
-	);
 }
 
 function makeSmoke(pos, force = 1) {
@@ -109,7 +65,7 @@ function makeSmoke(pos, force = 1) {
 		0, // angle
 		0, // 0.1 * force, // radius / 2, // emitSize
 		rand(0.2, 0.4), // emitTime
-		rand(15, 30) * (force + 0.2), // emitRate
+		rand(2, 5) * (force + 0.2), // emitRate
 		PI / 2, // emiteCone
 		spriteAtlas.blob,
 		rgb(1, 1, 1, 1),
@@ -117,7 +73,7 @@ function makeSmoke(pos, force = 1) {
 		rgb(1, 1, 1),
 		rgb(1, 1, 1),
 		rand(0.1, 1), // time
-		0.1 + 0.1 * force, // sizeStart
+		0.2 + 0.2 * force, // sizeStart
 		0.01, // sizeEnd
 		force * 0.001, // speed
 		0.1, // angleSpeed
@@ -135,7 +91,7 @@ function makeSmoke(pos, force = 1) {
 }
 
 
-function makeFlash(pos, size=1, life=500)
+function makeFire(pos, size=1, durationMS=250)
 {
 	let flash = new EngineObject(pos.copy(), vec2(size), spriteAtlas.explosion);
 	flash.gravityScale = 0;
@@ -148,35 +104,44 @@ function makeFlash(pos, size=1, life=500)
 
 	setTimeout(() => {
 		flash.destroy();
-	}, life);
+	}, durationMS);
 }
 
 function makeHitEffect(pos, force=1)
 {
 	sound_hit.play(pos, force);
 	sound_shoot.play(pos, .5, .3);
-	makeFlash(pos, force);
+	makeFire(pos, force);
 	makeSmoke(pos, rand(5,10)*force);
 	makeSparks(pos, force);
 }
+
+let explosionCount = 0;
 
 function makeExplosion(pos, force=1)
 {
 	sound_explosion.play(pos, force);
 
-	gameBlinkFrames = 4 + force * 4;
-	cameraShake = randInCircle(force/2, force/4);
+	blinkScreen(4 + force * 4);
+	makeFire(pos);
 
-	makeFlash(pos);
+	if (explosionCount > 3) return; // limit simultaneous explosions
 
-	for (let i = 0; i < 2 + 8*force; i++) {
+	explosionCount++;
+	console.log(`Explosion count: ${explosionCount}`);
+
+	for (let i = 0; i < 2 + 4*force; i++) {
 		setTimeout( () => {
 			let p = pos.add(randInCircle(force*.5));
 
-			if (i % 2 == 0) makeFlash(p, rand(force, force*2));
-			makeSmoke(p, rand(5,10)*force);
+			if (i % 2 == 0) makeFire(p, rand(force, force*2));
+			makeSmoke(p, rand(1,10)*force);
 			makeSparks(p, force);
 		}, i * 30);
 	}
 
+	setTimeout(() => {
+		explosionCount--;
+		console.log(`Explosion count: ${explosionCount}`);
+	}, 1500);
 }

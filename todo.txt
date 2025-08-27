@@ -1,8 +1,16 @@
 TODO: 
 
- - Ships
+ - Enforce landscape mode
 
- - Make level much much longer ... or generate ?
+ - Test on mobiles
+
+ - Water in front
+
+ - Go to next level
+
+ - Music ??
+
+ - Make level much much longer  ? ... or generate ??
 
  - Enable webgl rendering (and remove non webgl) ??? Doable w newer Littljs ?
 

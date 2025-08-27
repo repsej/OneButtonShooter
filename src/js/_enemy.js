@@ -28,7 +28,7 @@ class Enemy extends EngineObject {
 	}
 
 
-	hit(damage=1) {
+	hit(damage=1, noExplosion=false) {
 		if(this.hp <= 0) return;
 
 		this.hp -= damage;
@@ -41,8 +41,7 @@ class Enemy extends EngineObject {
 
 			setTimeout(() => this.destroy(), this.deathTimeSecs * 1000);
 
-			makeExplosion(this.pos, 1);
-			return;
+			if (!noExplosion) makeExplosion(this.pos, 1);
 		}
 	}
 

@@ -18,7 +18,7 @@ class Bullet extends EngineObject {
 		this.shooter = shooter;
 		this.renderOrder = 1500;
 
-		makeFlash(this.pos, .5, 50);
+		makeFire(this.pos, .5, 50);
 	}
 
 	update() {
@@ -36,7 +36,7 @@ class Bullet extends EngineObject {
 
 
 	collideWithObject(o) {
-		if (o == this.shooter) return false; // don't hit self
+		if (o.constructor == this.shooter.constructor) return false; // don't hit own type
 
 		if (o.hit) o.hit(1);
 

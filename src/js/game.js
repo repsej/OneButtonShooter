@@ -2,8 +2,6 @@
 
 let spriteAtlas, score, level, transitionFrames, cameraSize;
 
-//let bonusText, bonusAmmount, bonusGivenTime;
-
 let GameState = {
 	PLAY: 0,
 	GAME_OVER: 1,
@@ -377,10 +375,15 @@ function gameRenderPost() {
 	if (gameBlinkFrames > 0) {
 		gameBlinkFrames--;
 		let alpha = 0.2 + gameBlinkFrames / 10;
-		alpha = min(alpha, .8);
+		alpha = min(alpha, .9);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
 	}
+}
+
+function blinkScreen(frames) {
+	gameBlinkFrames /= 3;
+	gameBlinkFrames += frames;
 }
 
 function gameDrawScoreStuff(halfTile) {

@@ -1,11 +1,10 @@
 /** @format */
 
-let shipHp = 5;
-let shipParts = [];
+let shipHp, shipParts;
 
 function shipReset()
 {
-	shipHp = 5;
+	shipHp = 10;
 	shipParts = [];
 }
 
@@ -26,16 +25,27 @@ class ShipPart extends Enemy {
 
 	update() {
 		super.update();
+
+		if (this.pos.x < cameraPos.x + 5 && shipHp > 0)
+		{
+			// Tuuut tuuut ... start sailing !
+			for (const s of shipParts) {
+				s.xAccel = .0004;
+			}
+		}
+
 		this.angle = 0;
 		this.velocity.y = max(this.velocity.y, -.1);
 
-		this.velocity.x = min(this.velocity.x + this.xAccel, .1);
+		this.velocity.x = min(this.velocity.x + this.xAccel, .08);
+
+		if(shipHp < 0 && this.pos.y > 1 && rand(1) < .007) makeExplosion(this.pos, 3);
 
 		if (this.isAAGun) aaUpdateCannon(this);
 	}
 
 	superHit(dam) {
-		super.hit(dam);
+		super.hit(dam, true);
 	}
 
 	hit(dam=1) {
@@ -44,11 +54,6 @@ class ShipPart extends Enemy {
 		}
 
 		this.isAAGun = false; // disable gun
-
-		for (const s of shipParts) {
-			s.xAccel = .001;
-		}
-
 		shipHp -= dam;
 
 		makeExplosion(this.pos, 1);

@@ -52,7 +52,7 @@ class Player extends EngineObject {
 				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
 			} 			
 
-			while (rand() < 0.2) makeFlash(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
+			while (rand() < 0.2) makeFire(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
 
 			if (this.pos.y < 1)
 			{

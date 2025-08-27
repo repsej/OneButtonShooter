@@ -15,6 +15,8 @@ const levelSetTileData = (pos, layer, data) =>
 const levelGetTileData = (pos, layer) =>
 	pos.arrayCheck(tileCollisionSize) ? tileData[layer][((pos.y | 0) * tileCollisionSize.x + pos.x) | 0] : 0;
 
+let levelFramesUntilNextWave;
+
 function levelBuild(level) {
 
 	playerStartPos = undefined;
@@ -84,8 +86,8 @@ function levelLoad(levelNumber) {
 	tileLayers[0] = tileLayer;
 	tileData[0] = [];
 
-	for (let x = levelSize.x; x--; )
-		for (let y = levelSize.y; y--; ) {
+	for (let y = levelSize.y; y--; ) {
+		for (let x = levelSize.x; x--; ) {
 			const pos = vec2(x, levelSize.y - 1 - y);
 			const tile = layerData[y * levelSize.x + x];
 			const objectPos = pos.add(vec2(0.5));
@@ -138,11 +140,10 @@ function levelLoad(levelNumber) {
 					tileLayer.setData(pos, new TileLayerData(tile - 1, direction, !!mirror));
 			}
 		}
+	}
 	tileLayer.redraw();
 }
 
-
-let levelFramesUntilNextWave;
 
 function levelUpdate()
 {
