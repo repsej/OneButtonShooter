@@ -40,9 +40,7 @@ class Bullet extends EngineObject {
 
 		if (o.hit) o.hit(1);
 
-		sound_hit.play(this.pos, 1);
-		sound_shoot.play(this.pos, .5, .3);
-		makeHit(this.pos, 1);
+		makeHitEffect(this.pos, 1);
 		this.destroy();
 		return false;
 	}

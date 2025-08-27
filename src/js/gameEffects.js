@@ -151,9 +151,10 @@ function makeFlash(pos, size=1, life=500)
 	}, life);
 }
 
-function makeHit(pos, force=1)
+function makeHitEffect(pos, force=1)
 {
 	sound_hit.play(pos, force);
+	sound_shoot.play(pos, .5, .3);
 	makeFlash(pos, force);
 	makeSmoke(pos, rand(5,10)*force);
 	makeSparks(pos, force);

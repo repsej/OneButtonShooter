@@ -21,6 +21,7 @@ class ShipPart extends Enemy {
 		shipParts.push(this);
 
 		this.isAAGun = isAAGun;
+		this.xAccel = 0;
 	}
 
 	update() {
@@ -28,7 +29,7 @@ class ShipPart extends Enemy {
 		this.angle = 0;
 		this.velocity.y = max(this.velocity.y, -.1);
 
-		this.velocity.x = min(this.velocity.x, .1);
+		this.velocity.x = min(this.velocity.x + this.xAccel, .1);
 
 		if (this.isAAGun) aaUpdateCannon(this);
 	}
@@ -42,8 +43,10 @@ class ShipPart extends Enemy {
 			return;
 		}
 
+		this.isAAGun = false; // disable gun
+
 		for (const s of shipParts) {
-			s.velocity = vec2(.01, 0);
+			s.xAccel = .001;
 		}
 
 		shipHp -= dam;
@@ -54,6 +57,8 @@ class ShipPart extends Enemy {
 		{
 			for (const s of shipParts) {
 				s.velocity.x = 0;
+				s.xAccel = 0;
+
 				s.superHit(s.hp);
 			}
 		}
