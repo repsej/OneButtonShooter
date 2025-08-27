@@ -22,6 +22,7 @@ function levelBuild(level) {
 	tileLayers = undefined;
 	sky = undefined;
 
+	shipReset();
 	levelLoad(level);
 	sky = new Sky();
 	levelSpawnPlayer();
@@ -61,6 +62,14 @@ function levelLoad(levelNumber) {
 		balloon: 12,
 		enemyPlane: 13,
 		aaBattery: 16,
+
+		shipStern: 17,
+		shipMid: 18,
+		shipBow: 19,
+		shipRadio: 20,
+		shipBuilding: 21,
+		shipChimney: 22,
+		shipAAGun: 23,
 	};
 
 	// set all level data tiles
@@ -95,7 +104,20 @@ function levelLoad(levelNumber) {
 					break;
 
 				case tileLookup.aaBattery:
-					new AABattery(objectPos);
+					new AABattery(objectPos, tile-1);
+					break;
+
+				case tileLookup.shipAAGun:
+					new AABattery(objectPos, tile-1);
+					break;
+
+				case tileLookup.shipStern:
+				case tileLookup.shipMid:
+				case tileLookup.shipBow:
+				case tileLookup.shipRadio:
+				case tileLookup.shipBuilding:
+				case tileLookup.shipChimney:
+					new ShipPart(objectPos, tile-1);
 					break;
 
 				// case tileLookup.enemyPlane:

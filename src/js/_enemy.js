@@ -8,6 +8,7 @@ class Enemy extends EngineObject {
 		this.gravityScale = 0;
 		this.hp = 3;
 		this.deathGravity = 1;
+		this.deathTimeSecs = 2;
 	}
 
 	update()
@@ -41,7 +42,7 @@ class Enemy extends EngineObject {
 
 			this.gravityScale = this.deathGravity;
 
-			setTimeout(() => this.destroy(), 2000 );
+			setTimeout(() => this.destroy(), this.deathTimeSecs * 1000);
 
 			makeExplosion(this.pos, 1);
 			return;

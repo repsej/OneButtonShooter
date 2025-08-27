@@ -2,8 +2,8 @@
 
 class AABattery extends Enemy {
 
-	constructor(pos) {
-		super(pos, vec2(1), spriteAtlas.aaBattery);
+	constructor(pos, tileIndex) {
+		super(pos, vec2(1), tile(tileIndex));
 
 		this.setCollision(true, true, false);
 		this.hp = 1;

@@ -22,15 +22,6 @@ class Bullet extends EngineObject {
 	}
 
 	update() {
-		// if ((frame/10)%2<1)
-		// {
-		// 	this.color= rgb(1, 1, 0);
-		// }
-		// else
-		// {
-		// 	this.color= rgb(1, 0, 0);
-		// }
-
 		super.update();
 		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.x > cameraPos.x + cameraSize.x/2 + 2) 
 			this.destroy();
