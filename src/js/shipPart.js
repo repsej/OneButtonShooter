@@ -19,27 +19,25 @@ class ShipPart extends Enemy {
 		this.setCollision(true, true, false);
 		this.deathGravity = .01;
 		shipParts.push(this);
-		}
 
-	update()
-	{
+		this.isAAGun = isAAGun;
+	}
+
+	update() {
 		super.update();
 		this.angle = 0;
 		this.velocity.y = max(this.velocity.y, -.1);
 
 		this.velocity.x = min(this.velocity.x, .1);
 
-
-		if (shipHp <= 0) return;
+		if (this.isAAGun) aaUpdateCannon(this);
 	}
 
-	superHit(dam)
-	{
+	superHit(dam) {
 		super.hit(dam);
 	}
 
-	hit(dam=1)
-	{
+	hit(dam=1) {
 		if (this.hp < 0 || shipHp < 0){
 			return;
 		}
@@ -55,9 +53,9 @@ class ShipPart extends Enemy {
 		if (shipHp < 0)
 		{
 			for (const s of shipParts) {
+				s.velocity.x = 0;
 				s.superHit(s.hp);
 			}
 		}
 	}
-
 }
