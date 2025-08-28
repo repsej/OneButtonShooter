@@ -63,9 +63,14 @@ function createMusic(level) {
 	createInstruments();
 
 	// prettier-ignore
-	let chordStarts = [
-		, , 0, 0, 5, 0, 7, 0,
+	let chordStartsMel = [
+		p,p,p,p,p,p,0, 0, 5, 0, 7, 0,
 	];
+
+	let chordStartsBass = [
+		0, 0, 5, 0, 7, 0, 0, 0, 5, 0, 7, 0,
+	];
+
 
 	patterns = [[], []];
 
@@ -90,10 +95,10 @@ function createMusic(level) {
 		12, 12, p, 12, 
 		p, p, p, p]; // in the mood melody
 
-	let melNodes = unfoldPattern(3, -0.2, root + 12 + .2, melPattern, chordStarts, altMelPattern, 7);
+	let melNodes = unfoldPattern(3, -0.2, root + 12 + .2, melPattern, chordStartsMel, altMelPattern, 11);
 	patterns[0].push(melNodes);
 
-	let melNodes2 = unfoldPattern(3, 0.2, root + 12 - .2, melPattern, chordStarts, altMelPattern2, 7);
+	let melNodes2 = unfoldPattern(3, 0.2, root + 12 - .2, melPattern, chordStartsMel, altMelPattern2, 11);
 	patterns[0].push(melNodes2);
 
 
@@ -101,18 +106,18 @@ function createMusic(level) {
 
 	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
 
-	let bassNodes = unfoldPattern(0, -0.1, root, bassPattern, chordStarts);
+	let bassNodes = unfoldPattern(0, -0.1, root, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes);
 
-	let bassNodes2 = unfoldPattern(0, 0.1, root + 7, bassPattern, chordStarts);
+	let bassNodes2 = unfoldPattern(0, 0.1, root + 7, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes2);
 
 	musicSongLength = bassNodes.length - 2;
 
 	// Drums
 
-	let bdStarts = Array(chordStarts.length).fill(0);
-	let snareStarts = Array(chordStarts.length / 2).fill(0);
+	let bdStarts = Array(chordStartsMel.length).fill(0);
+	let snareStarts = Array(chordStartsMel.length / 2).fill(0);
 
 	let bdPattern = [0, p, p, p, 0, p, p, p];
 	let snarePattern = [
