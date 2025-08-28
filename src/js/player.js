@@ -144,7 +144,7 @@ class Player extends EngineObject {
 
 		lives--;
 
-		musicTargetTempo = tempoSlow;
+		// musicTargetTempo = tempoSlow;
 
 		setTimeout(() => {
 			if (lives == 0) {

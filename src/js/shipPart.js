@@ -29,6 +29,9 @@ class ShipPart extends Enemy {
 	update() {
 		super.update();
 
+		if (this.pos.x < cameraPos.x + cameraSize.x/2) {
+			musicTargetTempo = tempoFast;
+		}
 
 		if (this.pos.x < cameraPos.x + 5 && shipHp > 0 && !shipSailing)
 		{

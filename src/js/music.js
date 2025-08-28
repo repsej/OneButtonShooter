@@ -65,7 +65,7 @@ function createMusic(level) {
 
 	// prettier-ignore
 	let chordStartsMel = [
-		p,p,p,p,p,p,0, 0, 5, 0, 7, 0,
+		p, p, p, p, p, p, 0, 0, 5, 0, 7, 0,
 	];
 
 	let chordStartsBass = [
@@ -78,10 +78,10 @@ function createMusic(level) {
 	//// Melody
 
 	let melPattern = [
-		0, 4, 7, 0, 
-		4, 7, 0, 4, 
-		7, 0, 4, 7, 
-		p, 7, p, p]; // in the mood melody
+		0, 3, 7, 0, 
+		3, 7, 0, 3, 
+		7, 0, 3, 7, 
+		p, 7, p, p]; // in the mood melody (minor version)
 
 	let altMelPattern = [
 		0, 0, 0, 0, 
@@ -105,7 +105,12 @@ function createMusic(level) {
 
 	//// Bass
 
+	// major pent: 0, 2, 4, 7, 9
+	// minor pent: 0, 3, 5, 7, 10
+
 	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
+//	let bassPattern = [0, p, 5, p, 7, p, 10, p, 11, p, 10, p, 7, p, 5, p]; // in the mood bass (minor) (SUCKS!)
+
 
 	let bassNodes = unfoldPattern(0, -0.1, root, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes);
