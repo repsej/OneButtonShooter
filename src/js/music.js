@@ -184,11 +184,12 @@ function musicUpdate() {
 		let pan = pat[1];
 		let semitone = pat[(beat % (pat.length - 2)) + 2];
 
-		if (typeof semitone == "number" && !isNaN(semitone)) {
-			// console.log("semi", semitone);
+		let vol = rand(musicVol*.8, musicVol*1.2);
 
-			//instrument.playNote(semitone - 12, vec2(cameraPos.x + pan, cameraPos.y), vol);
-			instrument.playNotePure(semitone - 12, pan, musicVol);
+		if (beat % 4 == 2) vol = 1.5 * musicVol; // accentuate the off beats !
+
+		if (typeof semitone == "number" && !isNaN(semitone)) {
+			instrument.playNotePure(semitone - 12, pan, vol);
 		}
 	}
 }
