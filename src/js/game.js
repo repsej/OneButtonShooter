@@ -52,7 +52,7 @@ function gameInit() {
 	lives = LIVES_START;
 	titleSize = 7;
 
-	musicOn = true; // XXX For now
+	musicOn = true;
 
 	levelBuild(level);
 	musicInit(level);
@@ -75,7 +75,6 @@ function gameInit() {
 
 function gameSetState(newState) {
 	gameBottomText = undefined;
-	//gameBottomTopText = undefined;
 
 	gameState = newState;
 
@@ -85,11 +84,6 @@ function gameSetState(newState) {
 			break;
 
 		case GameState.WON:
-			// gameSkipToLevel(13);
-			// level = 31;
-			// musicInit(level);
-			// // musicOn = true;
-			//gameBonusSet("Lives bonus ", lives * LIVE_BONUS_SCORE, 2);
 			break;
 
 		case GameState.TRANSITION:
@@ -103,9 +97,6 @@ function gameSetState(newState) {
 
 function gameNextLevel() {
 	if (transitionFrames > 0) return;
-
-	//sound_exit.play(player.pos, 3);
-	// player.jumpToNextLevel();
 
 	gameBlinkFrames = 10;
 	gameCameraShake();
@@ -131,7 +122,6 @@ function gameUpdate() {
 
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
-
 
 	// gameBottomText = "camY=" +cameraPos.y.toFixed(2) + "    playerY=" + player.pos.y.toFixed(2);
 
