@@ -68,7 +68,7 @@ class Player extends EngineObject {
 
 		if (this.gravityScale == 0)
 		{
-			if (inputJumpPressed()){
+			if (inputButtonPressed()){
 				gameBottomText = undefined;
 
 				musicTargetTempo = tempoMid;
@@ -82,7 +82,7 @@ class Player extends EngineObject {
 		}
 
 
-		if (inputJumpHeld() && this.pos.y < MAX_FLYING_HEIGHT)
+		if (inputButtonHeld() && this.pos.y < MAX_FLYING_HEIGHT)
 		{
 			this.yPower += DY_POWER;
 		}
@@ -98,7 +98,7 @@ class Player extends EngineObject {
 		this.velocity.x = this.xSpeed;
 
 
-		if (inputJumpPressed() || inputJumpReleased())
+		if (inputButtonPressed() || inputButtonReleased())
 		{
 			// spawn bullet in front of plane
 			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);

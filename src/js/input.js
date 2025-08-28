@@ -1,58 +1,36 @@
 /** @format */
 
-let inputJump = 0;
-let inputJumpLast = 0;
+let inputButton = 0;
+let inputButtonLast = 0;
 
-let inputFrame = 0;
-
-let inputJumpData = {};
-
-// if false it will record
-let inputPlaybackDemo = false;
-
-function inputJumpHeld() {
-	return inputJump & 1;
+function inputReset() {
+	inputButton = 0;
+	inputButtonLast = 0;
 }
 
-function inputJumpPressed(forceRealInput = false) {
+function inputButtonHeld() {
+	return inputButton & 1;
+}
+
+function inputButtonPressed(forceRealInput = false) {
 	if (forceRealInput) {
-		let realInput = inputReadRealJumpInput();
+		let realInput = inputReadRealInput();
 		return realInput == 3;
 	}
 
-	return inputJump == 3;
+	return inputButton == 3;
 }
 
-function inputJumpReleased(forceRealInput = false) {
+function inputButtonReleased(forceRealInput = false) {
 	if (forceRealInput) {
-		let realInput = inputReadRealJumpInput();
+		let realInput = inputReadRealInput();
 		return realInput == 4;
 	}
 
-	return inputJump == 4;
+	return inputButton == 4;
 }
 
-function inputReset() {
-	inputJump = 0;
-	inputFrame = 0;
-
-	if (inputPlaybackDemo && savefileExist("jumpData_" + level)) {
-		inputJumpData = savefileGet("jumpData_" + level);
-	} else {
-		inputJumpData = {};
-		inputPlaybackDemo = false;
-	}
-}
-
-function inputPlaybackDemoReady() {
-	for (let i = 1; i <= 13; i++) {
-		if (!savefileExist("jumpData_" + i)) return false;
-	}
-
-	return true;
-}
-
-function inputReadRealJumpInput() {
+function inputReadRealInput() {
 	let space = inputData[0]["Space"];
 	let gamepadButton = inputData[1] && inputData[1][0];
 	let mouseButton = inputData[0][0];
@@ -60,29 +38,8 @@ function inputReadRealJumpInput() {
 	return space | gamepadButton | mouseButton;
 }
 
-// XXX added to not collide w inputUpdate in littleJs ... sigh
-
-function inputUpdateXXX() {
-	if (inputPlaybackDemo && level > 0) {
-		// Play back jump data
-		let frameData = inputJumpData[inputFrame];
-		if (frameData != undefined) inputJump = frameData;
-	} else {
-		// Play game and record jump data
-
-		inputJump = inputReadRealJumpInput();
-
-		if (inputJump != inputJumpLast) {
-			inputJumpData[inputFrame] = inputJump;
-		}
-	}
-	//console.log(inputFrame, inputJump);
-
-	inputFrame++;
-
-	inputJumpLast = inputJump;
-}
-
-function inputSaveData() {
-	savefileSet("jumpData_" + level, inputJumpData);
+// Name chosed to not collide with littlejs
+function inputUpdateXXX() { 
+	inputButton = inputReadRealInput();
+	inputButtonLast = inputButton;
 }

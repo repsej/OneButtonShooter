@@ -82,12 +82,6 @@ function gameSetState(newState) {
 	switch (newState) {
 		case GameState.GAME_OVER:
 			gameBlinkFrames = 15;
-			// levelBuild(14);
-			// musicInit(22);
-			// new ConcreteBlock(vec2(levelSize.x / 2, levelSize.y * 4));
-
-			if (!inputPlaybackDemo) gameNewHiscoreStatus = savefileHiscoreUpdate(score);
-
 			break;
 
 		case GameState.WON:
@@ -147,7 +141,8 @@ function gameUpdate() {
 			break;
 
 		case GameState.GAME_OVER:
-			if (inputJumpReleased(true)) gameInit();
+			musicTargetTempo = tempoSlow;
+			if (inputButtonReleased(true)) gameInit();
 			break;
 
 		case GameState.TRANSITION:
