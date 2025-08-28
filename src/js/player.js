@@ -26,6 +26,8 @@ class Player extends EngineObject {
 
 		this.deathFrame = undefined;
 		this.deathAngle = undefined;
+
+		musicTargetTempo = tempoSlow;
 	}
 
 	isPaused() {
@@ -68,6 +70,8 @@ class Player extends EngineObject {
 		{
 			if (inputJumpPressed()){
 				gameBottomText = undefined;
+
+				musicTargetTempo = tempoMid;
 
 				this.yPower = MAX_YPOWER / 2;
 				this.gravityScale = PLAYER_GRAVITY; 
@@ -139,6 +143,8 @@ class Player extends EngineObject {
 		this.deathFrame = frame;
 
 		lives--;
+
+		musicTargetTempo = tempoSlow;
 
 		setTimeout(() => {
 			if (lives == 0) {

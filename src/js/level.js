@@ -2,7 +2,32 @@
 
 const tileType_empty = 0;
 const tileType_ground = 1;
-const tileType_spike = 2;
+
+// create table for tiles in the level tilemap
+const tileLookup = {
+	empty: 0,
+	player: 1,
+	water: 5,
+	ground: 6,
+
+	// islandBeachLeft: 7,
+	// islandSandPalmLower: 8,
+	// islandSand: 9,
+	// islandBeachRight: 10,
+	// palmUpper: 11,
+
+	balloon: 12,
+	enemyPlane: 13,
+	aaGun: 16,
+
+	shipStern: 17,
+	shipMid: 18,
+	shipBow: 19,
+	shipRadio: 20,
+	shipBuilding: 21,
+	shipChimney: 22,
+	shipAAGun: 23,
+};
 
 
 let player, playerStartPos, tileData, tileLayers, sky;
@@ -48,31 +73,6 @@ function levelLoad(levelNumber) {
 	levelSize = vec2(tileMapData.w, tileMapData.h);
 	initTileCollision(levelSize);
 
-	// create table for tiles in the level tilemap
-	const tileLookup = {
-		empty: 0,
-		player: 1,
-		water: 5,
-		ground: 6,
-
-		// islandBeachLeft: 7,
-		// islandSandPalmLower: 8,
-		// islandSand: 9,
-		// islandBeachRight: 10,
-		// palmUpper: 11,
-
-		balloon: 12,
-		enemyPlane: 13,
-		aaGun: 16,
-
-		shipStern: 17,
-		shipMid: 18,
-		shipBow: 19,
-		shipRadio: 20,
-		shipBuilding: 21,
-		shipChimney: 22,
-		shipAAGun: 23,
-	};
 
 	// set all level data tiles
 	tileData = [];
@@ -119,7 +119,7 @@ function levelLoad(levelNumber) {
 				case tileLookup.shipRadio:
 				case tileLookup.shipBuilding:
 				case tileLookup.shipChimney:
-					new ShipPart(objectPos, tile-1);
+					new ShipPart(objectPos, tile-1, false, tile == tileLookup.shipChimney);
 					break;
 
 				// case tileLookup.enemyPlane:

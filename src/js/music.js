@@ -1,9 +1,13 @@
 /** @format */
 
-const tempo = 4.5;
+const tempoSlow = 4;
+const tempoMid = 5;
+const tempoFast = 6;
+
+let tempo = tempoSlow; 
 let musicVol = .3;
 
-
+let musicTargetTempo = tempo; // set to change tempo
 
 let patterns = [[]];
 
@@ -146,6 +150,8 @@ let musicTempo = tempo;
 let beatFloat = 0;
 
 function musicUpdate() {
+	tempo = tempo * .9 + musicTargetTempo * .1;
+
 	beatFloat += musicTempo / 60;
 
 	let beat = Math.floor(beatFloat) % musicSongLength;
