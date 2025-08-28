@@ -1,5 +1,10 @@
 /** @format */
 
+const tempo = 4.5;
+let musicVol = .3;
+
+
+
 let patterns = [[]];
 
 let musicSongLength = 0;
@@ -7,7 +12,7 @@ let musicSongLength = 0;
 let instrumentList = [];
 
 let instrumentParams = [
-	[1, 0, 43, 0.01, 0.5, 0.5, , 0.5], // 0 bass
+	[1, 0, 43, 0.05, 0.5, 0.5, , 0.5], // 0 bass
 	[10, 0, 170, 0.003, , 0.008, , 0.97, -35, 53, , , , , , 0.1], // 1 bass drum
 	[0.6, 0, 270, , , 0.12, 3, 1.65, -2, , , , , 4.5, , 0.02], // 2 snare
 	[1.5, 0, 130, .1, .2,
@@ -24,14 +29,6 @@ let instrumentParams = [
     // release = .1, shape = 0, shapeCurve = 1, slide = 0, deltaSlide = 0,			  // 5
     // pitchJump = 0, pitchJumpTime = 0, repeatTime = 0, noise = 0, modulation = 0,   // 5
     // bitCrush = 0, delay = 0, sustainVolume = 1, decay = 0, tremolo = 0, filter = 0 // 6
-
-
-let songData = [
-	instrumentList,
-	patterns, // patterns
-	[1], // sequence (NOT USED)
-	80, // BPM
-];
 
 function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=undefined, altIndex=0) {
 	let nodes = [];
@@ -127,20 +124,10 @@ function createMusic(level) {
 		p, p, 0, 0,
 	];
 
-	// let bdPattern = [0, p, 0, p, 0, p, 0, p];
-	// let snarePattern = [
-	// 	p, 0, p, 0,
-	// 	p, 0, p, 0,
-	// 	p, 0, p, 0,
-	// 	p, 0, p, 0,
-	// ];
-
-
 	patterns[0].push(unfoldPattern(1, 0, 7, bdPattern, bdStarts));
 	patterns[0].push(unfoldPattern(2, 0.1, 7, snarePattern, snareStarts));
 }
 
-let musicVol = .3;
 let musicOn = true;
 
 let musicStartTime = 0;
@@ -151,7 +138,6 @@ function musicInit(level) {
 	musicLastPlayedBeat = -1;
 }
 
-const tempo = 5.5;
 
 
 let musicLastPlayedBeat = -1;
