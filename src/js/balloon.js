@@ -10,7 +10,7 @@ class Balloon extends Enemy {
 		this.setCollision(true, true, false);
 		this.hp = 3;
 
-		this.deathGravity = .3;
+		this.deathGravity = .2;
 	}
 
 	update()

@@ -174,7 +174,7 @@ function musicUpdate() {
 
 	if (!musicOn) return;
 
-	if (beat == 0) musicPlayCrash(2);
+	// if (beat == 0) musicPlayCrash(2);
 
 	for (const pat of patterns[0]) {
 		let instrument = instrumentList[pat[0]];

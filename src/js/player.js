@@ -48,7 +48,6 @@ class Player extends EngineObject {
 				return;
 			}
 
-
 			if (frame % 3 == 0){
 				makeSmoke(this.pos, rand(1,4));
 				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
@@ -69,6 +68,9 @@ class Player extends EngineObject {
 		if (this.gravityScale == 0)
 		{
 			if (inputButtonPressed()){
+				musicPlayCrash(2);
+				gameBlinkFrames = 10;
+
 				gameBottomText = undefined;
 
 				musicTargetTempo = tempoMid;

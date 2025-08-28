@@ -19,7 +19,7 @@ function aaUpdateCannon(gun) {
 	if (gun.framesToShoot === undefined) gun.framesToShoot = rand(50,100);
 
 	if (gun.pos.x < cameraPos.x + cameraSize.x / 2 + 2 && gun.hp > 0) {
-		if (gun.framesToShoot-- < 0 && gun.pos.x > cameraPos.x) {
+		if (gun.framesToShoot-- < 0 && gun.shootDistOk()) {
 			gun.framesToShoot = rand(100, 150);
 
 			let bulletSpeed = vec2(-.07, .07);

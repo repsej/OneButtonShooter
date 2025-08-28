@@ -17,7 +17,7 @@ class EnemyPlane extends Enemy {
 
 		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 && this.hp > 0)
 		{
-			if(this.framesToShoot-- < 0 && this.pos.x > cameraPos.x)
+			if(this.framesToShoot-- < 0 && this.shootDistOk())
 			{
 				this.framesToShoot = rand(100,200);
 			

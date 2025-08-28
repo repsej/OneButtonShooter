@@ -7,8 +7,14 @@ class Enemy extends EngineObject {
 		this.setCollision(true, true, false);
 		this.gravityScale = 0;
 		this.hp = 3;
-		this.deathGravity = 1;
+		this.deathGravity = .5;
 		this.deathTimeSecs = 2;
+	}
+
+
+	shootDistOk()
+	{
+		return (abs(this.pos.x - player.pos.x) > 10);
 	}
 
 	update()

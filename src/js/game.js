@@ -16,14 +16,13 @@ const LIVES_START = 3;
 
 let gameBottomText = undefined;
 let lives = undefined;
-let titleSize;
 let gameNewHiscoreStatus = undefined;
 let gameBlinkFrames = 0;
 let cameraShake = vec2();
-let gameLastDiedOnLevel = undefined;
 let showHeight = 20;
 
-let title;
+// let title, titleSize;
+
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameInit() {
@@ -50,7 +49,6 @@ function gameInit() {
 	gameState = GameState.PLAY;
 
 	lives = LIVES_START;
-	titleSize = 7;
 
 	musicOn = true;
 
@@ -78,9 +76,11 @@ function gameSetState(newState) {
 
 	gameState = newState;
 
+	musicPlayCrash(2);
+	gameBlinkFrames = 15;
+
 	switch (newState) {
 		case GameState.GAME_OVER:
-			gameBlinkFrames = 15;
 			break;
 
 		case GameState.WON:
