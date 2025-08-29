@@ -96,12 +96,11 @@ function createMusic(level) {
 		12, 12, p, 12, 
 		p, p, p, p]; // in the mood melody
 
-	let melNodes = unfoldPattern(3, -0.2, root + 12 + .2, melPattern, chordStartsMel, altMelPattern, 11);
+	let melNodes = unfoldPattern(3, -0.5, root + 12 + .2, melPattern, chordStartsMel, altMelPattern, 11);
 	patterns[0].push(melNodes);
 
-	let melNodes2 = unfoldPattern(3, 0.2, root + 12 - .2, melPattern, chordStartsMel, altMelPattern2, 11);
-	patterns[0].push(melNodes2);
-
+	melNodes = unfoldPattern(3, 0.5, root + 24 - .2, melPattern, chordStartsMel, altMelPattern2, 11);
+	patterns[0].push(melNodes);
 
 	//// Bass
 
@@ -115,8 +114,8 @@ function createMusic(level) {
 	let bassNodes = unfoldPattern(0, -0.1, root - .1, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes);
 
-	let bassNodes2 = unfoldPattern(0, 0.1, root + 7.1, bassPattern, chordStartsBass);
-	patterns[0].push(bassNodes2);
+	bassNodes = unfoldPattern(0, 0.1, root + 7.1, bassPattern, chordStartsBass);
+	patterns[0].push(bassNodes);
 
 	musicSongLength = bassNodes.length - 2;
 
