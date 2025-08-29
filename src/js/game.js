@@ -21,8 +21,7 @@ let gameBlinkFrames = 0;
 let cameraShake = vec2();
 let showHeight = 20;
 
-// let title, titleSize;
-
+let forcePause = false;
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameInit() {
@@ -103,6 +102,8 @@ function gameNextLevel() {
 
 	gameSetState(GameState.TRANSITION);
 }
+
+
 
 function gameUpdate() {
 	inputUpdateXXX();
@@ -187,10 +188,15 @@ function gameCameraShake(strength = 1) {
 
 function gameUpdatePost() {
 
+	// Pause when not in landscape mode
+	paused = window.innerHeight > window.innerWidth
+
+	if (forcePause) paused = true;
+
 	if (!IS_RELEASE)
 	{
 		if (keyWasPressed("KeyP")) {
-			paused = !paused;
+			forcePause = !forcePause;
 		}
 	}
 }
@@ -267,6 +273,17 @@ function gameRender() {}
 function gameRenderPost() {
 	let ySpacing = overlayCanvas.height / 20;
 
+	if (paused && !forcePause)
+	{
+		gameDrawHudText("PAUSED", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
+		gameDrawHudText("Please turn screen to play", overlayCanvas.width / 2, overlayCanvas.height * 0.6, .8);
+
+		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(0,0,0,.8), 0, undefined, true);
+
+		mainContext.drawImage(overlayCanvas, 0, 0);
+		return;
+	}
+
 	switch (gameState) {
 		case GameState.TRANSITION:
 			// let bestTime = savefileTimeGet(level);
@@ -338,20 +355,6 @@ function gameRenderPost() {
 	}
 
 	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - ySpacing * 3);
-
-
-	// if (gameBottomTopText)
-	// 	gameDrawHudText(gameBottomTopText, overlayCanvas.width * 0.5, overlayCanvas.height - halfTile * 3);
-
-	// if (player) player.renderTop(); // On top of everything !
-
-	// if (inputPlaybackDemo) {
-	// 	if ((time * 2) % 2 > 1) {
-	// 		gameDrawHudText("DEMO PLAYBACK", overlayCanvas.width / 4, overlayCanvas.height - halfTile);
-	// 	} else {
-	// 		gameDrawHudText("[Jump to quit]", (overlayCanvas.width * 3) / 4, overlayCanvas.height - halfTile);
-	// 	}
-	// }
 
 	mainContext.drawImage(overlayCanvas, 0, 0);
 
