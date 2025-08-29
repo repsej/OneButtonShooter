@@ -46,7 +46,10 @@ class EnemyPlane extends Enemy {
 
 
 	shoot() {
-		let bulletSpeed = player.pos.subtract(this.pos).normalize(.15);
+		let dist = this.pos.distance(player.pos);
+		let targetPoint = player.pos.add(vec2(dist/3, 0)); // lead the target
+
+		let bulletSpeed = targetPoint.subtract(this.pos).normalize(.15);
 		const bulletPos = this.pos.add(bulletSpeed.normalize(1));
 		new Bullet(bulletPos, bulletSpeed, this);
 	}
