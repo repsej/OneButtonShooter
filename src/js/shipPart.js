@@ -29,6 +29,10 @@ class ShipPart extends Enemy {
 	update() {
 		super.update();
 
+		if (this.isChimney && rand()<.5) makeSmoke(this.pos.add(vec2(0, .8)), shipSailing ? rand(1,3) : .5);
+
+		if (player.isPaused()) return;
+
 		if (this.pos.x < cameraPos.x + cameraSize.x/2 && gameState == GameState.PLAYING) {
 			musicTargetTempo = tempoFast;
 		}
@@ -44,17 +48,12 @@ class ShipPart extends Enemy {
 			}
 		}
 
-		if (this.isChimney && shipSailing)
-		{
-			if (rand()<.5)makeSmoke(this.pos.add(vec2(0, .8)), rand(1,2));
-		}
-
 		this.angle = 0;
-		this.velocity.y = max(this.velocity.y, -.1);
+		this.velocity.y = max(this.velocity.y, -.01);
 
 		this.velocity.x = min(this.velocity.x + this.xAccel, .08);
 
-		if(shipHp < 0 && this.pos.y > 1 && rand(1) < .007) makeExplosion(this.pos, 3);
+		if(shipHp < 0 && this.pos.y > 1 && rand(1) < .004) makeExplosion(this.pos, rand(1,3));
 
 		if (this.isAAGun) aaUpdateCannon(this);
 	}

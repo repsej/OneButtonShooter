@@ -37,10 +37,16 @@ class Player extends EngineObject {
 	update() {
 
 		cameraMicPos = this.pos;
+		this.angle = -this.velocity.y * 3;
 
 		super.update();
-		this.angle = -this.velocity.y * 3;
-		
+
+		if (this.pos.y < 1)
+		{
+			if (this.deathAngle === undefined) this.deathAngle = this.angle;
+			this.velocity = this.velocity.scale(.5);
+			this.angle = this.deathAngle;
+		}
 		
 		if (!this.alive || gameState == GameState.GAME_OVER){
 
@@ -55,12 +61,6 @@ class Player extends EngineObject {
 
 			while (rand() < 0.2) makeFire(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
 
-			if (this.pos.y < 1)
-			{
-				if (this.deathAngle === undefined) this.deathAngle = this.angle;
-				this.velocity = this.velocity.scale(.5);
-				this.angle = this.deathAngle;
-			}
 
 			return;
 		} 

@@ -112,10 +112,10 @@ function createMusic(level) {
 //	let bassPattern = [0, p, 5, p, 7, p, 10, p, 11, p, 10, p, 7, p, 5, p]; // in the mood bass (minor) (SUCKS!)
 
 
-	let bassNodes = unfoldPattern(0, -0.1, root, bassPattern, chordStartsBass);
+	let bassNodes = unfoldPattern(0, -0.1, root - .1, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes);
 
-	let bassNodes2 = unfoldPattern(0, 0.1, root + 7, bassPattern, chordStartsBass);
+	let bassNodes2 = unfoldPattern(0, 0.1, root + 7.1, bassPattern, chordStartsBass);
 	patterns[0].push(bassNodes2);
 
 	musicSongLength = bassNodes.length - 2;

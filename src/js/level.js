@@ -89,12 +89,20 @@ function levelLoad(levelNumber) {
 	for (let y = levelSize.y; y--; ) {
 		for (let x = levelSize.x; x--; ) {
 			const pos = vec2(x, levelSize.y - 1 - y);
-			const tile = layerData[y * levelSize.x + x];
+			const t = layerData[y * levelSize.x + x];
 			const objectPos = pos.add(vec2(0.5));
 
 			// Create objects
-			switch (tile) {
+			switch (t) {
 				case tileLookup.empty:
+					break;
+
+				case tileLookup.water:
+					levelSetTileData(pos, 0, tile);
+					setTileCollisionData(pos, tileType_ground);
+					let water = new EngineObject(pos.add(vec2(0.5)), vec2(1), tile(t-1));
+					water.update = () => {}; // static !
+					water.renderOrder = 2500;
 					break;
 
 				case tileLookup.balloon:
@@ -106,11 +114,11 @@ function levelLoad(levelNumber) {
 					break;
 
 				case tileLookup.aaGun:
-					new AAGun(objectPos, tile-1);
+					new AAGun(objectPos, t-1);
 					break;
 
 				case tileLookup.shipAAGun:
-					new ShipPart(objectPos, tile-1, true);
+					new ShipPart(objectPos, t-1, true);
 					break;
 
 				case tileLookup.shipStern:
@@ -119,25 +127,21 @@ function levelLoad(levelNumber) {
 				case tileLookup.shipRadio:
 				case tileLookup.shipBuilding:
 				case tileLookup.shipChimney:
-					new ShipPart(objectPos, tile-1, false, tile == tileLookup.shipChimney);
+					new ShipPart(objectPos, t-1, false, t == tileLookup.shipChimney);
 					break;
 
-				// case tileLookup.enemyPlane:
-				// 	new EnemyPlane(objectPos);
-				// 	break;
-
 				default: // Stuff with collision
-					levelSetTileData(pos, 0, tile);
+					levelSetTileData(pos, 0, t);
 					setTileCollisionData(pos, tileType_ground);
 
 					let direction = 0, mirror = 0;
 
-					// if (tile == tileLookup.ground) {
+					// if (tile == tileLookup.) {
 					// 	direction = randInt(4);
 					// 	mirror = randInt(2);
 					// }
 
-					tileLayer.setData(pos, new TileLayerData(tile - 1, direction, !!mirror));
+					tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
 			}
 		}
 	}
