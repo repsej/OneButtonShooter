@@ -1,5 +1,6 @@
 TODO: 
 
+ - Make pos of player be set to a number of tiles and not a percentage of the screen.
 
  - Go to next level
 

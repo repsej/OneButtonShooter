@@ -12,6 +12,14 @@ class EnemyPlane extends Enemy {
 		this.frame = 0;
 	}
 
+	destroy(){
+		// shoot just before leaving the screen
+		if (this.framesToShoot < 0 && this.hp > 0) this.shoot();
+
+		super.destroy();
+	}
+
+
 	update() {
 		super.update(); 
 
@@ -21,9 +29,7 @@ class EnemyPlane extends Enemy {
 			{
 				this.framesToShoot = rand(100,200);
 			
-				let bulletSpeed = player.pos.subtract(this.pos).normalize(.15);
-				const bulletPos = this.pos.add(bulletSpeed.normalize(1));
-				new Bullet(bulletPos, bulletSpeed, this);
+				this.shoot();
 			}
 
 			this.velocity.x = -0.05;
@@ -38,4 +44,10 @@ class EnemyPlane extends Enemy {
 		}
 	}
 
+
+	shoot() {
+		let bulletSpeed = player.pos.subtract(this.pos).normalize(.15);
+		const bulletPos = this.pos.add(bulletSpeed.normalize(1));
+		new Bullet(bulletPos, bulletSpeed, this);
+	}
 }
