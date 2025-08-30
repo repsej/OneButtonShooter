@@ -290,6 +290,7 @@ function gameRenderPost() {
 
 	switch (gameState) {
 		case GameState.TRANSITION:
+			gameDrawHudText("Level cleared", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
 		// fall-thru !
 
 		case GameState.PLAY:
@@ -299,9 +300,15 @@ function gameRenderPost() {
 
 			if (player.isPaused())
 			{
-				gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
-				gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
+				gameDrawHudText("Get ready", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
+				gameDrawHudText("Watch out for enemy fighters", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 1);
+
+				// gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
+				// gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
 			}
+
+			shipDrawHealthBar();
+
 			break;
 
 		case GameState.GAME_OVER:

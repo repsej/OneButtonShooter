@@ -86,20 +86,14 @@ function createMusic(level) {
 	let altMelPattern = [
 		0, 0, 0, 0, 
 		0, 0, 0, 0, 
-		0, 0, p, 0, 
+		7, 3, p, 0, 
 		p, p, p, p]; // in the mood melody
 
-
-	let altMelPattern2 = [
-		12, 12, 12, 12, 
-		12, 12, 12, 12, 
-		12, 12, p, 12, 
-		p, p, p, p]; // in the mood melody
 
 	let melNodes = unfoldPattern(3, -0.5, root + 12 + .2, melPattern, chordStartsMel, altMelPattern, 11);
 	patterns[0].push(melNodes);
 
-	melNodes = unfoldPattern(3, 0.5, root + 24 - .2, melPattern, chordStartsMel, altMelPattern2, 11);
+	melNodes = unfoldPattern(3, 0.5, root + 24 - .2, melPattern, chordStartsMel, altMelPattern, 11);
 	patterns[0].push(melNodes);
 
 	//// Bass

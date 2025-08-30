@@ -10,6 +10,6 @@ function assert(test, text = "[Like, some error]") {
 
 	if (!test) {
 		console.error("ASSERT FAILED: ", text);
-		debugger;
+		debugger; // NOFIX - NEEDS BE HERE !
 	}
 }

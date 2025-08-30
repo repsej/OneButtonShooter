@@ -42,13 +42,11 @@ class Player extends EngineObject {
 		//// Sound and particle effects
 		if (frame % 17 == 0 )
 		{
-			debugger;
 			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
 		}
 
 		if (frame % 13 == 0)
 		{
-			debugger;
 			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
 		}
 
@@ -173,7 +171,7 @@ class Player extends EngineObject {
 		// musicTargetTempo = tempoSlow;
 
 		setTimeout(() => {
-			if (lives == 0) {
+			if (lives <= 0) {
 				gameSetState(GameState.GAME_OVER);
 				return;
 			}
