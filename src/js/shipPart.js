@@ -4,7 +4,7 @@ let shipHp, shipParts, shipSailing = false;
 
 function shipReset()
 {
-	shipHp = 20;
+	shipHp = 5;
 	shipParts = [];
 	shipSailing = false;
 }
@@ -24,6 +24,8 @@ class ShipPart extends Enemy {
 		this.xAccel = 0;
 
 		this.isChimney = isChimney;
+
+		shipHp += 1;
 	}
 
 	update() {

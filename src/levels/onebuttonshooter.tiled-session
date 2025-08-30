@@ -1,0 +1,76 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "level-00.tmj": {
+            "scale": 0.2719375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1601.4709262238566,
+                "y": 152.60859572512072
+            }
+        },
+        "level-01.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 638,
+                "y": 160.66666666666663
+            }
+        },
+        "level-02.tmj": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2543.5,
+                "y": 123.5
+            }
+        },
+        "level-03.tmj": {
+            "scale": 0.2719375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1601.4709262238566,
+                "y": 152.60859572512072
+            }
+        },
+        "level-04.tmj": {
+            "scale": 0.2719375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1601.4709262238566,
+                "y": 152.60859572512072
+            }
+        },
+        "level-05.tmj": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 947.75,
+                "y": 263.75
+            }
+        },
+        "level-06.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1134,
+                "y": 118
+            }
+        },
+        "level-07.tmj": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 957.75,
+                "y": 225.75
+            }
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "onebuttonshooter.tiled-project",
+    "recentFiles": [
+    ]
+}
