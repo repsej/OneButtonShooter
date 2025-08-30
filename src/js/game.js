@@ -290,31 +290,6 @@ function gameRenderPost() {
 
 	switch (gameState) {
 		case GameState.TRANSITION:
-			// let bestTime = savefileTimeGet(level);
-			// if (bestTime > 0) {
-			// 	let bestText = undefined;
-
-			// 	console.log("best, diff: ", bestTime, gameBestTimeBonusDiff);
-
-			// 	if (gameBestTimeBonusDiff != undefined) {
-			// 		// let bonusDiffAsTime =
-			// 		// 	Math.floor(Math.abs(gameBestTimeBonusDiff) / 100) + "." + (Math.abs(gameBestTimeBonusDiff) % 100);
-
-			// 		let bonusDiffAsTime = Math.abs(gameBestTimeBonusDiff).toString().padStart(4, "0");
-			// 		bonusDiffAsTime = bonusDiffAsTime.slice(0, 2) + "." + bonusDiffAsTime.slice(2);
-
-			// 		if (gameBestTimeBonusDiff == 0) {
-			// 			bestText = "Best tied";
-			// 		} else if (gameBestTimeBonusDiff > 0) {
-			// 			bestText = (time * 2) % 2 > 1 ? "NEW BEST +" + bonusDiffAsTime : "";
-			// 		} else {
-			// 			bestText = "Best -" + bonusDiffAsTime;
-			// 		}
-			// 	}
-
-			// 	if (bestText) gameDrawHudText(bestText, (overlayCanvas.width * 3) / 4, halfTile * 2, 0.7);
-			// }
-
 		// fall-thru !
 
 		case GameState.PLAY:
@@ -327,33 +302,20 @@ function gameRenderPost() {
 				gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
 				gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
 			}
-
-
-			//if (bonusText) gameDrawHudText(bonusText + bonusAmmount, overlayCanvas.width / 2, ySpacing * 3, 0.7);
-
 			break;
 
 		case GameState.GAME_OVER:
 			gameDrawScoreStuff(ySpacing);
 
 			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
-			// gameDrawHudText("Beware the danger of 13 !", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 2);
 
 			break;
 
 		case GameState.WON:
 			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("FREEBIRD", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 8, 4);
-			gameDrawHudText("YOU TAEK-WON-DODO", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 5, 2);
-
-			if (!isTouchDevice) {
-				gameDrawHudText(
-					"[Page up/down to change music.  Chamber " + level + "]",
-					(overlayCanvas.width * 2) / 4,
-					overlayCanvas.height - ySpacing * 3
-				);
-			}
+			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 8, 3);
+			gameDrawHudText("YOU SANK ALL SHIPS", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 5, 2);
 
 			break;
 	}

@@ -11,14 +11,11 @@ class Enemy extends EngineObject {
 		this.deathTimeSecs = 2;
 	}
 
-
-	shootDistOk()
-	{
+	shootDistOk() {
 		return (abs(this.pos.x - player.pos.x) > 10);
 	}
 
-	update()
-	{
+	update() {
 		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2)
 		{
 			this.destroy();
@@ -32,7 +29,6 @@ class Enemy extends EngineObject {
 		this.angle = 3*this.velocity.y;
 		super.update();
 	}
-
 
 	hit(damage=1, noExplosion=false) {
 		if(this.hp <= 0) return;

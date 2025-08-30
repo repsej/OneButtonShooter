@@ -5,7 +5,7 @@ class EnemyPlane extends Enemy {
 	constructor(pos) {
 		super(pos, vec2(2,1), spriteAtlas.enemyPlane);
 
-		this.setCollision(true, true, false);
+		this.setCollision(true, true, true);
 		this.hp = 1;
 
 		this.framesToShoot = rand(50,100);
@@ -32,7 +32,7 @@ class EnemyPlane extends Enemy {
 				this.shoot();
 			}
 
-			this.velocity.x = -0.05;
+			if (this.velocity.x == 0) this.velocity.x = rand(-0.05, -0.1);
 
 			if (rand() < 0.05) {
 				this.velocity.y = rand(-0.01, 0.01);
@@ -44,6 +44,10 @@ class EnemyPlane extends Enemy {
 		}
 	}
 
+	collideWithTile(tileData, pos) {
+		this.hit(this.hp);
+		return false;
+	}
 
 	shoot() {
 		let dist = this.pos.distance(player.pos);

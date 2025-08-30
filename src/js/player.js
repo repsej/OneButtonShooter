@@ -63,10 +63,13 @@ class Player extends EngineObject {
 			this.gravityScale = 0.0001;
 			this.yPower = MAX_YPOWER*2
 
-			cameraScale += .3;
+			this.drawSize.x *= 1.005;
+			this.drawSize.y *= 1.005;
+			
+			cameraScale -= .01;
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
-			this.velocity.y += 0.01;
+			this.velocity.y += 0.1;
 
 			return;
 		}

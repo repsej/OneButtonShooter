@@ -107,8 +107,8 @@ function createMusic(level) {
 	// major pent: 0, 2, 4, 7, 9
 	// minor pent: 0, 3, 5, 7, 10
 
-	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
-//	let bassPattern = [0, p, 5, p, 7, p, 10, p, 11, p, 10, p, 7, p, 5, p]; // in the mood bass (minor) (SUCKS!)
+//	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
+	let bassPattern = [0, p, 3, p, 7, p, 9, p, 10, p, 9, p, 7, p, 3, p]; // in the mood bass (minor version)
 
 
 	let bassNodes = unfoldPattern(0, -0.1, root - .1, bassPattern, chordStartsBass);
@@ -119,7 +119,7 @@ function createMusic(level) {
 
 	musicSongLength = bassNodes.length - 2;
 
-	// Drums
+	//// Drums
 
 	let bdStarts = Array(chordStartsMel.length).fill(0);
 	let snareStarts = Array(chordStartsMel.length / 2).fill(0);
