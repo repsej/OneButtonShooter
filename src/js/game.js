@@ -45,7 +45,6 @@ function gameInit() {
 
 	transitionFrames = score = level = 0;
 	gravity = -0.01;
-	gameState = GameState.PLAY;
 
 	lives = LIVES_START;
 
@@ -65,18 +64,22 @@ function gameInit() {
 	
 	showHeight = levelSize.y * 1.2; // Show some more air above the level
 
-	cameraScale = mainCanvas.height / showHeight;
+	// cameraScale = mainCanvas.height / showHeight;
 
 	if (isTouchDevice) particleEmitRateScale = 0.5;
+
+	gameSetState(GameState.PLAY);
 }
 
 function gameSetState(newState) {
+	cameraScale = mainCanvas.height / showHeight;
+
 	gameBottomText = undefined;
 
 	gameState = newState;
 
 	musicPlayCrash(2);
-	gameBlinkFrames = 15;
+	gameBlinkFrames = 20;
 
 	switch (newState) {
 		case GameState.GAME_OVER:
@@ -114,12 +117,15 @@ function gameUpdate() {
 	cameraSize = getCameraSize();
 
 	// Camera follows the player
- 	cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x / 3, 0)), 0.05);
+ 	cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x / 3, 0)), 0.1);
 
-	// Clamp camera's y position downwards
-	// cameraPos.y = max(cameraPos.y, cameraSize.y / 2);
 
-	cameraPos.y = cameraSize.y / 2;
+	if (gameState == GameState.TRANSITION) {
+		// Clamp camera's y position downwards
+	 	cameraPos.y = max(cameraPos.y, cameraSize.y / 2); 
+	} else {
+		cameraPos.y = cameraSize.y / 2;
+	}
 
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
@@ -137,10 +143,25 @@ function gameUpdate() {
 			break;
 
 		case GameState.TRANSITION:
+			if (--transitionFrames <= 0) {
+				level++;
+				if (level >= levelData.length) {
+					gameSetState(GameState.WON);
+					break;
+				}
+
+				levelBuild(level);
+				gameSetState(GameState.PLAY);
+			}
+				
 			break;
 
 		case GameState.PLAY:
 			levelUpdate();
+			if (player.pos.x > levelSize.x - cameraSize.x / 2) {
+				gameNextLevel();
+			}
+
 			break;
 	}
 
@@ -202,33 +223,16 @@ function gameUpdatePost() {
 }
 
 function gameSkipToLevel(newLevel) {
-	// gameBottomText = undefined;
-	// gameBottomTopText = undefined;
+	gameBottomText = undefined;
+	gameBlinkFrames = 15;
 
-	// if (gameState == GameState.WON) {
-	// 	musicInit(level);
-	// 	return;
-	// }
+	level = mod(newLevel, levelData.length);
+	levelBuild(level);
 
-	// gameBlinkFrames = 15;
+	transitionFrames = 0;
 
-	// if (newLevel == 14) {
-	// 	gameSetState(GameState.WON);
-	// 	return;
-	// }
-
-	// level = mod(newLevel, levelData.length);
-	// levelBuild(level);
-	// musicInit(level);
-	// //musicOn = true;
-
-	// transitionFrames = 0;
-	// bonusText = undefined;
-
-	// gameSetState(GameState.PLAY);
-	// inputReset();
-
-	//playMusic();
+	gameSetState(GameState.PLAY);
+	inputReset();
 }
 
 function gameDrawHudText(
@@ -384,33 +388,5 @@ function gameDrawScoreStuff(halfTile) {
 	return scoreText;
 }
 
-// BONUS STUFF
-
-// function gameBonusSet(text, ammount, initPause = 1) {
-// 	bonusText = text;
-// 	bonusAmmount = ammount;
-// }
-
-// // Returns true on the frame it is done counting
-// function gameBonusUpdate() {
-// 	if (time - bonusGivenTime > 5) bonusText = undefined;
-// 	if (time - bonusGivenTime < 0) return false; // Intial pause
-// 	if (bonusAmmount <= 0) return false;
-
-// 	if (transitionFrames % 2 == 0) {
-// 		sound_score.play();
-
-// 		if (bonusAmmount > TIME_BONUS_SCORE) {
-// 			score += TIME_BONUS_SCORE;
-// 			bonusAmmount -= TIME_BONUS_SCORE;
-// 		} else {
-// 			score += bonusAmmount;
-// 			bonusAmmount = 0;
-// 			return true;
-// 		}
-// 	}
-
-// 	return false;
-// }
 
 engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, ["tiles.png"]);

@@ -6,11 +6,12 @@ class AAGun extends Enemy {
 
 		this.setCollision(true, true, false);
 		this.hp = 1;
+		this.deathGravity = 0;
+		this.deathTimeSecs = 0;
 	}
 
 	update() {
 		super.update(); 
-
 		aaUpdateCannon(this);
 	}
 }

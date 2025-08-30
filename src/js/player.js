@@ -21,6 +21,8 @@ class Player extends EngineObject {
 
 		gameBottomText = "[Click to start]";
 
+		this.yPower = 0;
+		this.xSpeed = 0;
 		this.gravityScale = 0;
 		gameBlinkFrames = 15;
 
@@ -35,12 +37,43 @@ class Player extends EngineObject {
 	}
 
 	update() {
+		super.update();
+
+		//// Sound and particle effects
+		if (frame % 17 == 0 )
+		{
+			debugger;
+			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
+		}
+
+		if (frame % 13 == 0)
+		{
+			debugger;
+			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
+		}
+
+		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
+
+
+		//// Transtition state
+		if (gameState == GameState.TRANSITION )
+		{
+			this.setCollision(false, false, false);
+			this.angle -= .025;
+			this.gravityScale = 0.0001;
+			this.yPower = MAX_YPOWER*2
+
+			cameraScale += .3;
+
+			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
+			this.velocity.y += 0.01;
+
+			return;
+		}
 
 		cameraMicPos = this.pos;
 		this.angle = -this.velocity.y * 3;
-
-		super.update();
-
+		
 		if (this.pos.y < 1)
 		{
 			if (this.deathAngle === undefined) this.deathAngle = this.angle;
@@ -110,18 +143,6 @@ class Player extends EngineObject {
 
 			new Bullet(bulletPos, bulletSpeed.normalize(.3), this, 1.2);
 		}
-
-		if (frame % 17 == 0 )
-		{
-			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
-		}
-
-		if (frame % 13 == 0)
-		{
-			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
-		}
-
-		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
 	}
 
 	render() {

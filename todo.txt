@@ -1,16 +1,8 @@
 TODO: 
 
+ - Make intro screen with title, select level, toggle music
+
  - Make pos of player be set to a number of tiles and not a percentage of the screen.
-
- - Go to next level
-
- - Multiple levels ... every second is fighting a boat ... like in 1943
-
- - Shorter levels
-
- - Maybe reuse same level for run ups ? ... first w only planes ... then also islands w aa guns ... last w also barrage balloon
-
- - Just making the levels might compress better than writing the logic ??
 
  - For every second level completed ... that can be chosen from start screen
 
@@ -21,3 +13,6 @@ TODO:
  - Test on mobiles
 
  - Water splash effect (things falling into water, wake after ship, etc.)
+ 
+ - Add smoldering wreckage of destroyed aa guns
+
