@@ -61,7 +61,7 @@ class Player extends EngineObject {
 			this.setCollision(false, false, false);
 			this.angle -= .025;
 			this.gravityScale = 0.0001;
-			this.yPower = MAX_YPOWER*2
+			this.yPower = MAX_YPOWER;
 
 			this.drawSize.x *= 1.005;
 			this.drawSize.y *= 1.005;
