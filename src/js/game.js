@@ -116,14 +116,17 @@ function gameUpdate() {
 
 	cameraSize = getCameraSize();
 
-	// Camera follows the player
- 	cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x / 3, 0)), 0.1);
-
 
 	if (gameState == GameState.TRANSITION) {
-		// Clamp camera's y position downwards
-	 	cameraPos.y = max(cameraPos.y, cameraSize.y / 2); 
+ 		let followPos = vec2(player.pos.x, player.pos.y /2);
+		
+		cameraPos = cameraPos.lerp(followPos, 0.03);
+
+		// Clamp camera's y position downwards (dont see below the sea)
+		cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
+
 	} else {
+	 	cameraPos = cameraPos.lerp(player.pos.add(vec2(11, 0)), 0.1);
 		cameraPos.y = cameraSize.y / 2;
 	}
 
@@ -178,10 +181,10 @@ function gameUpdate() {
 		}
 
 		// WIN
-		if (keyWasPressed("KeyW")) {
-			level = 13;
-			gameNextLevel();
-		}
+		// if (keyWasPressed("KeyW")) {
+		// 	level = 13;
+		// 	gameNextLevel();
+		// }
 
 		// KILL
 		if (keyWasPressed("KeyK")) player.hit();

@@ -64,10 +64,10 @@ class Player extends EngineObject {
 			this.drawSize.x *= 1.005;
 			this.drawSize.y *= 1.005;
 			
-			cameraScale -= .01;
+			cameraScale -= .02;
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
-			this.velocity.y += 0.1;
+			this.velocity.y += 0.02;
 
 			return;
 		}

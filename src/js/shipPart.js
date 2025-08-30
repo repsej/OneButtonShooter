@@ -50,7 +50,7 @@ function shipDrawHealthBar(){
 	shipX += shipParts[0].velocity.x;
 
 	let healtBarPos = vec2(shipX, barY+2);
-	let healtBarSize = vec2(3,.2);
+	let healtBarSize = vec2(shipHpMax / 5,.2);
 	let healthPerc = shipHp / shipHpMax;
 
 	drawBar(healtBarPos, healtBarSize, healthPerc, healtBarSize.x * .01, new Color( 1-healthPerc, healthPerc*.5, .2), false);
