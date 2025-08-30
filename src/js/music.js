@@ -86,7 +86,7 @@ function createMusic(level) {
 	let altMelPattern = [
 		0, 0, 0, 0, 
 		0, 0, 0, 0, 
-		7, 3, p, 0, 
+		0, 0, p, 7, 
 		p, p, p, p]; // in the mood melody
 
 

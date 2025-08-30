@@ -7,6 +7,7 @@ let GameState = {
 	GAME_OVER: 1,
 	WON: 2,
 	TRANSITION: 3,
+	TITLE: 4,
 };
 
 let gameState = GameState.PLAY;
@@ -68,7 +69,7 @@ function gameInit() {
 
 	if (isTouchDevice) particleEmitRateScale = 0.5;
 
-	gameSetState(GameState.PLAY);
+	gameSetState(GameState.TITLE);
 }
 
 function gameSetState(newState) {
@@ -82,17 +83,14 @@ function gameSetState(newState) {
 	gameBlinkFrames = 20;
 
 	switch (newState) {
-		case GameState.GAME_OVER:
+		case GameState.TITLE:
+			player.velocity = vec2(.1,0);
+			level = 6;
+			levelBuild(level);
 			break;
-
-		case GameState.WON:
-			break;
-
+		
 		case GameState.TRANSITION:
 			transitionFrames = TRANSITION_FRAMES;
-			break;
-
-		default:
 			break;
 	}
 }
@@ -110,16 +108,12 @@ function gameNextLevel() {
 
 function gameUpdate() {
 	inputUpdateXXX();
-
 	musicUpdate();
-
 
 	cameraSize = getCameraSize();
 
-
 	if (gameState == GameState.TRANSITION) {
  		let followPos = vec2(player.pos.x, player.pos.y /2);
-		
 		cameraPos = cameraPos.lerp(followPos, 0.03);
 
 		// Clamp camera's y position downwards (dont see below the sea)
@@ -133,10 +127,21 @@ function gameUpdate() {
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
 
-	// gameBottomText = "camY=" +cameraPos.y.toFixed(2) + "    playerY=" + player.pos.y.toFixed(2);
-
 
 	switch (gameState) {
+		case GameState.TITLE:
+			levelUpdate();
+			if (player.pos.x > levelSize.x - cameraSize.x / 2) {
+				levelBuild(level);
+			}
+
+			if (inputButtonReleased(true)){
+				level = 0;
+				levelBuild(level);
+				gameSetState(GameState.PLAY);
+			} 	
+			break;
+
 		case GameState.WON:
 			break;
 
@@ -179,12 +184,6 @@ function gameUpdate() {
 			lives = 1;
 			player?.hit();
 		}
-
-		// WIN
-		// if (keyWasPressed("KeyW")) {
-		// 	level = 13;
-		// 	gameNextLevel();
-		// }
 
 		// KILL
 		if (keyWasPressed("KeyK")) player.hit();
@@ -292,6 +291,12 @@ function gameRenderPost() {
 	}
 
 	switch (gameState) {
+		case GameState.TITLE:
+			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
+			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
+			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+			break;
+
 		case GameState.TRANSITION:
 			gameDrawHudText("Level cleared", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
 		// fall-thru !

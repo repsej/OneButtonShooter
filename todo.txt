@@ -1,14 +1,16 @@
 TODO: 
 
- - Make intro screen with title, select level, toggle music
+ - Change colors to make it look like early sunrise (or late sunset)
+
+ - In transition draw hero on top and add black square behind him
+
+
+ - Title screen: select level
+ - Title screen: toggle music
 
  - Make pos of player be set to a number of tiles and not a percentage of the screen.
 
  - For every second level completed ... that can be chosen from start screen
-
- - Level transition with plane doing a roll (not realistic)
-
- - Change colors to make it look like early sunrise (or late sunset)
 
  - Test on mobiles
 
@@ -16,3 +18,9 @@ TODO:
  
  - Add smoldering wreckage of destroyed aa guns
 
+ - Rotating from portrait to landscape buggy on phone.  
+   "After rotating, the screen is cut in half.  After dieing three times, it fixes itself.  But its not in fullscreen mode, so the browser bar takes up 1/3 of the screen"
+
+ - Player HP ?  And health bar ?
+
+ - Limit number of player shots on screen ... ?  20 ?? Else it is too easy for fast tappers.

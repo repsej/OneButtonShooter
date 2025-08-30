@@ -19,7 +19,7 @@ class Player extends EngineObject {
 		this.setCollision(true, true);
 		cameraPos = this.pos.copy();
 
-		gameBottomText = "[Click to start]";
+		// gameBottomText = "[Click to start]";
 
 		this.yPower = 0;
 		this.xSpeed = 0;
@@ -29,7 +29,7 @@ class Player extends EngineObject {
 		this.deathFrame = undefined;
 		this.deathAngle = undefined;
 
-		musicTargetTempo = tempoSlow;
+		musicTargetTempo = tempoMid;
 	}
 
 	isPaused() {
@@ -37,6 +37,14 @@ class Player extends EngineObject {
 	}
 
 	update() {
+		if (gameState== GameState.TITLE) {
+			this.yPower = 0;
+			this.xSpeed = .1;
+			this.gravityScale = .1;
+			this.pos.y = levelSize.y / 2;
+			this.setCollision(false, false, false);
+		}
+
 		super.update();
 
 		//// Sound and particle effects
@@ -134,7 +142,7 @@ class Player extends EngineObject {
 		this.velocity.x = this.xSpeed;
 
 
-		if (inputButtonPressed() || inputButtonReleased())
+		if (gameState == GameState.PLAY && (inputButtonPressed() || inputButtonReleased()))
 		{
 			// spawn bullet in front of plane
 			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
@@ -142,11 +150,12 @@ class Player extends EngineObject {
 
 			const bulletPos = this.pos.add(bulletSpeed.normalize(1.5));
 
-			new Bullet(bulletPos, bulletSpeed.normalize(.3), this, 1.2);
+			new Bullet(bulletPos, bulletSpeed.normalize(.4), this, 1.2);
 		}
 	}
 
 	render() {
+		if (gameState== GameState.TITLE) return;
 
 		// blink before starting level
 		if (this.gravityScale == 0 && (frame / 10) % 2 < 1) return;
@@ -155,6 +164,8 @@ class Player extends EngineObject {
 	}
 
 	hit(damage=1) {
+		if (gameState == GameState.TITLE) return;
+		
 		if (!this.alive) return;
 
 		makeExplosion(this.pos, 2);

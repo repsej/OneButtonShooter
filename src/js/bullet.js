@@ -29,6 +29,8 @@ class Bullet extends EngineObject {
 
 	collideWithTile(pos, layer) {
 		sound_shoot.play(this.pos, .5, .3);
+
+		makeFire(this.pos, .5, 100);
 		makeSmoke(this.pos, rand(1,2));
 		this.destroy();
 		return false;

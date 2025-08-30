@@ -127,8 +127,8 @@ class ShipPart extends Enemy {
 		if (shipHp <= 0)
 		{
 			setTimeout( () => {
-				gameSetState(GameState.TRANSITION);
-			}, 1000);
+				if (player.alive) gameSetState(GameState.TRANSITION);
+			}, 1500);
 			
 			for (const s of shipParts) {
 				s.velocity.x = 0;
