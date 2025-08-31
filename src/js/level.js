@@ -8,13 +8,7 @@ const tileLookup = {
 	empty: 0,
 	player: 1,
 	water: 5,
-	ground: 6,
-
-	// islandBeachLeft: 7,
-	// islandSandPalmLower: 8,
-	// islandSand: 9,
-	// islandBeachRight: 10,
-	// palmUpper: 11,
+	island_ground: 7,
 
 	balloon: 12,
 	enemyPlane: 13,
@@ -136,10 +130,10 @@ function levelLoad(levelNumber) {
 
 					let direction = 0, mirror = 0;
 
-					// if (tile == tileLookup.) {
-					// 	direction = randInt(4);
-					// 	mirror = randInt(2);
-					// }
+					if (t == tileLookup.island_ground) {
+						direction = randInt(4);
+						//mirror = randInt(2);
+					}
 
 					tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
 			}

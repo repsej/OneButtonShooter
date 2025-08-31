@@ -24,6 +24,8 @@ let showHeight = 20;
 
 let forcePause = false;
 
+let moon = undefined;
+
 ///////////////////////////////////////////////////////////////////////////////
 function gameInit() {
 	// create a table of all sprites
@@ -36,6 +38,7 @@ function gameInit() {
 		enemyPlane: tile(vec2(12*16, 0), vec2(32, 16)),
 		explosion: tile(14),
 		aaGun: tile(15),
+		moon: tile(23)
 
 		//title: tile(vec2(48, 32), vec2(48, 32)),
 	};
@@ -53,10 +56,6 @@ function gameInit() {
 
 	levelBuild(level);
 	musicInit(level);
-
-	// title = new EngineObject(vec2(levelSize.x / 2, levelSize.y * 0.7), vec2(20, 9), spriteAtlas.title);
-	// title.setCollision(false, false, false);
-	// title.gravityScale = 0;
 
 	// gameBottomText = undefined;
 	// gameBottomTopText = undefined;
@@ -127,6 +126,13 @@ function gameUpdate() {
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
 
+	if (!moon || moon.destroyed) {
+		moon = new EngineObject(vec2(1), vec2(2), spriteAtlas.moon);
+		moon.setCollision(false, false, false);
+		moon.gravityScale = 0;
+	}
+
+	moon.pos = cameraPos.add(vec2(cameraSize.x/3, cameraSize.y/3));
 
 	switch (gameState) {
 		case GameState.TITLE:
@@ -281,8 +287,8 @@ function gameRenderPost() {
 
 	if (paused && !forcePause)
 	{
-		gameDrawHudText("PAUSED", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-		gameDrawHudText("Please turn screen to play", overlayCanvas.width / 2, overlayCanvas.height * 0.6, .8);
+		gameDrawHudText("PAUSED", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 1);
+		gameDrawHudText("Turn screen to play", overlayCanvas.width / 2, overlayCanvas.height * 0.6, .5);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(0,0,0,.8), 0, undefined, true);
 
