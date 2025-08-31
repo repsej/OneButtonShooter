@@ -5,8 +5,6 @@ TODO:
 
 WORKS NOW ?
 
- - Flavor text for each level
- 
  - Make sure hiscore works
 
  - Show hiscore on title screen

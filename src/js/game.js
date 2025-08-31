@@ -286,6 +286,21 @@ function gameDrawHudText(
 
 function gameRender() {}
 
+let levelTexts = [
+	"Enemy fighters ahead!",
+	"Sink cargo ship!",
+
+	"Mountain ahead!",
+	"Sink transport ship!",
+
+	"Anti-air guns ahead!",
+	"Sink destroyer!",
+
+	"Barrage balloons ahead!",
+	"Sink battleship!",
+];
+
+
 function gameRenderPost() {
 	let ySpacing = overlayCanvas.height / 20;
 
@@ -312,14 +327,14 @@ function gameRenderPost() {
 		// fall-thru !
 
 		case GameState.PLAY:
-			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 1) / 4, ySpacing);
+			gameDrawHudText("Level " + (level+1) + " / 8", (overlayCanvas.width * 1) / 4, ySpacing);
 			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
-			gameDrawHudText("Level " + (level+1), (overlayCanvas.width * 3) / 4, ySpacing);
+			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 3) / 4, ySpacing);
 
 			if (player.isPaused())
 			{
 				gameDrawHudText("Get ready", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-				gameDrawHudText("Watch out for enemy fighters", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 1);
+				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.6, 1);
 
 				// gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
 				// gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
