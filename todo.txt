@@ -1,8 +1,15 @@
 TODO: 
+ - Try black and white
+
+ - Enemy planes are behind the clouds
+
+ - Clouds could be nicer ...
 
  - Change colors to make it look like early sunrise (or late sunset)
 
  - In transition draw hero on top and add black square behind him
+
+ - Have scrolling text that describes the BCS ... old movie style
 
 
  - Title screen: select level

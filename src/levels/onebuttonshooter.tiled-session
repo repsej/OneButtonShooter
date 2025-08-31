@@ -1,76 +1,99 @@
 {
-    "activeFile": "",
+    "activeFile": "level-07.tmj",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "level-00.tmj": {
             "scale": 0.2719375,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1601.4709262238566,
-                "y": 152.60859572512072
+                "x": 1599.6322684440358,
+                "y": 128.7060445874513
             }
         },
         "level-01.tmj": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 638,
-                "y": 160.66666666666663
+                "x": 1600,
+                "y": 152
             }
         },
         "level-02.tmj": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2543.5,
-                "y": 123.5
+                "x": 1600,
+                "y": 152
             }
         },
         "level-03.tmj": {
             "scale": 0.2719375,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1601.4709262238566,
-                "y": 152.60859572512072
+                "x": 1599.6322684440358,
+                "y": 150.76993794529994
             }
         },
         "level-04.tmj": {
             "scale": 0.2719375,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1601.4709262238566,
-                "y": 152.60859572512072
+                "x": 1599.6322684440358,
+                "y": 150.76993794529994
             }
         },
         "level-05.tmj": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 947.75,
-                "y": 263.75
+                "x": 1600,
+                "y": 152
             }
         },
         "level-06.tmj": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1134,
-                "y": 118
+                "x": 1600,
+                "y": 152
             }
         },
         "level-07.tmj": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 957.75,
-                "y": 225.75
+                "x": 1600,
+                "y": 152
             }
+        },
+        "tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "openFiles": [
+        "level-00.tmj",
+        "level-01.tmj",
+        "level-02.tmj",
+        "level-03.tmj",
+        "level-05.tmj",
+        "level-07.tmj",
+        "level-06.tmj",
+        "level-04.tmj",
+        "tileset.tsx"
     ],
     "project": "onebuttonshooter.tiled-project",
     "recentFiles": [
+        "level-00.tmj",
+        "level-01.tmj",
+        "level-02.tmj",
+        "level-03.tmj",
+        "level-05.tmj",
+        "tileset.tsx",
+        "level-04.tmj",
+        "level-06.tmj",
+        "level-07.tmj"
     ]
 }
