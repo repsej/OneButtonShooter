@@ -9,8 +9,6 @@ class Sky extends EngineObject {
 		this.renderOrder = -1e4;
 		this.seed = randInt(1e9);
 
-
-
 		this.skyTopColor = rgb(.1,.1,.1);
 		this.skyMiddleColor = rgb(.2, .2, .2);
 		this.skyBottomColor = rgb(.4, .4, .4);
@@ -26,6 +24,7 @@ class Sky extends EngineObject {
 		for (let i = 0; i < this.cloudCount; i++ ) {
 			const cloud = new EngineObject();
 			cloud.tileInfo = spriteAtlas.cloud;
+			cloud.color = new Color(1,1,1,.9);
 			this.clouds.push(cloud);
 		}
 
@@ -45,33 +44,37 @@ class Sky extends EngineObject {
 		// @ts-ignore
 		gradient.addColorStop(1, this.skyBottomColor);
 
-		// let horizon = 0.8;
-		// let islandThickness = 0.05;
-		// let islandTop = horizon - islandThickness;
-
-		// gradient.addColorStop(0, "#0148d6"); // sky top
-		// gradient.addColorStop(islandTop, "#2b6dce"); // sky bottom
-		// gradient.addColorStop(islandTop + 0.01, "#3b6363"); // island top
-
-		// gradient.addColorStop(horizon, "#011a57"); // island bottom
-
-		// gradient.addColorStop(horizon + 0.001, "#002a88"); // sea top
-		// gradient.addColorStop(0.95, "#00e5d8"); // sea bottom
-		// gradient.addColorStop(1, "#f1eedd"); // w sand
-
 		mainContext.save();
 		mainContext.fillStyle = gradient;
 		mainContext.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 		mainContext.globalCompositeOperation = "lighter";
+
+		// draw stars
+		const random = new RandomGenerator(this.seed);
+
+		for (let i = 0; i < this.cloudCount * 5; i++ ) {
+
+			const screenPos = vec2(
+				mod(random.float(mainCanvas.width) - cameraPos.x * 2, mainCanvas.width),
+				random.float(mainCanvas.height) * random.float() * random.float()
+			);
+
+			const color = new Color(1,1,1, random.float(.3, .7));
+
+			// @ts-ignore
+			mainContext.fillStyle = color;
+			mainContext.fillRect(screenPos.x, screenPos.y, 3, 3);
+		}
+
+
 		mainContext.restore();
 
 
 		// draw clouds
-		const random = new RandomGenerator(this.seed);
 
 		for (let i = 0; i < this.cloudCount; i++ ) {
 			const size = random.float(1, 2) ** 2;
-			const speed = 0; // random.float() < 0.95 ? 0 : random.float(-99, 99);
+			const speed = random.float(-100,-50); // random.float() < 0.95 ? 0 : random.float(-99, 99);
 			const w = mainCanvas.width * 2,
 				h = mainCanvas.height / 10;
 
@@ -79,7 +82,7 @@ class Sky extends EngineObject {
 
 			const screenPos = vec2(
 				mod(random.float(w) + time * speed - cameraPos.x * camMult * 10, w),
-				random.float(h) + time * abs(speed) * random.float() + cameraPos.y * camMult - size
+				random.float(h) * random.float() + cameraPos.y * camMult - size
 			);
 
 			//screenPos.y -= mainCanvas.height * 0.5;
@@ -99,14 +102,6 @@ class Sky extends EngineObject {
 			cloud.renderOrder = size;
 
 			//drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
-
-			// reflection
-			// mainContext.fillRect(
-			// 	screenPos.x,
-			// 	mainCanvas.height * (2 * islandTop + islandThickness) - screenPos.y,
-			// 	size,
-			// 	size
-			// );
 		}
 		// mainContext.restore();
 	}

@@ -53,7 +53,7 @@ function shipDrawHealthBar(){
 	let healtBarSize = vec2(shipHpMax / 5,.2);
 	let healthPerc = shipHp / shipHpMax;
 
-	drawBar(healtBarPos, healtBarSize, healthPerc, healtBarSize.x * .01, new Color( 1-healthPerc, healthPerc*.5, .2), false);
+	drawBar(healtBarPos, healtBarSize, healthPerc, healtBarSize.x * .01, Colors.white, false);
 }
 
 class ShipPart extends Enemy {
@@ -69,6 +69,8 @@ class ShipPart extends Enemy {
 
 		this.isAAGun = isAAGun;
 		this.xAccel = 0;
+
+		this.hp = 2;
 
 		this.isChimney = isChimney;
 
@@ -108,22 +110,26 @@ class ShipPart extends Enemy {
 		if (this.isAAGun) aaUpdateCannon(this);
 	}
 
-	superHit(dam) {
-		super.hit(dam, true);
+	superHit() {
+		this.hp = 1;
+		super.hit(1, true);
 	}
 
 	hit(dam=1) {
-		if (this.hp < 0 || shipHp <= 0){
-			return;
+		if (shipHp <= 0) return;
+		
+		if (this.hp > 0){
+			this.hp -= dam;
+			if (this.hp <= 0){
+				makeExplosion(this.pos, this.isAAGun ? 2 : 1);
+
+				if (this.isAAGun) this.size = vec2(0); // destroy gun
+
+				this.isAAGun = false; // disable gun
+			}
 		}
 
-		makeExplosion(this.pos, this.isAAGun ? 2 : 1);
-
-		if (this.isAAGun) this.size = vec2(0);
-
-		this.isAAGun = false; // disable gun
 		shipHp -= dam;
-
 		if (shipHp <= 0)
 		{
 			setTimeout( () => {
@@ -134,7 +140,7 @@ class ShipPart extends Enemy {
 				s.velocity.x = 0;
 				s.xAccel = 0;
 
-				s.superHit(s.hp);
+				s.superHit();
 			}
 		}
 	}

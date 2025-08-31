@@ -5,7 +5,7 @@ class AAGun extends Enemy {
 		super(pos, vec2(1), tile(tileIndex));
 
 		this.setCollision(true, true, false);
-		this.hp = 1;
+		this.hp = 2;
 		this.deathGravity = 0;
 		this.deathTimeSecs = 0;
 	}
@@ -25,7 +25,7 @@ function aaUpdateCannon(gun) {
 
 			let bulletSpeed = vec2(-.07, .07);
 			const bulletPos = gun.pos.add(bulletSpeed.normalize(1));
-			new Bullet(bulletPos, bulletSpeed, gun);
+			new Bullet(bulletPos, bulletSpeed, gun, 4);
 		}
 	}
 }
