@@ -37,6 +37,8 @@ class Player extends EngineObject {
 	}
 
 	update() {
+		if (gameState == GameState.GAME_OVER) return;
+
 		if (gameState== GameState.TITLE) {
 			this.yPower = 0;
 			this.xSpeed = .1;
@@ -90,7 +92,7 @@ class Player extends EngineObject {
 			this.angle = this.deathAngle;
 		}
 		
-		if (!this.alive || gameState == GameState.GAME_OVER){
+		if (!this.alive){
 
 			if (frame - this.deathFrame > 180) {
 				return;

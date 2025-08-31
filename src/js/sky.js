@@ -10,9 +10,10 @@ class Sky extends EngineObject {
 		this.seed = randInt(1e9);
 
 
-		this.skyTopColor = rgb(0, 0, 1);
-		this.skyMiddleColor = rgb(0, .5, 1);
-		this.skyBottomColor = rgb(1, 0.5, .5);
+
+		this.skyTopColor = rgb(.1,.1,.1);
+		this.skyMiddleColor = rgb(.2, .2, .2);
+		this.skyBottomColor = rgb(.4, .4, .4);
 
 		// Sun rise colors
 		// this.skyTopColor = rgb(0, 0, .5);
@@ -39,7 +40,7 @@ class Sky extends EngineObject {
 		gradient.addColorStop(0, this.skyTopColor);
 
 		// @ts-ignore
-		gradient.addColorStop(0.5, this.skyMiddleColor);
+		gradient.addColorStop(0.8, this.skyMiddleColor);
 
 		// @ts-ignore
 		gradient.addColorStop(1, this.skyBottomColor);
