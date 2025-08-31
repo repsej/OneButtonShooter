@@ -236,12 +236,23 @@ function gameSkipToLevel(newLevel) {
 	inputReset();
 }
 
+// Arial (sans-serif)
+// Verdana (sans-serif)
+// Tahoma (sans-serif)
+// Trebuchet MS (sans-serif)
+// Times New Roman (serif)
+// Georgia (serif)
+// Garamond (serif)
+// Courier New (monospace)
+// Brush Script MT (cursive)
+
+
 function gameDrawHudText(
 	text,
 	x,
 	y,
 	sizeFactor = 1,
-	fontName = "monospace",
+	fontName = "Courier New",
 	fillColor = "#fff",
 	outlineColor = "#000"
 ) {

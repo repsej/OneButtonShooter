@@ -5,14 +5,12 @@ TODO:
 
 WORKS NOW ?
 
- - Nicer font ?  Typewriter ?
-
  - Flavor text for each level
  
  - Make sure hiscore works
 
  - Show hiscore on title screen
- - Show in middle on win screen
+ - Show player in middle on win screen
  - Win screen continue
 
  - Make pos of player be set to a number of tiles and not a percentage of the screen.
