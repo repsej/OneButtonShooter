@@ -55,8 +55,8 @@ class Sky extends EngineObject {
 		for (let i = 0; i < this.cloudCount * 5; i++ ) {
 
 			const screenPos = vec2(
-				mod(random.float(mainCanvas.width) - cameraPos.x * 2, mainCanvas.width),
-				random.float(mainCanvas.height) * random.float() * random.float()
+				mod(random.float(mainCanvas.width) - cameraPos.x, mainCanvas.width),
+				random.float(mainCanvas.height) * random.float()
 			);
 
 			const color = new Color(1,1,1, random.float(.3, .7));

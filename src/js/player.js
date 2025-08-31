@@ -12,7 +12,7 @@ class Player extends EngineObject {
 	constructor(pos) {
 		super(pos, vec2(2, .5), spriteAtlas.playerPlane);
 
-		this.drawSize = vec2(2,1);
+		this.drawSize = vec2(2.5,1.25);
 		this.renderOrder = 10;
 		this.alive = true;
 

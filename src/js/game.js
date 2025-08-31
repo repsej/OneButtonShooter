@@ -39,8 +39,6 @@ function gameInit() {
 		explosion: tile(14),
 		aaGun: tile(15),
 		moon: tile(23)
-
-		//title: tile(vec2(48, 32), vec2(48, 32)),
 	};
 
 	// enable touch gamepad on touch devices
@@ -56,11 +54,6 @@ function gameInit() {
 
 	levelBuild(level);
 	musicInit(level);
-
-	// gameBottomText = undefined;
-	// gameBottomTopText = undefined;
-	// gameBlinkFrames = 15;
-
 	
 	showHeight = levelSize.y * 1.2; // Show some more air above the level
 
@@ -72,8 +65,6 @@ function gameInit() {
 }
 
 function gameSetState(newState) {
-	cameraScale = mainCanvas.height / showHeight;
-
 	gameBottomText = undefined;
 
 	gameState = newState;
@@ -106,6 +97,8 @@ function gameNextLevel() {
 
 
 function gameUpdate() {
+	cameraScale = mainCanvas.height / showHeight;
+
 	inputUpdateXXX();
 	musicUpdate();
 
