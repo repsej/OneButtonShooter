@@ -5,6 +5,8 @@ TODO:
 
 WORKS NOW ?
 
+ - Fast music on ships !
+
  - Make sure hiscore works
 
  - Show hiscore on title screen
@@ -13,8 +15,6 @@ WORKS NOW ?
 
  - Make pos of player be set to a number of tiles and not a percentage of the screen.
 
- - For every second level completed ... that can be chosen from start screen
-
  - Test on mobiles
 
 
@@ -22,6 +22,7 @@ WORKS NOW ?
 
 
 MAYBE/WONT:
+ - For every second level completed ... that can be chosen from start screen
  - Add smoldering wreckage of destroyed aa guns
  - Player HP ?  And health bar ?
  - Water splash effect (things falling into water, wake after ship, etc.)
