@@ -16,25 +16,22 @@ let musicSongLength = 0;
 let instrumentList = [];
 
 let instrumentParams = [
-	[1, 0, 43, 0.05, 0.5, 0.5, , 0.5], // 0 bass
+	[1, 0, 43, 0.05, 0.2, 0.5, , 0.5], // 0 bass
 	[10, 0, 170, 0.003, , 0.008, , 0.97, -35, 53, , , , , , 0.1], // 1 bass drum
 	[0.6, 0, 270, , , 0.12, 3, 1.65, -2, , , , , 4.5, , 0.02], // 2 snare
-	[1.5, 0, 130, .1, .2,
+	[2, 0, 130, .1, .2,
 	 .2, 2, 1.4, , , 
 	 , , , .3, , 
 	 .2, .18, .7, .14, ,922], // 3 melody lead
 	[1, , 400, , , 0.5, 2, 0.1, , 1, , , , 2.5, , 0.5, , 0.5, 0.1], // 4 crash
 ];
 
-	//[1.1, .05, 77, , 0.3, 0.9, 2, 0.41, , , , , , , , 0.1], // 3 melody lead
-
-
     // volume = 1, randomness = .05, frequency = 220, attack = 0, sustain = 0,  	  // 5 
     // release = .1, shape = 0, shapeCurve = 1, slide = 0, deltaSlide = 0,			  // 5
     // pitchJump = 0, pitchJumpTime = 0, repeatTime = 0, noise = 0, modulation = 0,   // 5
     // bitCrush = 0, delay = 0, sustainVolume = 1, decay = 0, tremolo = 0, filter = 0 // 6
 
-function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=undefined, altIndex=0) {
+function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=undefined, altIndex=-1, altIndex2= -1) {
 	let nodes = [];
 	nodes.push(instrument);
 	nodes.push(pan);
@@ -43,7 +40,7 @@ function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=u
 		const s = starts[i];
 
 		let p = pattern;
-		if (altPattern && i == altIndex) {
+		if (altPattern && (i == altIndex || i == altIndex2)) {
 			p = altPattern;
 		}
 
@@ -58,18 +55,17 @@ function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=u
 
 function createMusic(level) {
 	const p = undefined;
-	const root = 19; // 19 = G
-
+	const root = 26;
 
 	createInstruments();
 
 	// prettier-ignore
 	let chordStartsMel = [
-		p, p, p, p, p, p, 0, 0, 5, 0, 7, 0,
+		p, p, p, p, 0, 0, 0, 0
 	];
 
 	let chordStartsBass = [
-		0, 0, 5, 0, 7, 0, 0, 0, 5, 0, 7, 0,
+		0, 0, 0, 0, 0, 0, 0, 0
 	];
 
 
@@ -78,40 +74,55 @@ function createMusic(level) {
 	//// Melody
 
 	let melPattern = [
-		0, 3, 7, 0, 
-		3, 7, 0, 3, 
-		7, 0, 3, 7, 
-		p, 7, p, p]; // in the mood melody (minor version)
+		12, 15, p, 10, 
+		p ,p, p, p,
+		12, 15, 12, 15, 
+		11, 8, 5, 3 ]; // Flying home
 
 	let altMelPattern = [
-		0, 0, 0, 0, 
-		0, 0, 0, 0, 
-		0, 0, p, 7, 
-		p, p, p, p]; // in the mood melody
+		0, 3, 5, 8, 
+		p, 6, p, p,
+		p, p, p, p,
+		p, p, p, p]; // Flying home end variation
 
 
-	let melNodes = unfoldPattern(3, -0.5, root + 12 + .2, melPattern, chordStartsMel, altMelPattern, 11);
+	let melNodes = unfoldPattern(3, -.5, root + .2, melPattern, chordStartsMel, altMelPattern, 7 );
 	patterns[0].push(melNodes);
 
-	melNodes = unfoldPattern(3, 0.5, root + 24 - .2, melPattern, chordStartsMel, altMelPattern, 11);
+	melNodes = unfoldPattern(3, 0.5, root - .2, melPattern, chordStartsMel, altMelPattern, 7);
 	patterns[0].push(melNodes);
+
 
 	//// Bass
 
 	// major pent: 0, 2, 4, 7, 9
 	// minor pent: 0, 3, 5, 7, 10
 
-//	let bassPattern = [0, p, 4, p, 7, p, 9, p, 10, p, 9, p, 7, p, 4, p]; // in the mood bass
-	let bassPattern = [0, p, 3, p, 7, p, 9, p, 10, p, 9, p, 7, p, 3, p]; // in the mood bass (minor version)
+
+	let bassPattern = [
+		11, p, 11, p, 9, p, 9, p,
+ 		 8, p,  8, p, 7, p, 6, p
+	]; // flying home bass
+
+	let altBassPattern = [
+		11, p, 3, p, 6, p, 9, p,
+ 		11, p, 3, p, 6, p, 9, p
+	]; // flying home bass alt
 
 
-	let bassNodes = unfoldPattern(0, -0.1, root - .1, bassPattern, chordStartsBass);
+	let bassNodes = unfoldPattern(0, -0.1, root - 12 + .1, bassPattern, chordStartsBass, altBassPattern, 3, 7);
 	patterns[0].push(bassNodes);
 
-	bassNodes = unfoldPattern(0, 0.1, root + 7.1, bassPattern, chordStartsBass);
+	bassNodes = unfoldPattern(0, 0.1, root - 12 + .1, bassPattern, chordStartsBass, altBassPattern, 3, 7);
 	patterns[0].push(bassNodes);
 
-	musicSongLength = bassNodes.length - 2;
+	// let bassNodes = unfoldPattern(0, -0.1, root - .1, bassPattern, chordStartsBass);
+	// patterns[0].push(bassNodes);
+
+	// bassNodes = unfoldPattern(0, 0.1, root + 7.1, bassPattern, chordStartsBass);
+	// patterns[0].push(bassNodes);
+
+	musicSongLength = melNodes.length - 2;
 
 	//// Drums
 
