@@ -29,27 +29,28 @@ let moon = undefined;
 
 
 let introStory = [
-	"In the vast Pacific ",
-	"of World War II, ",
-	"the U.S. Navy flew missions",
-	"no others dared take.",
+	"⸻ ★ ★ ★ ⸻",
 	"",
-	"Their aircraft was the ",
-	"Catalina — slow and lightly armed,",
-	"but painted matte black ",
-	"for night operations.",
-	"",	
-	"They hunted enemy ships,",
-	"rescued downed pilots, and ",
-	"scouted behind enemy lines — ",
+	"World War II",
+	"PACIFIC THEATER, 1944",
+	"",
+	"A secret navy squadron",
+	"hunted enemy ships,",
+	"rescued downed pilots, and",
+	"scouted behind enemy lines —",
 	"all under the cover of darkness.",
 	"",
-	"They were called the “Black Cats.”",
+	"Their aircraft was the",
+	"slow PBY Catalina — lightly",
+	"armed, but painted matte",
+	"black for night operations.",
+	"",	
+	"They were known as the ",
+	"“Black Cats.”",
 	"",
-	"Flying low, alone, and ",
-	"deep into enemy waters, ",
-	"they became legends of ",
-	"a war fought in shadows."
+	"This is their game.",
+	"",
+	"⸻ ★ ★ ★ ⸻",
 ];
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -378,7 +379,7 @@ function gameRenderPost() {
 			break;
 
 		case GameState.INTRO_STORY:
-			gameDrawHudTextMultilines(introStory, overlayCanvas.width / 2, overlayCanvas.height * scrollTextY, 1.75);
+			gameDrawHudTextMultilines(introStory, overlayCanvas.width / 2, overlayCanvas.height * scrollTextY, 1.5);
 			break			
 
 		case GameState.TRANSITION:
