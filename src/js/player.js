@@ -111,7 +111,7 @@ class Player extends EngineObject {
 
 		if (this.gravityScale == 0)
 		{
-			if (inputButtonPressed()){
+			if (inputButtonReleased()){
 				musicPlayCrash(2);
 				gameBlinkFrames = 10;
 

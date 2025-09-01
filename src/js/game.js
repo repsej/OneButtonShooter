@@ -92,6 +92,8 @@ function gameInit() {
 }
 
 function gameSetState(newState) {
+
+	inputReset();
 	gameBottomText = undefined;
 
 	gameState = newState;
@@ -176,6 +178,7 @@ function gameUpdate() {
 			scrollTextY -= .001;
 
 			if (inputButtonReleased(true)){
+				levelBuild(level);
 				gameSetState(GameState.PLAY);
 			} 	
 			break;
@@ -275,7 +278,6 @@ function gameSkipToLevel(newLevel) {
 	transitionFrames = 0;
 
 	gameSetState(GameState.PLAY);
-	inputReset();
 }
 
 // Arial (sans-serif)

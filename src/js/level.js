@@ -38,7 +38,6 @@ let levelFramesUntilNextWave;
 
 function levelBuild(level) {
 
-	playerStartPos = undefined;
 	tileData = undefined;
 	tileLayers = undefined;
 	sky = undefined;
@@ -67,13 +66,9 @@ function levelLoad(levelNumber) {
 	levelSize = vec2(tileMapData.w, tileMapData.h);
 	initTileCollision(levelSize);
 
-
-	// set all level data tiles
 	tileData = [];
 	tileLayers = [];
-	playerStartPos = vec2(1, levelSize.y);
-	// const layerCount = tileMapData.layers.length;
-	// for (let layer = layerCount; layer--; ) {
+	playerStartPos = vec2(7, levelSize.y * 3 / 4);
 	const layerData = tileMapData.d;
 	const tileLayer = new TileLayer(vec2(), levelSize, tile(0, 16));
 	tileLayer.renderOrder = -1e3;
@@ -128,14 +123,13 @@ function levelLoad(levelNumber) {
 					levelSetTileData(pos, 0, t);
 					setTileCollisionData(pos, tileType_ground);
 
-					let direction = 0, mirror = 0;
-
-					if (t == tileLookup.island_ground) {
-						direction = randInt(4);
-						//mirror = randInt(2);
-					}
-
-					tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
+					// let direction = 0, mirror = 0;
+					// if (t == tileLookup.island_ground) {
+					// 	direction = randInt(4);
+					// 	//mirror = randInt(2);
+					// }
+					//tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
+					tileLayer.setData(pos, new TileLayerData(t - 1));
 			}
 		}
 	}

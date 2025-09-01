@@ -1,9 +1,5 @@
 TODO: 
 
- - Rotating from portrait to landscape buggy on phone.  
-   "After rotating, the screen is cut in half.  After dieing three times, it fixes itself.  But its not in fullscreen mode, so the browser bar takes up 1/3 of the screen"
-
-WORKS NOW ?
 
  - Make sure hiscore works
 
@@ -11,7 +7,6 @@ WORKS NOW ?
 
  - Show hiscore on title screen
  - Show player in middle on win screen
- - Win screen continue
 
  - Make pos of player be set to a number of tiles and not a percentage of the screen.
 

@@ -5,67 +5,67 @@
     ],
     "fileStates": {
         "level-00.tmj": {
-            "scale": 0.2719375,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1599.6322684440358,
-                "y": 128.7060445874513
+                "x": 260.66666666666663,
+                "y": 96.66666666666663
             }
         },
         "level-01.tmj": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600,
-                "y": 152
+                "x": -62,
+                "y": 20.66666666666663
             }
         },
         "level-02.tmj": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600.5,
-                "y": 151.5
+                "x": 93.5,
+                "y": -47.5
             }
         },
         "level-03.tmj": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1106,
-                "y": 167.33333333333331
+                "x": 231.33333333333331,
+                "y": 76.66666666666663
             }
         },
         "level-04.tmj": {
-            "scale": 0.33,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1401.5151515151513,
-                "y": 192.42424242424227
+                "x": 8.5,
+                "y": 30.5
             }
         },
         "level-05.tmj": {
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600,
-                "y": 152
+                "x": 432.5,
+                "y": 42.5
             }
         },
         "level-06.tmj": {
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1745,
-                "y": 153
+                "x": 325.5,
+                "y": 73.5
             }
         },
         "level-07.tmj": {
-            "scale": 2,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1596.25,
-                "y": 148.25
+                "x": 222,
+                "y": 192.66666666666663
             }
         },
         "tileset.tsx": {
