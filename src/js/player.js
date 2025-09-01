@@ -36,6 +36,16 @@ class Player extends EngineObject {
 		return this.gravityScale == 0;
 	}
 
+	startTransition() {
+		if (!this.alive) return;
+
+		this.renderOrder = 10000;
+
+		this.setCollision(false, false, false);	
+		gameSetState(GameState.TRANSITION);
+	}
+
+
 	update() {
 		if (gameState == GameState.GAME_OVER) return;
 
@@ -66,7 +76,6 @@ class Player extends EngineObject {
 		//// Transtition state
 		if (gameState == GameState.TRANSITION )
 		{
-			this.setCollision(false, false, false);
 			this.angle -= .025;
 			this.gravityScale = 0.0001;
 			this.yPower = MAX_YPOWER;

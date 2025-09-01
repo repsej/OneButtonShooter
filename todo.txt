@@ -1,6 +1,5 @@
 TODO: 
 
-
  - Make sure hiscore works
 
  - Pause on game over before you can continue (to hear the slow music)
@@ -25,7 +24,6 @@ MAYBE/WONT:
  - Enemy planes are behind the clouds
  - Clouds could be nicer ...
  - In transition draw hero on top and add black square behind him
- - Have scrolling text that describes the BCS ... old movie style
  - Title screen: select level
  - Title screen: toggle music
 

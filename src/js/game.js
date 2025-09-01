@@ -124,7 +124,7 @@ function gameNextLevel() {
 	gameBlinkFrames = 10;
 	gameCameraShake();
 
-	gameSetState(GameState.TRANSITION);
+	player.startTransition();
 }
 
 
