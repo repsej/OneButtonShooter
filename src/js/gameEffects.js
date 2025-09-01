@@ -69,9 +69,9 @@ function makeSmoke(pos, force = 1) {
 		PI / 2, // emiteCone
 		spriteAtlas.blob,
 		rgb(1, 1, 1, .1),
-		rgb(0.5, 0.5, 0.5, 0.5),
-		rgb(1, 1, 1),
-		rgb(1, 1, 1),
+		rgb(0.5, 0.5, 0.5, 0.3),
+		rgb(1, 1, 1, 0),
+		rgb(1, 1, 1, 0),
 		rand(0.1, 1), // time
 		0.2 + 0.2 * force, // sizeStart
 		0.01, // sizeEnd

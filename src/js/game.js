@@ -288,16 +288,16 @@ function gameRender() {}
 
 let levelTexts = [
 	"Enemy fighters ahead!",
-	"Sink cargo ship!",
+	"Sink the cargo ship!",
 
 	"Mountain ahead!",
-	"Sink transport ship!",
+	"Sink the transport ship!",
 
-	"Anti-air guns ahead!",
-	"Sink destroyer!",
+	"AA guns ahead!",
+	"Sink the destroyer!",
 
 	"Barrage balloons ahead!",
-	"Sink battleship!",
+	"Sink the battleship!",
 ];
 
 

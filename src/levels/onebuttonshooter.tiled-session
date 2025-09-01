@@ -1,5 +1,5 @@
 {
-    "activeFile": "level-07.tmj",
+    "activeFile": "level-06.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -53,11 +53,11 @@
             }
         },
         "level-06.tmj": {
-            "scale": 0.75,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600,
-                "y": 152
+                "x": 1745,
+                "y": 153
             }
         },
         "level-07.tmj": {
@@ -91,9 +91,9 @@
         "level-02.tmj",
         "level-03.tmj",
         "level-05.tmj",
+        "level-07.tmj",
         "tileset.tsx",
         "level-04.tmj",
-        "level-06.tmj",
-        "level-07.tmj"
+        "level-06.tmj"
     ]
 }
