@@ -149,7 +149,7 @@ function gameUpdate() {
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
 
-	if (!moon || moon.destroyed) {
+	if (!moon || moon.destroyed) {
 		moon = new EngineObject(vec2(1), vec2(2), spriteAtlas.moon);
 		moon.setCollision(false, false, false);
 		moon.gravityScale = 0;
