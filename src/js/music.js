@@ -62,6 +62,7 @@ function createMusic(level) {
 	// prettier-ignore
 	let chordStartsMel = [
 		p, p, p, p, 0, 0, 0, 0
+//		0, 0, 0, 0, 0, 0, 0, 0
 	];
 
 	let chordStartsBass = [
@@ -71,25 +72,27 @@ function createMusic(level) {
 
 	patterns = [[], []];
 
-	//// Melody
+	//// Melody (inspired by "Flying Home" by Benny Goodman)
 
+	// scale: 0 3 5 6 8 10 11 12 15
+	
 	let melPattern = [
-		12, 15, p, 10, 
+		3, 0, p, 5, 
 		p ,p, p, p,
-		12, 15, 12, 15, 
-		11, 8, 5, 3 ]; // Flying home
+		3, 0, 3, 0, 
+		5, 6, 10, 12 ]; 
 
 	let altMelPattern = [
-		0, 3, 5, 8, 
-		p, 6, p, p,
+		0, 12, 10, 6, 
+		p, 8, p, 0,
 		p, p, p, p,
-		p, p, p, p]; // Flying home end variation
+		p, p, p, p]; 
 
 
-	let melNodes = unfoldPattern(3, -.5, root + .2, melPattern, chordStartsMel, altMelPattern, 7 );
+	let melNodes = unfoldPattern(3, -.5, root + .1, melPattern, chordStartsMel, altMelPattern, 7 );
 	patterns[0].push(melNodes);
 
-	melNodes = unfoldPattern(3, 0.5, root - .2, melPattern, chordStartsMel, altMelPattern, 7);
+	melNodes = unfoldPattern(3, 0.5, root - .1, melPattern, chordStartsMel, altMelPattern, 7);
 	patterns[0].push(melNodes);
 
 
