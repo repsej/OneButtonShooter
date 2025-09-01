@@ -75,6 +75,9 @@ function createMusic(level) {
 	//// Melody (inspired by "Flying Home" by Benny Goodman)
 
 	// scale: 0 3 5 6 8 10 11 12 15
+
+	// major pent: 0, 2, 4, 7, 9
+	// minor pent: 0, 3, 5, 7, 10
 	
 	let melPattern = [
 		3, 0, p, 5, 
@@ -92,14 +95,12 @@ function createMusic(level) {
 	let melNodes = unfoldPattern(3, -.5, root + .1, melPattern, chordStartsMel, altMelPattern, 7 );
 	patterns[0].push(melNodes);
 
-	melNodes = unfoldPattern(3, 0.5, root - .1, melPattern, chordStartsMel, altMelPattern, 7);
+	melNodes = unfoldPattern(3, 0.5, root + 12 - .1, melPattern, chordStartsMel, altMelPattern, 7);
 	patterns[0].push(melNodes);
 
 
 	//// Bass
 
-	// major pent: 0, 2, 4, 7, 9
-	// minor pent: 0, 3, 5, 7, 10
 
 
 	let bassPattern = [

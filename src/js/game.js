@@ -29,7 +29,7 @@ let moon = undefined;
 
 
 let introStory = [
-	"⸻ ★ ★ ★ ⸻",
+	"⸻  =★=  ⸻",
 	"",
 	"World War II",
 	"PACIFIC THEATER, 1944",
@@ -50,7 +50,7 @@ let introStory = [
 	"",
 	"This is their game.",
 	"",
-	"⸻ ★ ★ ★ ⸻",
+	"⸻  =★=  ⸻",
 ];
 
 ///////////////////////////////////////////////////////////////////////////////
