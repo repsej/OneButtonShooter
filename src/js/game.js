@@ -8,6 +8,7 @@ let GameState = {
 	WON: 2,
 	TRANSITION: 3,
 	TITLE: 4,
+	INTRO_STORY: 5
 };
 
 let gameState = GameState.PLAY;
@@ -25,6 +26,31 @@ let showHeight = 20;
 let forcePause = false;
 
 let moon = undefined;
+
+
+let introStory = [
+	"In the vast Pacific ",
+	"of World War II, ",
+	"the U.S. Navy flew missions",
+	"no others dared take.",
+	"",
+	"Their aircraft was the ",
+	"Catalina — slow and lightly armed,",
+	"but painted matte black ",
+	"for night operations.",
+	"",	
+	"They hunted enemy ships,",
+	"rescued downed pilots, and ",
+	"scouted behind enemy lines — ",
+	"all under the cover of darkness.",
+	"",
+	"They were called the “Black Cats.”",
+	"",
+	"Flying low, alone, and ",
+	"deep into enemy waters, ",
+	"they became legends of ",
+	"a war fought in shadows."
+];
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameInit() {
@@ -79,6 +105,10 @@ function gameSetState(newState) {
 			levelBuild(level);
 			break;
 		
+		case GameState.INTRO_STORY:
+			scrollTextY = 1;
+			break;
+
 		case GameState.TRANSITION:
 			transitionFrames = TRANSITION_FRAMES;
 			break;
@@ -137,11 +167,22 @@ function gameUpdate() {
 			if (inputButtonReleased(true)){
 				level = 0;
 				levelBuild(level);
+				gameSetState(GameState.INTRO_STORY);
+			} 	
+			break;
+
+		case GameState.INTRO_STORY:
+			scrollTextY -= .001;
+
+			if (inputButtonReleased(true)){
 				gameSetState(GameState.PLAY);
 			} 	
 			break;
 
 		case GameState.WON:
+			if (inputButtonReleased(true)){
+				gameSetState(GameState.TITLE);
+			} 	
 			break;
 
 		case GameState.GAME_OVER:
@@ -246,6 +287,19 @@ function gameSkipToLevel(newLevel) {
 // Courier New (monospace)
 // Brush Script MT (cursive)
 
+function gameDrawHudTextMultilines( 
+	texts, x, y, 
+	sizeFactor = 1, 
+	fontName="Courier New", 
+	lineSpacing = 1, 
+	fillColor = "#fff", 
+	outlineColor = "#000"
+) {
+	for (let i = 0; i < texts.length; i++) {
+		gameDrawHudText(texts[i], x, y + i * (overlayCanvas.height / 20) * lineSpacing * sizeFactor, sizeFactor, fontName, fillColor, outlineColor);
+	}
+
+}
 
 function gameDrawHudText(
 	text,
@@ -300,6 +354,7 @@ let levelTexts = [
 	"Sink the battleship!",
 ];
 
+let scrollTextY = 1;
 
 function gameRenderPost() {
 	let ySpacing = overlayCanvas.height / 20;
@@ -322,9 +377,13 @@ function gameRenderPost() {
 			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 			break;
 
+		case GameState.INTRO_STORY:
+			gameDrawHudTextMultilines(introStory, overlayCanvas.width / 2, overlayCanvas.height * scrollTextY, 1.75);
+			break			
+
 		case GameState.TRANSITION:
 			gameDrawHudText("Level cleared", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-		// fall-thru !
+			// fall-thru !
 
 		case GameState.PLAY:
 			gameDrawHudText("Level " + (level+1) + " / 8", (overlayCanvas.width * 1) / 4, ySpacing);

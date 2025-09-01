@@ -155,7 +155,7 @@ class Player extends EngineObject {
 	}
 
 	render() {
-		if (gameState== GameState.TITLE) return;
+		if (gameState == GameState.TITLE || gameState == GameState.INTRO_STORY) return;
 
 		// blink before starting level
 		if (this.gravityScale == 0 && (frame / 10) % 2 < 1) return;
