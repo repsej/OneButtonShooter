@@ -5,7 +5,7 @@ class AAGun extends Enemy {
 		super(pos, vec2(1), tile(tileIndex));
 
 		this.setCollision(true, true, false);
-		this.hp = 2;
+		this.hp = 1;
 		this.deathGravity = 0;
 		this.deathTimeSecs = 0;
 	}

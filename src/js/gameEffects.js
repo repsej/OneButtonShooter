@@ -95,7 +95,7 @@ function makeFire(pos, size=1, durationMS=250)
 {
 	let flash = new EngineObject(pos.copy(), vec2(size), spriteAtlas.explosion);
 	flash.gravityScale = 0;
-	flash.renderOrder = 1000;
+	flash.renderOrder = 2000;
 	flash.color = rgb(1, 1, 1, 1);
 
 	flash.update = () => {

@@ -333,9 +333,9 @@ function gameRenderPost() {
 
 			if (player.isPaused())
 			{
-				gameDrawHudText("Get ready", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.6, 1);
-
+				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
+				gameDrawHudText("Get ready", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+			
 				// gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
 				// gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
 			}
