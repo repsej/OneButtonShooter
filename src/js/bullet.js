@@ -18,7 +18,7 @@ class Bullet extends EngineObject {
 		this.shooter = shooter;
 		this.renderOrder = 1500;
 
-		makeFire(this.pos, .5, 50);
+		makeFire(this.pos, size * .5, 50 + size * 50);
 	}
 
 	update() {
