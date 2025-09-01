@@ -5,9 +5,9 @@ TODO:
 
 WORKS NOW ?
 
- - Fast music on ships !
-
  - Make sure hiscore works
+
+ - Pause on game over before you can continue (to hear the slow music)
 
  - Show hiscore on title screen
  - Show player in middle on win screen

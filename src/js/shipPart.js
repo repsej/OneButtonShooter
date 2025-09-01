@@ -77,8 +77,6 @@ class ShipPart extends Enemy {
 		shipHpMax += 1;
 		shipHp = shipHpMax;
 
-		musicTargetTempo = tempoFast;
-
 		xTotal += this.pos.x;
 		barY = max(barY, this.pos.y);
 	}
