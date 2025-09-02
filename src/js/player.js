@@ -4,6 +4,7 @@ const MAX_YSPEED = .2;
 const MAX_YPOWER = .01;
 const DY_POWER = .0005;
 const PLAYER_GRAVITY = .4;
+const X_FLYING_SPEED = 0.075;
 
 const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxygen left up here ... qed
 
@@ -47,17 +48,21 @@ class Player extends EngineObject {
 
 
 	update() {
-		if (gameState == GameState.GAME_OVER) return;
+		if (gameState == GameState.GAME_OVER || gameState == GameState.INTRO_STORY) return;
+
+		super.update();
+		cameraMicPos = this.pos;
+
 
 		if (gameState== GameState.TITLE) {
 			this.yPower = 0;
-			this.xSpeed = .1;
+			this.velocity.x = X_FLYING_SPEED;
 			this.gravityScale = .1;
-			this.pos.y = levelSize.y / 2;
+			this.pos.y = levelSize.y * 2 / 3;
 			this.setCollision(false, false, false);
+			return;
 		}
 
-		super.update();
 
 		//// Sound and particle effects
 		if (frame % 17 == 0 )
@@ -71,6 +76,7 @@ class Player extends EngineObject {
 		}
 
 		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
+
 
 
 		//// Transtition state
@@ -91,7 +97,8 @@ class Player extends EngineObject {
 			return;
 		}
 
-		cameraMicPos = this.pos;
+
+
 		this.angle = -this.velocity.y * 3;
 		
 		if (this.pos.y < 1)
@@ -128,7 +135,7 @@ class Player extends EngineObject {
 
 				this.yPower = MAX_YPOWER / 2;
 				this.gravityScale = PLAYER_GRAVITY; 
-				this.xSpeed = .075;
+				this.xSpeed = X_FLYING_SPEED;
 			}
 
 			return;
@@ -146,9 +153,9 @@ class Player extends EngineObject {
 
 		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
 		this.velocity.y += this.yPower;
+		this.velocity.x = this.xSpeed;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
-		this.velocity.x = this.xSpeed;
 
 
 		if (gameState == GameState.PLAY && (inputButtonPressed() || inputButtonReleased()))

@@ -70,7 +70,7 @@ class ShipPart extends Enemy {
 		this.isAAGun = isAAGun;
 		this.xAccel = 0;
 
-		this.hp = 2;
+		this.hp = 1;
 
 		this.isChimney = isChimney;
 

@@ -375,8 +375,8 @@ function gameRenderPost() {
 
 	switch (gameState) {
 		case GameState.TITLE:
-			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
-			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
+			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
+			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
 			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 			break;
 

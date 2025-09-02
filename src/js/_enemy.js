@@ -12,7 +12,7 @@ class Enemy extends EngineObject {
 	}
 
 	shootDistOk() {
-		return (abs(this.pos.x - player.pos.x) > 10);
+		return (abs(this.pos.x - player.pos.x) > 12);
 	}
 
 	update() {
