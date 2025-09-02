@@ -23,6 +23,11 @@ class EnemyPlane extends Enemy {
 	update() {
 		super.update(); 
 
+		if (this.hp <= 0)
+		{
+			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
+		}
+
 		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 && this.hp > 0)
 		{
 			if(this.framesToShoot-- < 0 && this.shootDistOk())
