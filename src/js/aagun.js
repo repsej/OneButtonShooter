@@ -26,6 +26,8 @@ function aaUpdateCannon(gun) {
 			let bulletSpeed = vec2(-.07, .07);
 			const bulletPos = gun.pos.add(bulletSpeed.normalize(1));
 			new Bullet(bulletPos, bulletSpeed, gun, 4);
+
+			sound_explosion.play(gun.pos, .7, 1.3);
 		}
 	}
 }

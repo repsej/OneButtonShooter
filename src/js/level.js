@@ -10,6 +10,9 @@ const tileLookup = {
 	water: 5,
 	island_ground: 7,
 
+	palm_top: 9,
+	palm_bottom: 10,
+
 	balloon: 12,
 	enemyPlane: 13,
 	aaGun: 16,
@@ -123,13 +126,18 @@ function levelLoad(levelNumber) {
 					levelSetTileData(pos, 0, t);
 					setTileCollisionData(pos, tileType_ground);
 
-					// let direction = 0, mirror = 0;
-					// if (t == tileLookup.island_ground) {
-					// 	direction = randInt(4);
-					// 	//mirror = randInt(2);
-					// }
-					//tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
-					tileLayer.setData(pos, new TileLayerData(t - 1));
+					let direction = 0, mirror = 0;
+					if (t == tileLookup.island_ground) {
+						direction = randInt(4);
+						//mirror = randInt(2);
+					}
+
+					if (t == tileLookup.palm_top || t == tileLookup.palm_bottom) {
+						mirror = randInt(2);
+					}
+
+					tileLayer.setData(pos, new TileLayerData(t - 1, direction, !!mirror));
+					// tileLayer.setData(pos, new TileLayerData(t - 1));
 			}
 		}
 	}
