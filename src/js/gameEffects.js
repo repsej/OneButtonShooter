@@ -59,13 +59,15 @@ function makeSparks(pos, count = 5)
 }
 
 function makeSmoke(pos, force = 1) {
+	if (force < .5) return; // prevent too many small particles ... slows down Safari ... and maybe iPhones ...
+
 	// smoke
 	new ParticleEmitter(
 		pos, // pos
 		0, // angle
 		0, // 0.1 * force, // radius / 2, // emitSize
 		rand(0.2, 0.4), // emitTime
-		rand(2, 5) * (force + 0.2), // emitRate
+		rand(2, 3) * (force + 0.2), // emitRate
 		PI / 2, // emiteCone
 		spriteAtlas.blob,
 		rgb(1, 1, 1, .1),

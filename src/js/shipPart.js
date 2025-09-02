@@ -119,7 +119,7 @@ class ShipPart extends Enemy {
 		if (this.hp > 0){
 			this.hp -= dam;
 			if (this.hp <= 0){
-				makeExplosion(this.pos, this.isAAGun ? 2 : 1);
+				makeExplosion(this.pos, 1);
 
 				if (this.isAAGun) this.size = vec2(0); // destroy gun
 
