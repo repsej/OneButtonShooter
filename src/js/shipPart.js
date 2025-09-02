@@ -4,8 +4,8 @@ let shipHpMax, shipHp, shipParts, shipX, shipSailing = false, xTotal = 0, barY =
 
 function shipReset()
 {
-	shipHp = -1;
-	shipHpMax = 5;
+	shipHp = shipHpMax = level * 5;
+
 	shipParts = [];
 	shipSailing = false;
 
@@ -74,8 +74,8 @@ class ShipPart extends Enemy {
 
 		this.isChimney = isChimney;
 
-		shipHpMax += 1;
-		shipHp = shipHpMax;
+		// shipHpMax += 1;
+		// shipHp = shipHpMax;
 
 		xTotal += this.pos.x;
 		barY = max(barY, this.pos.y);
