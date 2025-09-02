@@ -1,11 +1,5 @@
 /** @format */
 
-// let SAVEFILE_UPDATE_STATUS = {
-// 	NUMBER_LOWER: -1,
-// 	NUMBER_SAME: 0,
-// 	NUMBER_HIGHER: 1,
-// };
-
 function savefileGetNumber(key, defaultValue = 0.0) {
 	let retVal = localStorage.getItem(key);
 
@@ -16,46 +10,34 @@ function savefileGetNumber(key, defaultValue = 0.0) {
 	}
 }
 
-// Returns the diff
+// Returns if number was bigger
 function savefileUpdateNumber(key, value, defaultValue = 0.0) {
 	let diff = value - savefileGetNumber(key, defaultValue);
 
-	if (Math.abs(diff) < 0.001) {
-		return 0;
-	}
-
 	if (diff > 0) {
 		localStorage.setItem(key, value);
-		return diff;
+		return true;
 	} else {
-		return diff;
+		return false;
 	}
 }
 
 function savefileHiscoreGet() {
-	return savefileGetNumber("bcs_hs", 0);
+	return savefileGetNumber("blackcatsquardron_hs", 0);
 }
 
 function savefileHiscoreUpdate(score) {
-	return savefileUpdateNumber("bcs_hs", score);
+	return savefileUpdateNumber("blackcatsquardron_hs", score);
 }
 
-function savefileTimeGet(level) {
-	return savefileGetNumber("bcs_level" + level);
-}
+// function savefileSet(key, val) {
+// 	localStorage.setItem(key, JSON.stringify(val));
+// }
 
-function savefileTimeBonusUpdate(level, time) {
-	return savefileUpdateNumber("bcs_level" + level, time);
-}
+// function savefileGet(key) {
+// 	return JSON.parse(localStorage.getItem(key));
+// }
 
-function savefileSet(key, val) {
-	localStorage.setItem(key, JSON.stringify(val));
-}
-
-function savefileGet(key) {
-	return JSON.parse(localStorage.getItem(key));
-}
-
-function savefileExist(key) {
-	return localStorage.getItem(key) != null;
-}
+// function savefileExist(key) {
+// 	return localStorage.getItem(key) != null;
+// }

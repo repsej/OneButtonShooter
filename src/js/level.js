@@ -40,7 +40,6 @@ const levelGetTileData = (pos, layer) =>
 let levelFramesUntilNextWave;
 
 function levelBuild(level) {
-
 	tileData = undefined;
 	tileLayers = undefined;
 	sky = undefined;

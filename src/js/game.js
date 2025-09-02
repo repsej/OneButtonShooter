@@ -18,7 +18,7 @@ const LIVES_START = 3;
 
 let gameBottomText = undefined;
 let lives = undefined;
-let gameNewHiscoreStatus = undefined;
+let gameWasNewHiscore = undefined;
 let gameBlinkFrames = 0;
 let cameraShake = vec2();
 let showHeight = 20;
@@ -29,28 +29,27 @@ let moon = undefined;
 
 
 let introStory = [
-	"⸻  =★=  ⸻",
+	"=★=",
 	"",
 	"World War II",
 	"PACIFIC THEATER, 1944",
 	"",
-	"A secret navy squadron",
-	"hunted enemy ships,",
-	"rescued downed pilots, and",
-	"scouted behind enemy lines —",
-	"all under the cover of darkness.",
+	"As a pilot in a secret navy",
+	"squadron your task is to sink",
+	"enemy ships.",
 	"",
-	"Their aircraft was the",
-	"slow PBY Catalina — lightly",
+	"Your aircraft is the old",
+	"slow PBY Catalina.  Lightly",
 	"armed, but painted matte",
-	"black for night operations.",
+	"black ... perfect for night",
+	"operations.",
 	"",	
-	"They were known as the ",
-	"“Black Cats.”",
+	"You are part of the secret",
+	"BLACK CAT SQUADRON",
 	"",
-	"This is their game.",
+	"Now give them hell!",
 	"",
-	"⸻  =★=  ⸻",
+	"=★=",
 ];
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,7 +69,7 @@ function gameInit() {
 
 	// enable touch gamepad on touch devices
 	touchGamepadEnable = true;
-	gameNewHiscoreStatus = undefined;
+	gameWasNewHiscore = undefined;
 
 	transitionFrames = score = level = 0;
 	gravity = -0.01;
@@ -84,7 +83,7 @@ function gameInit() {
 	
 	showHeight = levelSize.y * 1.2; // Show some more air above the level
 
-	// cameraScale = mainCanvas.height / showHeight;
+	cameraSize = getCameraSize();
 
 	if (isTouchDevice) particleEmitRateScale = 0.5;
 
@@ -115,6 +114,11 @@ function gameSetState(newState) {
 		case GameState.TRANSITION:
 			transitionFrames = TRANSITION_FRAMES;
 			break;
+
+		case GameState.WON:
+		case GameState.GAME_OVER:
+			gameWasNewHiscore = savefileHiscoreUpdate(score);
+			break;
 	}
 }
 
@@ -135,8 +139,6 @@ function gameUpdate() {
 	inputUpdateXXX();
 	musicUpdate();
 
-	cameraSize = getCameraSize();
-
 	if (gameState == GameState.TRANSITION) {
  		let followPos = vec2(player.pos.x, player.pos.y /2);
 		cameraPos = cameraPos.lerp(followPos, 0.03);
@@ -145,7 +147,9 @@ function gameUpdate() {
 		cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
 
 	} else {
-	 	cameraPos = cameraPos.lerp(player.pos.add(vec2(11, 0)), 0.1);
+		// Player should always be placed a set number of tiles in from the left side of the screen
+		const tilesFromLeft = 7;
+		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-tilesFromLeft, 0)), 0.1);
 		cameraPos.y = cameraSize.y / 2;
 	}
 
@@ -184,14 +188,10 @@ function gameUpdate() {
 			break;
 
 		case GameState.WON:
+		case GameState.GAME_OVER:
 			if (inputButtonReleased(true)){
 				gameSetState(GameState.TITLE);
 			} 	
-			break;
-
-		case GameState.GAME_OVER:
-			musicTargetTempo = tempoSlow;
-			if (inputButtonReleased(true)) gameInit();
 			break;
 
 		case GameState.TRANSITION:
@@ -254,6 +254,8 @@ function gameCameraShake(strength = 1) {
 }
 
 function gameUpdatePost() {
+
+	cameraSize = getCameraSize();
 
 	// Pause when not in landscape mode
 	paused = window.innerHeight > window.innerWidth
@@ -341,6 +343,21 @@ function gameDrawHudText(
 	overlayContext.fillText(text, x, y);
 }
 
+function gameDrawHudTextBlink(
+	text,
+	x,
+	y,
+	sizeFactor = 1,
+	fontName = "Courier New",
+	fillColor = "#fff",
+	outlineColor = "#000"
+){
+	if ((time * 4) % 2 < 1) {
+		gameDrawHudText(text, x, y, sizeFactor, fontName, fillColor, outlineColor);
+	}
+}
+
+
 function gameRender() {}
 
 let levelTexts = [
@@ -375,6 +392,8 @@ function gameRenderPost() {
 
 	switch (gameState) {
 		case GameState.TITLE:
+			gameDrawScoreStuff(ySpacing); 
+
 			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
 			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
 			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
@@ -449,9 +468,15 @@ function gameDrawScoreStuff(halfTile) {
 	if (savefileHiscoreGet()) {
 		scoreText += "          Hiscore " + savefileHiscoreGet();
 	}
-	gameDrawHudText(scoreText, overlayCanvas.width / 2, halfTile);
 
-	return scoreText;
+	if (gameWasNewHiscore) {
+		scoreText += "  NEW!";
+		gameDrawHudTextBlink(scoreText, overlayCanvas.width / 2, halfTile);
+	}
+	else
+	{
+		gameDrawHudText(scoreText, overlayCanvas.width / 2, halfTile);
+	}
 }
 
 
