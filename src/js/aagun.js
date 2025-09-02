@@ -17,17 +17,19 @@ class AAGun extends Enemy {
 }
 
 function aaUpdateCannon(gun) {
+	if (player.isPaused()) return;
+
 	if (gun.framesToShoot === undefined) gun.framesToShoot = rand(50,100);
 
 	if (gun.pos.x < cameraPos.x + cameraSize.x / 2 + 2 && gun.hp > 0) {
-		if (gun.framesToShoot-- < 0 && gun.shootDistOk()) {
+		if (gun.framesToShoot-- < 0 && gun.shootOk()) {
 			gun.framesToShoot = rand(100, 150);
 
 			let bulletSpeed = vec2(-.07, .07);
 			const bulletPos = gun.pos.add(bulletSpeed.normalize(1));
 			new Bullet(bulletPos, bulletSpeed, gun, 4);
 
-			sound_explosion.play(gun.pos, .7, 1.3);
+			sound_explosion.play(gun.pos, .7, 1.5);
 		}
 	}
 }

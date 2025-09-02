@@ -11,7 +11,7 @@ class Enemy extends EngineObject {
 		this.deathTimeSecs = 2;
 	}
 
-	shootDistOk() {
+	shootOk() {
 		return (abs(this.pos.x - player.pos.x) > 12);
 	}
 

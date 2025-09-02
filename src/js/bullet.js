@@ -6,10 +6,6 @@ class Bullet extends EngineObject {
 
 		this.drawSize = vec2(.5*size);
 
-		if (player.isPaused()){
-			this.destroy();
-			return;
-		}
 
 		this.setCollision(true, false, true);
 		this.velocity = vel;

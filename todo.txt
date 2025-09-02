@@ -1,5 +1,10 @@
 TODO: 
 
+ - Make pos of player be set to a number of tiles from left edge
+
+
+
+
  - Make sure hiscore works (on both Game over and Won)
 
  - Pause on game over before you can continue (to hear the slow music)
@@ -7,15 +12,13 @@ TODO:
  - Show hiscore on title screen
  - Show player in middle on win screen
 
- - Make pos of player be set to a number of tiles from left edge
-
  - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
 
  - Better intro text.  Present, action, now ... you are part of the secret ...
 
  - Time bonus for sinking ships
 
- 
+
 
  - How to handle the difficulty ?  Most gamers should be able to finish the game in about 10 minutes.
 
