@@ -1,17 +1,33 @@
 TODO: 
 
- - Make sure hiscore works
+ - Make sure hiscore works (on both Game over and Won)
 
  - Pause on game over before you can continue (to hear the slow music)
 
  - Show hiscore on title screen
  - Show player in middle on win screen
 
- - Make pos of player be set to a number of tiles and not a percentage of the screen.
+ - Make pos of player be set to a number of tiles from left edge
 
- - Test on mobiles
+ - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
 
+ - Better intro text.  Present, action, now ... you are part of the secret ...
 
+ - Time bonus for sinking ships
+
+ 
+
+ - How to handle the difficulty ?  Most gamers should be able to finish the game in about 10 minutes.
+
+   - Count planes lost instead of lives remaining.   And give a bonus div by this (+1) at the end :) 
+
+   - Multiple difficulties ?  Hard.  Needs UI on title screen.
+
+   - Adaptive difficulty ?  Harder the more lives you have left ?  
+     What can be tweaked ?  Enemy shooting pause.  Eplane spawn pause.  Eplane spawn numbers.  Ship hp - aa hp - plane hp - balloon hp.  
+
+   - Bonus for lives left after each sinking ?
+   - Get bonus life after each sinking ?
 
 
 
@@ -28,3 +44,7 @@ MAYBE/WONT:
  - Title screen: toggle music
 
 
+
+Is served at:
+
+https://repsej.github.io/OneButtonShooter/

@@ -378,6 +378,8 @@ function gameRenderPost() {
 			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
 			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
 			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+
+			gameDrawHudText("a Js13kGames 2025 entry by Jesper Rasmussen", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .5);
 			break;
 
 		case GameState.INTRO_STORY:
