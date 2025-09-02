@@ -67,15 +67,15 @@ function makeSmoke(pos, force = 1) {
 		0, // angle
 		0, // 0.1 * force, // radius / 2, // emitSize
 		rand(0.2, 0.4), // emitTime
-		rand(2, 3) * (force + 0.2), // emitRate
+		rand(1, 1.5) * (force + 0.2), // emitRate
 		PI / 2, // emiteCone
 		spriteAtlas.blob,
-		rgb(1, 1, 1, .1),
-		rgb(0.5, 0.5, 0.5, 0.3),
+		rgb(1, 1, 1, .2),
+		rgb(0.5, 0.5, 0.5, 0.5),
 		rgb(1, 1, 1, 0),
 		rgb(1, 1, 1, 0),
-		rand(0.1, 1), // time
-		0.2 + 0.2 * force, // sizeStart
+		rand(0.3, 1), // time
+		0.4 + 0.4 * force, // sizeStart
 		0.01, // sizeEnd
 		force * 0.001, // speed
 		0.1, // angleSpeed
@@ -84,10 +84,10 @@ function makeSmoke(pos, force = 1) {
 		-0.2, // gravity
 		PI, // particle cone
 		0.5, // fade
-		1, // randomness
+		0, // randomness
 		false, // collide
 		false, // additive
-		true, // colorLinear
+		false, // colorLinear
 		0 // renderOrder
 	);
 }
