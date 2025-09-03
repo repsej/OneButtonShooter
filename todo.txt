@@ -2,6 +2,10 @@ TODO:
 
  - Add addScore function that checks for player dead etc
 
+ - Infinite continues :) ... from the current level ... count down on Game Over screen ... hold button to continue
+
+
+
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
  - Pause on game over before you can continue (to hear the slow music)
@@ -13,17 +17,8 @@ TODO:
  - Time bonus for sinking ships
 
 
- - How to handle the difficulty ?  Most gamers should be able to finish the game in about 10 minutes.
 
-   - Count planes lost instead of lives remaining.   And give a bonus div by this (+1) at the end :) 
 
-   - Multiple difficulties ?  Hard.  Needs UI on title screen.
-
-   - Adaptive difficulty ?  Harder the more lives you have left ?  
-     What can be tweaked ?  Enemy shooting pause.  Eplane spawn pause.  Eplane spawn numbers.  Ship hp - aa hp - plane hp - balloon hp.  
-
-   - Bonus for lives left after each sinking ?
-   - Get bonus life after each sinking ?
 
 
 
@@ -38,6 +33,15 @@ MAYBE:
  - In transition draw hero on top and add black square behind him
  - Title screen: select level
  - Title screen: toggle music
+
+
+ - How to handle the difficulty ?  Most gamers should be able to finish the game in about 10 minutes.
+  - Count planes lost instead of lives remaining.   And give a bonus div by this (+1) at the end :) 
+  - Multiple difficulties ?  Hard.  Needs UI on title screen.
+  - Adaptive difficulty ?  Harder the more lives you have left ?  
+    What can be tweaked ?  Enemy shooting pause.  Eplane spawn pause.  Eplane spawn numbers.  Ship hp - aa hp - plane hp - balloon hp.  
+  - Bonus for lives left after each sinking ?
+  - Get bonus life after each sinking ?
 
 WONT:
 

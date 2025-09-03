@@ -11,7 +11,7 @@ const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxy
 
 class Player extends EngineObject {
 	constructor(pos) {
-		super(pos, vec2(2, .5), spriteAtlas.playerPlane);
+		super(pos, vec2(1.5, .5), spriteAtlas.playerPlane);
 
 		this.drawSize = vec2(2.5,1.25);
 		this.renderOrder = 10;
@@ -162,7 +162,7 @@ class Player extends EngineObject {
 
 		if (gameState == GameState.PLAY && (inputButtonPressed() || inputButtonReleased()))
 		{
-			if (frame - this.lastShotFrame >= 3){
+			if (frame - this.lastShotFrame >= 4){
 				this.lastShotFrame = frame;
 
 				// spawn bullet in front of plane
