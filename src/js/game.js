@@ -26,7 +26,7 @@ let showHeight = 20;
 let forcePause = false;
 
 let moon = undefined;
-
+let gameStateChangedTime = time;
 
 let introStory = [
 	"=★=",
@@ -100,6 +100,8 @@ function gameSetState(newState) {
 	musicPlayCrash(2);
 	gameWhiteBlinkFrames = 20;
 
+	gameStateChangedTime = time;
+
 	switch (newState) {
 		case GameState.TITLE:
 			gameBlackOverlayAlphaTarget = .25;
@@ -130,9 +132,6 @@ function gameSetState(newState) {
 }
 
 function gameBeginTransition() {
-	gameWhiteBlinkFrames = 10;
-	gameCameraShake();
-
 	player.startTransition();
 }
 
@@ -191,11 +190,7 @@ function gameUpdate() {
 			}
 
 			if (inputButtonReleased(true)){
-				level = 0;
-				score = 0;
-				lives = LIVES_START;
-				levelBuild(level);
-				gameSetState(GameState.INTRO_STORY);
+				gameStartGame(0);
 			} 	
 			break;
 
@@ -209,10 +204,20 @@ function gameUpdate() {
 			break;
 
 		case GameState.WON:
-		case GameState.GAME_OVER:
 			if (inputButtonReleased(true)){
 				gameSetState(GameState.TITLE);
 			} 	
+			break;
+
+
+		case GameState.GAME_OVER:
+			if (time - gameStateChangedTime < 10){
+				if (inputButtonReleased(true)) gameStartGame(level)
+			}
+			else
+			{
+				gameSetState(GameState.TITLE);
+			}
 			break;
 
 		case GameState.TRANSITION:
@@ -258,6 +263,19 @@ function gameUpdate() {
 	cameraShake = cameraShake.scale(-0.9);
 	cameraPos = cameraPos.add(cameraShake);
 }
+
+function gameStartGame(startLevel) {
+	level = startLevel;
+	score = 0;
+	lives = LIVES_START;
+	levelBuild(level);
+	if (level == 0) {
+		gameSetState(GameState.INTRO_STORY);
+	} else {
+		gameSetState(GameState.PLAY);
+	}
+}
+
 
 function gameCameraShake(strength = 1) {
 	strength /= 2;
@@ -426,10 +444,7 @@ function gameRenderPost() {
 			if (player.isPaused())
 			{
 				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-				gameDrawHudText("Get ready", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
-			
-				// gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 4);
-				// gameDrawHudText("SQUARDRON", overlayCanvas.width / 2, overlayCanvas.height * 0.6, 4);
+				gameDrawHudText("Tap when ready", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 			}
 
 			shipDrawHealthBar();
@@ -439,7 +454,16 @@ function gameRenderPost() {
 		case GameState.GAME_OVER:
 			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
+			gameDrawHudText("GAME OVER", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
+
+			let t = time - gameStateChangedTime;
+
+			if (t <= 10){
+				gameDrawHudText("Timer", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 2);
+				gameDrawHudText((10 - t|0), overlayCanvas.width / 2, overlayCanvas.height * 0.6, 3);
+
+				gameDrawHudText("Tap to continue", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+			}
 
 			break;
 

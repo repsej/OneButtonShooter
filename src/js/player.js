@@ -43,6 +43,9 @@ class Player extends EngineObject {
 	startTransition() {
 		if (!this.alive) return;
 
+		gameWhiteBlinkFrames = 10;
+		gameCameraShake();
+
 		this.renderOrder = 10000;
 
 		this.setCollision(false, false, false);	
