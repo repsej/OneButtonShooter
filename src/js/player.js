@@ -2,8 +2,8 @@
 
 const MAX_YSPEED = .2;
 const MAX_YPOWER = .01;
-const DY_POWER = .0005;
-const PLAYER_GRAVITY = .4;
+const DY_POWER = .002;
+const PLAYER_GRAVITY = .5;
 const X_FLYING_SPEED = 0.075;
 
 const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxygen left up here ... qed
@@ -34,6 +34,7 @@ class Player extends EngineObject {
 		musicTargetTempo = (level % 2 == 0) ? tempoMid : tempoFast;
 
 		this.lastShotFrame = frame;
+		this.shotStored = false;
 	}
 
 	isPaused() {
@@ -178,9 +179,13 @@ class Player extends EngineObject {
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
 
 
-		if (gameState == GameState.PLAY && (inputButtonPressed() || inputButtonReleased()))
+
+		if (gameState == GameState.PLAY )
 		{
-			if (frame - this.lastShotFrame >= 4){
+			let shootNow = inputButtonPressed() || inputButtonReleased();
+	
+			if (frame - this.lastShotFrame >= 5 && (shootNow || this.shotStored)) {
+				this.shotStored = false;
 				this.lastShotFrame = frame;
 
 				// spawn bullet in front of plane
@@ -190,7 +195,9 @@ class Player extends EngineObject {
 				const bulletPos = this.pos.add(bulletSpeed.normalize(2));
 
 				new Bullet(bulletPos, bulletSpeed.normalize(.4), this, 1.2, 1.3);
-			} 
+			} else {
+				if (shootNow) this.shotStored = true;
+			}
 		}
 	}
 
