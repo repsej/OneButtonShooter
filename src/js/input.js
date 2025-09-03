@@ -12,6 +12,10 @@ function inputButtonHeld() {
 	return inputButton & 1;
 }
 
+function inputButtonLastHeld() {
+	return inputButtonLast & 1;
+}
+
 function inputButtonPressed(forceRealInput = false) {
 	if (forceRealInput) {
 		let realInput = inputReadRealInput();

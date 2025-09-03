@@ -144,7 +144,7 @@ class Player extends EngineObject {
 		}
 
 
-		if (inputButtonHeld() && this.pos.y < MAX_FLYING_HEIGHT)
+		if (inputButtonLastHeld() && inputButtonHeld() && this.pos.y < MAX_FLYING_HEIGHT)
 		{
 			this.yPower += DY_POWER;
 		}
