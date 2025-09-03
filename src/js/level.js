@@ -26,8 +26,13 @@ const tileLookup = {
 	shipAAGun: 23,
 };
 
+/** @type Player */
+let player;
 
-let player, playerStartPos, tileData, tileLayers, sky;
+/** @type Vector2 */
+let playerStartPos;
+
+let tileData, tileLayers, sky;
 let levelSize;
 let levelStartTime = -1;
 

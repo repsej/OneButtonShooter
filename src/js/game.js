@@ -19,7 +19,8 @@ const LIVES_START = 3;
 let gameBottomText = undefined;
 let lives = undefined;
 let gameWasNewHiscore = undefined;
-let gameBlinkFrames = 0;
+let gameWhiteBlinkFrames = 0;
+let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
 let showHeight = 20;
 
@@ -98,7 +99,7 @@ function gameSetState(newState) {
 	gameState = newState;
 
 	musicPlayCrash(2);
-	gameBlinkFrames = 20;
+	gameWhiteBlinkFrames = 20;
 
 	switch (newState) {
 		case GameState.TITLE:
@@ -108,11 +109,17 @@ function gameSetState(newState) {
 			break;
 		
 		case GameState.INTRO_STORY:
+			gameBlackOverlayAlphaTarget = 1;
 			scrollTextY = 1;
 			break;
 
 		case GameState.TRANSITION:
+			gameBlackOverlayAlphaTarget = .6;
 			transitionFrames = TRANSITION_FRAMES;
+			break;
+
+		case GameState.PLAY:
+			gameBlackOverlayAlphaTarget = 0;
 			break;
 
 		case GameState.WON:
@@ -125,7 +132,7 @@ function gameSetState(newState) {
 function gameNextLevel() {
 	if (transitionFrames > 0) return;
 
-	gameBlinkFrames = 10;
+	gameWhiteBlinkFrames = 10;
 	gameCameraShake();
 
 	player.startTransition();
@@ -173,6 +180,8 @@ function gameUpdate() {
 
 			if (inputButtonReleased(true)){
 				level = 0;
+				score = 0;
+				lives = LIVES_START;
 				levelBuild(level);
 				gameSetState(GameState.INTRO_STORY);
 			} 	
@@ -272,7 +281,7 @@ function gameUpdatePost() {
 
 function gameSkipToLevel(newLevel) {
 	gameBottomText = undefined;
-	gameBlinkFrames = 15;
+	gameWhiteBlinkFrames = 15;
 
 	level = mod(newLevel, levelData.length);
 	levelBuild(level);
@@ -445,22 +454,30 @@ function gameRenderPost() {
 
 	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - ySpacing * 3);
 
+	//// Black overlay
+	gameBlackOverlayAlpha = gameBlackOverlayAlpha * 0.95 + gameBlackOverlayAlphaTarget * 0.05;
+	if (gameBlackOverlayAlpha > 0.02) {
+		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(0, 0, 0, gameBlackOverlayAlpha), 0, undefined, true);
+	}
+
+	// Overlay w texts
 	mainContext.drawImage(overlayCanvas, 0, 0);
 
-	// if (player) player.renderTop(); // On top of everything !
+	if (gameState == GameState.TRANSITION) player.render(); // Render player on top during transition
 
-	if (gameBlinkFrames > 0) {
-		gameBlinkFrames--;
-		let alpha = 0.2 + gameBlinkFrames / 10;
+	//// White flash
+	if (gameWhiteBlinkFrames > 0) {
+		gameWhiteBlinkFrames--;
+		let alpha = 0.2 + gameWhiteBlinkFrames / 10;
 		alpha = min(alpha, .9);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
 	}
 }
 
-function blinkScreen(frames) {
-	gameBlinkFrames /= 3;
-	gameBlinkFrames += frames;
+function blinkScreenWhite(frames) {
+	gameWhiteBlinkFrames /= 3;
+	gameWhiteBlinkFrames += frames;
 }
 
 function gameDrawScoreStuff(halfTile) {

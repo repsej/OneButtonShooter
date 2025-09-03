@@ -124,7 +124,7 @@ function makeExplosion(pos, force=1)
 {
 	sound_explosion.play(pos, force);
 
-	blinkScreen(4 + force * 4);
+	blinkScreenWhite(4 + force * 4);
 	makeFire(pos);
 
 	if (explosionCount > 3) return; // limit simultaneous explosions

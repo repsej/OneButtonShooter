@@ -25,7 +25,7 @@ class Player extends EngineObject {
 		this.yPower = 0;
 		this.xSpeed = 0;
 		this.gravityScale = 0;
-		gameBlinkFrames = 15;
+		gameWhiteBlinkFrames = 15;
 
 		this.deathFrame = undefined;
 		this.deathAngle = undefined;
@@ -131,7 +131,7 @@ class Player extends EngineObject {
 		{
 			if (inputButtonReleased()){
 				musicPlayCrash(2);
-				gameBlinkFrames = 10;
+				gameWhiteBlinkFrames = 10;
 
 				gameBottomText = undefined;
 
@@ -175,6 +175,8 @@ class Player extends EngineObject {
 			} 
 		}
 	}
+
+	// render(){}
 
 	render() {
 		if (gameState == GameState.TITLE || gameState == GameState.INTRO_STORY) return;
