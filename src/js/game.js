@@ -1,6 +1,6 @@
 /** @format */
 
-let spriteAtlas, score, level, transitionFrames, cameraSize;
+let spriteAtlas, score, level, cameraSize;
 
 let GameState = {
 	PLAY: 0,
@@ -12,7 +12,6 @@ let GameState = {
 };
 
 let gameState = GameState.PLAY;
-const TRANSITION_FRAMES = 240;
 const LIVE_BONUS_SCORE = 5000;
 const LIVES_START = 3;
 
@@ -72,7 +71,7 @@ function gameInit() {
 	touchGamepadEnable = true;
 	gameWasNewHiscore = undefined;
 
-	transitionFrames = score = level = 0;
+	score = level = 0;
 	gravity = -0.01;
 
 	lives = LIVES_START;
@@ -116,7 +115,6 @@ function gameSetState(newState) {
 
 		case GameState.TRANSITION:
 			gameBlackOverlayAlphaTarget = .5;
-			transitionFrames = TRANSITION_FRAMES;
 			break;
 
 		case GameState.PLAY:
@@ -131,14 +129,26 @@ function gameSetState(newState) {
 	}
 }
 
-function gameNextLevel() {
-	if (transitionFrames > 0) return;
-
+function gameBeginTransition() {
 	gameWhiteBlinkFrames = 10;
 	gameCameraShake();
 
 	player.startTransition();
 }
+
+
+function gameStartNextLevel()
+{
+	level++;
+	if (level >= levelData.length) {
+		gameSetState(GameState.WON);
+		return;
+	}
+
+	levelBuild(level);
+	gameSetState(GameState.PLAY);
+}
+
 
 
 
@@ -206,23 +216,13 @@ function gameUpdate() {
 			break;
 
 		case GameState.TRANSITION:
-			if (--transitionFrames <= 0) {
-				level++;
-				if (level >= levelData.length) {
-					gameSetState(GameState.WON);
-					break;
-				}
-
-				levelBuild(level);
-				gameSetState(GameState.PLAY);
-			}
-				
-			break;
+			// nop
+		 	break;
 
 		case GameState.PLAY:
 			levelUpdate();
 			if (player.pos.x > levelSize.x - cameraSize.x / 2) {
-				gameNextLevel();
+				gameBeginTransition();
 			}
 
 			break;
@@ -244,7 +244,7 @@ function gameUpdate() {
 		if (keyWasPressed("KeyK")) player.hit();
 
 		// Next level
-		if (keyWasPressed("KeyN")) gameNextLevel();
+		if (keyWasPressed("KeyN")) gameBeginTransition();
 
 		// Retry level
 		if (keyWasPressed("KeyR")) gameSkipToLevel(level);
@@ -287,8 +287,6 @@ function gameSkipToLevel(newLevel) {
 
 	level = mod(newLevel, levelData.length);
 	levelBuild(level);
-
-	transitionFrames = 0;
 
 	gameSetState(GameState.PLAY);
 }

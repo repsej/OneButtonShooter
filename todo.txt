@@ -2,11 +2,9 @@ TODO:
 
  - Infinite continues :) ... from the current level ... count down on Game Over screen ... hold button to continue
 
-
-
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
- - Pause on game over before you can continue (to hear the slow music)
+ - Pause on game over before you can continue (to hear the slow music).  Most screens need a small pause before you can continue.
 
  - Show player in middle on win screen
 
@@ -25,10 +23,8 @@ MAYBE:
  - Add smoldering wreckage of destroyed aa guns
  - Player HP ?  And health bar ?
  - Water splash effect (things falling into water, wake after ship, etc.)
- - Limit number of player shots on screen ... ?  20 ?? Else it is too easy for fast tappers.
  - Enemy planes are behind the clouds
  - Clouds could be nicer ...
- - In transition draw hero on top and add black square behind him
  - Title screen: select level
  - Title screen: toggle music
 

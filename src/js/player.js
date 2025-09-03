@@ -9,6 +9,7 @@ const X_FLYING_SPEED = 0.075;
 const MAX_FLYING_HEIGHT = 20; // engine dies at this altitude ... not enough oxygen left up here ... qed
 
 
+const LOOP_GRAVITY = 0.0001;
 class Player extends EngineObject {
 	constructor(pos) {
 		super(pos, vec2(1.5, .5), spriteAtlas.playerPlane);
@@ -53,8 +54,9 @@ class Player extends EngineObject {
 		if (gameState == GameState.GAME_OVER || gameState == GameState.INTRO_STORY) return;
 
 		super.update();
-		cameraMicPos = this.pos;
+	
 
+		cameraMicPos = this.pos;
 
 		if (gameState== GameState.TITLE) {
 			this.yPower = 0;
@@ -84,25 +86,38 @@ class Player extends EngineObject {
 		//// Transtition state
 		if (gameState == GameState.TRANSITION )
 		{
-			this.angle -= .025;
-			this.gravityScale = 0.0001;
-			this.yPower = MAX_YPOWER;
+
+			if (this.gravityScale != LOOP_GRAVITY) {
+				// Drop down to low height before starting loop
+				this.angle = -this.velocity.y * 3;
+				if (this.pos.y < 6){
+					this.gravityScale = LOOP_GRAVITY; // start looping
+				}
+				return;
+			}
 
 			this.drawSize.x *= 1.005;
 			this.drawSize.y *= 1.005;
-			
+
+			this.angle -= .025;
+			this.gravityScale = LOOP_GRAVITY;
+			this.yPower = MAX_YPOWER;
+
 			cameraScale -= .02;
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
 			this.velocity.y += 0.02;
 
+			if (this.angle < -PI * 2){
+				gameStartNextLevel();
+			}
+
 			return;
 		}
 
-
-
 		this.angle = -this.velocity.y * 3;
-		
+
+
 		if (this.pos.y < 1)
 		{
 			if (this.deathAngle === undefined) this.deathAngle = this.angle;
