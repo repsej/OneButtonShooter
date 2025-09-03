@@ -1,7 +1,5 @@
 TODO: 
 
- - Add addScore function that checks for player dead etc
-
  - Infinite continues :) ... from the current level ... count down on Game Over screen ... hold button to continue
 
 

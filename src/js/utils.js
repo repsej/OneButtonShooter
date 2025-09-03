@@ -26,3 +26,8 @@ function drawBar(pos, size, fraction, frameThickness = 0.1, barColor = Colors.wh
 }
 
 
+function addScore(points, pos){
+	if (gameState != GameState.PLAY || !player.alive) return;
+
+	score += points;
+}

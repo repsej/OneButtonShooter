@@ -470,7 +470,6 @@ function gameDrawScoreStuff(halfTile) {
 	}
 
 	if (gameWasNewHiscore) {
-		scoreText += "  NEW!";
 		gameDrawHudTextBlink(scoreText, overlayCanvas.width / 2, halfTile);
 	}
 	else
