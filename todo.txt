@@ -27,7 +27,7 @@ TODO:
 
 
 
-MAYBE/WONT:
+MAYBE:
  - For every second level completed ... that can be chosen from start screen
  - Add smoldering wreckage of destroyed aa guns
  - Player HP ?  And health bar ?
@@ -38,6 +38,12 @@ MAYBE/WONT:
  - In transition draw hero on top and add black square behind him
  - Title screen: select level
  - Title screen: toggle music
+
+WONT:
+
+ - Limit player bullets on screen (prevent fast tappers from having it too easy)
+   NAH .... doesnt work !
+ 
 
 
 

@@ -1,5 +1,5 @@
 {
-    "activeFile": "level-06.tmj",
+    "activeFile": "level-07.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -16,8 +16,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 853.75,
-                "y": 200.75
+                "x": 1600,
+                "y": 152
             }
         },
         "level-02.tmj": {
@@ -32,8 +32,8 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 883.8333333333333,
-                "y": 207.5
+                "x": 1600,
+                "y": 152
             }
         },
         "level-04.tmj": {
@@ -48,20 +48,20 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 904.4999999999999,
-                "y": 196.16666666666666
+                "x": 1600,
+                "y": 152
             }
         },
         "level-06.tmj": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 317.5,
-                "y": 65.5
+                "x": 1600,
+                "y": 152
             }
         },
         "level-07.tmj": {
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 1600,
@@ -91,9 +91,9 @@
         "level-02.tmj",
         "level-03.tmj",
         "level-05.tmj",
-        "level-07.tmj",
         "tileset.tsx",
         "level-04.tmj",
-        "level-06.tmj"
+        "level-06.tmj",
+        "level-07.tmj"
     ]
 }
