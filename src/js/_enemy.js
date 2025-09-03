@@ -12,6 +12,8 @@ class Enemy extends EngineObject {
 	}
 
 	shootOk() {
+		if (!player || !player.alive || gameState == GameState.TRANSITION) return false;
+
 		return abs(this.pos.x - player.pos.x) > 15;
 	}
 

@@ -101,6 +101,11 @@ class ShipPart extends Enemy {
 			}
 		}
 
+		// Slow down ship a bit when hit
+		for (const s of shipParts) {
+			s.velocity.x /= 1.05;
+		}
+
 		shipHp -= dam;
 		if (shipHp <= 0)
 		{

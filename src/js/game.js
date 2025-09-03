@@ -103,6 +103,7 @@ function gameSetState(newState) {
 
 	switch (newState) {
 		case GameState.TITLE:
+			gameBlackOverlayAlphaTarget = .25;
 			player.velocity = vec2(.1,0);
 			level = 6;
 			levelBuild(level);
@@ -114,7 +115,7 @@ function gameSetState(newState) {
 			break;
 
 		case GameState.TRANSITION:
-			gameBlackOverlayAlphaTarget = .6;
+			gameBlackOverlayAlphaTarget = .5;
 			transitionFrames = TRANSITION_FRAMES;
 			break;
 
@@ -124,6 +125,7 @@ function gameSetState(newState) {
 
 		case GameState.WON:
 		case GameState.GAME_OVER:
+			gameBlackOverlayAlphaTarget = .5;
 			gameWasNewHiscore = savefileHiscoreUpdate(score);
 			break;
 	}
@@ -455,7 +457,19 @@ function gameRenderPost() {
 	if (gameBottomText) gameDrawHudText(gameBottomText, overlayCanvas.width * 0.5, overlayCanvas.height - ySpacing * 3);
 
 	//// Black overlay
-	gameBlackOverlayAlpha = gameBlackOverlayAlpha * 0.95 + gameBlackOverlayAlphaTarget * 0.05;
+	if (gameBlackOverlayAlpha != gameBlackOverlayAlphaTarget){
+
+		if (gameBlackOverlayAlphaTarget > gameBlackOverlayAlpha) {
+			gameBlackOverlayAlpha += 0.02;
+			gameBlackOverlayAlpha = clamp(gameBlackOverlayAlpha, 0, gameBlackOverlayAlphaTarget);
+		} else {
+			gameBlackOverlayAlpha -= 0.02;
+			gameBlackOverlayAlpha = clamp(gameBlackOverlayAlpha, gameBlackOverlayAlphaTarget, 1);
+		}
+	}
+	
+	//gameBlackOverlayAlpha = gameBlackOverlayAlpha * 0.95 + gameBlackOverlayAlphaTarget * 0.05;
+	
 	if (gameBlackOverlayAlpha > 0.02) {
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(0, 0, 0, gameBlackOverlayAlpha), 0, undefined, true);
 	}
@@ -469,7 +483,8 @@ function gameRenderPost() {
 	if (gameWhiteBlinkFrames > 0) {
 		gameWhiteBlinkFrames--;
 		let alpha = 0.2 + gameWhiteBlinkFrames / 10;
-		alpha = min(alpha, .9);
+		alpha -= gameBlackOverlayAlpha; // Reduce white flash when black overlay is on
+		alpha = clamp(alpha, 0, .9);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
 	}
