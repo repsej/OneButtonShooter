@@ -4,7 +4,7 @@ let shipHpMax, shipHp, shipParts, shipX, shipSailing = false, xTotal = 0, barY =
 
 function shipReset()
 {
-	shipHp = shipHpMax = level * 5;
+	shipHp = shipHpMax = 10 + level * 5;
 
 	shipParts = [];
 	shipSailing = false;

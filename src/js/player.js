@@ -2,7 +2,7 @@
 
 const MAX_YSPEED = .2;
 const MAX_YPOWER = .01;
-const DY_POWER = .002;
+const DY_POWER = .00175;
 const PLAYER_GRAVITY = .5;
 const X_FLYING_SPEED = 0.075;
 

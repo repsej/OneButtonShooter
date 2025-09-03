@@ -162,14 +162,16 @@ function gameUpdate() {
 		cameraPos = cameraPos.lerp(followPos, 0.03);
 
 		// Clamp camera's y position downwards (dont see below the sea)
-		cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
+		//cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
 
 	} else {
 		// Player should always be placed a set number of tiles in from the left side of the screen
 		const tilesFromLeft = 7;
 		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-tilesFromLeft, 0)), 0.1);
-		cameraPos.y = cameraSize.y / 2;
 	}
+
+	cameraPos.y = cameraSize.y / 2;
+
 
 	// Clamp camera's x position
 	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
@@ -226,10 +228,9 @@ function gameUpdate() {
 
 		case GameState.PLAY:
 			levelUpdate();
-			if (player.pos.x > levelSize.x - cameraSize.x / 2) {
+			if (player.pos.x > levelSize.x - cameraSize.x * 2 / 3) {
 				gameBeginTransition();
 			}
-
 			break;
 	}
 
