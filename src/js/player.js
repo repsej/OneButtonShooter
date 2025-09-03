@@ -31,6 +31,8 @@ class Player extends EngineObject {
 		this.deathAngle = undefined;
 
 		musicTargetTempo = (level % 2 == 0) ? tempoMid : tempoFast;
+
+		this.lastShotFrame = frame;
 	}
 
 	isPaused() {
@@ -160,13 +162,17 @@ class Player extends EngineObject {
 
 		if (gameState == GameState.PLAY && (inputButtonPressed() || inputButtonReleased()))
 		{
-			// spawn bullet in front of plane
-			let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
-			bulletSpeed = bulletSpeed.add(this.velocity)
+			if (frame - this.lastShotFrame >= 3){
+				this.lastShotFrame = frame;
 
-			const bulletPos = this.pos.add(bulletSpeed.normalize(2));
+				// spawn bullet in front of plane
+				let bulletSpeed = vec2(.25, 0).rotate(-this.angle);
+				bulletSpeed = bulletSpeed.add(this.velocity)
 
-			new Bullet(bulletPos, bulletSpeed.normalize(.4), this, 1.2);
+				const bulletPos = this.pos.add(bulletSpeed.normalize(2));
+
+				new Bullet(bulletPos, bulletSpeed.normalize(.4), this, 1.2, 1.3);
+			} 
 		}
 	}
 

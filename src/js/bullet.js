@@ -1,7 +1,7 @@
 /** @format */
 
 class Bullet extends EngineObject {
-	constructor(pos, vel, shooter, size = 2) {
+	constructor(pos, vel, shooter, size = 2, maxLifeSecs = 0) {
 		super(pos, vec2(.25), spriteAtlas.bullet);
 
 		this.drawSize = vec2(.5*size);
@@ -13,12 +13,16 @@ class Bullet extends EngineObject {
 		sound_shoot.play(this.pos, .5);
 		this.shooter = shooter;
 		this.renderOrder = 1500;
+		this.maxLifeSecs = maxLifeSecs;
 
 		makeFire(this.pos, size * .5, 50 + size * 50);
 	}
 
 	update() {
 		super.update();
+
+		if (this.maxLifeSecs > 0 && time - this.spawnTime > this.maxLifeSecs) this.destroy();
+
 		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.x > cameraPos.x + cameraSize.x/2 + 2) 
 			this.destroy();
 	}
