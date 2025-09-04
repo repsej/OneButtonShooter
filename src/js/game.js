@@ -196,7 +196,7 @@ function gameUpdate() {
 				levelBuild(level);
 			}
 
-			if (inputButtonReleased(true)){
+			if (inputButtonReleased()){
 				gameStartGame(0);
 			} 	
 			break;
@@ -204,14 +204,14 @@ function gameUpdate() {
 		case GameState.INTRO_STORY:
 			scrollTextY -= .001;
 
-			if (inputButtonReleased(true)){
+			if (inputButtonReleased()){
 				levelBuild(level);
 				gameSetState(GameState.PLAY);
 			} 	
 			break;
 
 		case GameState.WON:
-			if (inputButtonReleased(true)){
+			if (inputButtonReleased()){
 				gameSetState(GameState.TITLE);
 			} 	
 			break;
@@ -219,7 +219,7 @@ function gameUpdate() {
 
 		case GameState.GAME_OVER:
 			if (time - gameStateChangedTime < 10){
-				if (inputButtonReleased(true)) gameStartGame(level)
+				if (inputButtonReleased()) gameStartGame(level)
 			}
 			else
 			{
@@ -415,10 +415,11 @@ function gameRenderPost() {
 	if (paused && !forcePause)
 	{
 		gameDrawHudText("PAUSED", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 1);
-		gameDrawHudText("Turn screen to play", overlayCanvas.width / 2, overlayCanvas.height * 0.6, .5);
+		gameDrawHudText("⟲", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 3);		
+		gameDrawHudText("Rotate phone to play", overlayCanvas.width / 2, overlayCanvas.height * 0.6, .5);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(0,0,0,.8), 0, undefined, true);
-
+		
 		mainContext.drawImage(overlayCanvas, 0, 0);
 		return;
 	}

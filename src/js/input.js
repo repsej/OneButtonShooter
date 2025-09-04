@@ -16,21 +16,11 @@ function inputButtonLastHeld() {
 	return inputButtonLast & 1;
 }
 
-function inputButtonPressed(forceRealInput = false) {
-	if (forceRealInput) {
-		let realInput = inputReadRealInput();
-		return realInput == 3;
-	}
-
+function inputButtonPressed() {
 	return inputButton == 3;
 }
 
-function inputButtonReleased(forceRealInput = false) {
-	if (forceRealInput) {
-		let realInput = inputReadRealInput();
-		return realInput == 4;
-	}
-
+function inputButtonReleased() {
 	return inputButton == 4;
 }
 
