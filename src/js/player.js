@@ -92,6 +92,8 @@ class Player extends EngineObject {
 		{
 
 			if (this.gravityScale != LOOP_GRAVITY) {
+				gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
+				
 				// Drop down to low height before starting loop
 				this.angle = -this.velocity.y * 3;
 				if (this.pos.y < 6){
@@ -111,6 +113,9 @@ class Player extends EngineObject {
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
 			this.velocity.y += 0.02;
+
+			gameBlackOverlayAlphaTarget += .002;
+			gameBlackOverlayAlphaTarget = clamp(gameBlackOverlayAlphaTarget, 0, GAME_BLACK_ALPHA_DARK);
 
 			if (this.angle < -PI * 2){
 				gameStartNextLevel();
@@ -213,7 +218,7 @@ class Player extends EngineObject {
 	}
 
 	hit(damage=1) {
-		if (gameState == GameState.TITLE) return;
+		if (gameState != GameState.PLAY) return;
 		
 		if (!this.alive) return;
 

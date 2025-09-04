@@ -5,7 +5,7 @@ const tempoMid = 5;
 const tempoFast = 6;
 
 let tempo = tempoSlow; 
-let musicVol = .3;
+let musicVol = .25;
 
 let musicTargetTempo = tempo; // set to change tempo
 

@@ -19,6 +19,11 @@ let gameBottomText = undefined;
 let lives = undefined;
 let gameWasNewHiscore = undefined;
 let gameWhiteBlinkFrames = 0;
+
+const GAME_BLACK_ALPHA_NONE = 0;
+const GAME_BLACK_ALPHA_MEDIUM = 0.4;
+const GAME_BLACK_ALPHA_DARK = 0.8;
+
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
 let showHeight = 20;
@@ -104,28 +109,28 @@ function gameSetState(newState) {
 
 	switch (newState) {
 		case GameState.TITLE:
-			gameBlackOverlayAlphaTarget = .25;
+			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
 			player.velocity = vec2(.1,0);
 			level = 6;
 			levelBuild(level);
 			break;
 		
 		case GameState.INTRO_STORY:
-			gameBlackOverlayAlphaTarget = 1;
+			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_DARK;
 			scrollTextY = 1;
 			break;
 
 		case GameState.TRANSITION:
-			gameBlackOverlayAlphaTarget = .5;
+			//gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
 			break;
 
 		case GameState.PLAY:
-			gameBlackOverlayAlphaTarget = 0;
+			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_NONE;
 			break;
 
 		case GameState.WON:
 		case GameState.GAME_OVER:
-			gameBlackOverlayAlphaTarget = .5;
+			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
 			gameWasNewHiscore = savefileHiscoreUpdate(score);
 			break;
 	}
