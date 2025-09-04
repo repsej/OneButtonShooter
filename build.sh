@@ -44,6 +44,8 @@ echo
 if [ $d -le 0 ]
 then
         echo "NOOOO !! zip size is $z (ie. $((-$d)) bytes bigger than the 13312 target)  :("
+        exit 1
 else
         echo "YAS, zip size is $z (ie. $d bytes below the 13312 target)  :)"
+        exit 0
 fi
