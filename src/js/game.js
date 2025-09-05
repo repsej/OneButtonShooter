@@ -136,9 +136,6 @@ function gameSetState(newState) {
 	}
 }
 
-function gameBeginTransition() {
-	player.startTransition();
-}
 
 
 function gameStartNextLevel()
@@ -233,8 +230,8 @@ function gameUpdate() {
 
 		case GameState.PLAY:
 			levelUpdate();
-			if (player.pos.x > levelSize.x - cameraSize.x * 2 / 3) {
-				gameBeginTransition();
+			if (player.pos.x > levelSize.x - 30) {
+				player.startTransition();
 			}
 			break;
 	}
@@ -255,7 +252,7 @@ function gameUpdate() {
 		if (keyWasPressed("KeyK")) player.hit();
 
 		// Next level
-		if (keyWasPressed("KeyN")) gameBeginTransition();
+		if (keyWasPressed("KeyN")) player.startTransition();
 
 		// Retry level
 		if (keyWasPressed("KeyR")) gameSkipToLevel(level);

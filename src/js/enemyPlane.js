@@ -26,17 +26,11 @@ class EnemyPlane extends Enemy {
 		if (this.hp <= 0)
 		{
 			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
+			return;
 		}
 
-		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 && this.hp > 0)
+		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 )
 		{
-			if(this.framesToShoot-- < 0 && this.shootOk())
-			{
-				this.framesToShoot = rand(100,200);
-			
-				this.shoot();
-			}
-
 			if (this.velocity.x == 0) this.velocity.x = rand(-0.05, -0.1);
 
 			if (rand() < 0.05) {
@@ -45,6 +39,15 @@ class EnemyPlane extends Enemy {
 
 			if (this.frame++ % 11 == 0) {
 				sound_engine.play(this.pos, .2, 2);
+			}
+
+			if (this.pos.x - player.pos.x < 40)
+			{
+				if(this.framesToShoot-- < 0 && this.shootOk())
+				{
+					this.framesToShoot = rand(100,200);
+					this.shoot();
+				}
 			}
 		}
 	}

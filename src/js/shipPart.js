@@ -62,7 +62,7 @@ class ShipPart extends Enemy {
 
 		if (player.isPaused()) return;
 
-		if (this.pos.x < cameraPos.x + 5 && shipHp > 0 && !shipSailing)
+		if (this.pos.x < player.pos.x + 20 && shipHp > 0 && !shipSailing)
 		{
 			// Tuuut tuuut ... start sailing !
 			shipSailing = true;
@@ -75,7 +75,7 @@ class ShipPart extends Enemy {
 		this.angle = 0;
 		this.velocity.y = max(this.velocity.y, -.01);
 
-		this.velocity.x = min(this.velocity.x + this.xAccel, .08);
+		this.velocity.x = min(this.velocity.x + this.xAccel, .07);
 
 		if(shipHp <= 0 && this.pos.y > 1 && rand(1) < .004) makeExplosion(this.pos, rand(1,3));
 

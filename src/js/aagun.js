@@ -21,7 +21,7 @@ function aaUpdateCannon(gun) {
 
 	if (gun.framesToShoot === undefined) gun.framesToShoot = rand(50,100);
 
-	if (gun.pos.x < cameraPos.x + cameraSize.x / 2 + 2 && gun.hp > 0) {
+	if (gun.pos.x < player.pos.x + 50 && gun.hp > 0) {
 		if (gun.framesToShoot-- < 0 && gun.shootOk()) {
 			gun.framesToShoot = rand(100, 150);
 
