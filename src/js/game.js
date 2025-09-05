@@ -161,14 +161,14 @@ function gameUpdate() {
 
 	if (gameState == GameState.TRANSITION) {
  		let followPos = vec2(player.pos.x, player.pos.y /2);
-		cameraPos = cameraPos.lerp(followPos, 0.03);
+		cameraPos = cameraPos.lerp(followPos, 0.01);
 
 		// Clamp camera's y position downwards (dont see below the sea)
 		//cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
 
 	} else {
 		// Player should always be placed a set number of tiles in from the left side of the screen
-		const tilesFromLeft = 7;
+		const tilesFromLeft = 8;
 		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-tilesFromLeft, 0)), 0.1);
 	}
 
@@ -230,7 +230,7 @@ function gameUpdate() {
 
 		case GameState.PLAY:
 			levelUpdate();
-			if (player.pos.x > levelSize.x - 30) {
+			if (player.pos.x > levelSize.x - 100) {
 				player.startTransition();
 			}
 			break;
