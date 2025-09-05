@@ -49,6 +49,8 @@ class Sky extends EngineObject {
 		mainContext.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 		mainContext.globalCompositeOperation = "lighter";
 
+		let starSize = mainCanvas.height/300;
+
 		// draw stars
 		const random = new RandomGenerator(this.seed);
 
@@ -59,11 +61,11 @@ class Sky extends EngineObject {
 				random.float(mainCanvas.height) * random.float()
 			);
 
-			const color = new Color(1,1,1, random.float(.3, .7));
+			const color = new Color(1,1,1, random.float(.2, .6));
 
 			// @ts-ignore
 			mainContext.fillStyle = color;
-			mainContext.fillRect(screenPos.x, screenPos.y, 3, 3);
+			mainContext.fillRect(screenPos.x, screenPos.y, starSize, starSize);
 		}
 
 
@@ -74,7 +76,7 @@ class Sky extends EngineObject {
 
 		for (let i = 0; i < this.cloudCount; i++ ) {
 			const size = random.float(1, 2) ** 2;
-			const speed = random.float(-100,-50); // random.float() < 0.95 ? 0 : random.float(-99, 99);
+			const speed = random.float(-.05,-.025) * mainCanvas.width;
 			const w = mainCanvas.width * 2,
 				h = mainCanvas.height / 10;
 

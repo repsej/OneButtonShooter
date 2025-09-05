@@ -1,7 +1,12 @@
 TODO: 
 
- - Bonus for lives at Game Won.  lives x 20000
+ - E-planes should start shooting when x tiles from player (in x axis)
+ - Level shall end when player is x tiles from the end (in x axis)
+ - Ship shall start sailing when x tiles from the player (x axis) 
+ - Look for other issues with camera width
+ - Test on very broad screen.
 
+ - Bonus for lives at Game Won.  lives x 20000
 
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
