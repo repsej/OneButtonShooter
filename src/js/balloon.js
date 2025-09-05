@@ -29,7 +29,7 @@ class Balloon extends Enemy {
 
 	render()
 	{
-		if(this.pos.y > 1) drawLine(this.pos, vec2(this.pos.x, 2), .05, new Color(0, 0, 0));
+		if(this.pos.y > 1) drawLine(this.pos, vec2(this.pos.x, 2), .05, Colors.black);
 		super.render();
 	}
 }

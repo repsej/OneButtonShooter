@@ -15,6 +15,9 @@ let gameState = GameState.PLAY;
 const LIVE_BONUS_SCORE = 5000;
 const LIVES_START = 3;
 
+const PLAYER_START_TILES_FROM_LEFT = 8;
+
+
 let gameBottomText = undefined;
 let lives = undefined;
 let gameWasNewHiscore = undefined;
@@ -168,8 +171,7 @@ function gameUpdate() {
 
 	} else {
 		// Player should always be placed a set number of tiles in from the left side of the screen
-		const tilesFromLeft = 8;
-		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-tilesFromLeft, 0)), 0.1);
+		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-PLAYER_START_TILES_FROM_LEFT, 0)), 0.1);
 	}
 
 	cameraPos.y = cameraSize.y / 2;
@@ -437,13 +439,24 @@ function gameRenderPost() {
 			break			
 
 		case GameState.TRANSITION:
-			gameDrawHudText("Level cleared", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-			// fall-thru !
+			gameDrawHudText("Level cleared!", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
+			drawTopLineUI();
+			break;
 
 		case GameState.PLAY:
-			gameDrawHudText("Level " + (level+1) + " / 8", (overlayCanvas.width * 1) / 4, ySpacing);
-			gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
-			gameDrawHudText("Lives " + lives, (overlayCanvas.width * 3) / 4, ySpacing);
+			drawTopLineUI();
+
+			if (level % 2 == 0)
+			{
+				let distToTarget = (levelSize.x - 100 - player.pos.x) | 0;
+				drawBar(vec2(overlayCanvas.width / 2, ySpacing * 2), 
+					vec2(overlayCanvas.width / 4, ySpacing / 5), 
+					1 - (levelSize.x - 100 - player.pos.x) / (levelSize.x - 100 - PLAYER_START_TILES_FROM_LEFT),
+					2, 
+					true);
+
+				//gameDrawHudText("To target " + distToTarget, overlayCanvas.width /2, overlayCanvas.height - ySpacing);
+			}
 
 			if (player.isPaused())
 			{
@@ -513,6 +526,12 @@ function gameRenderPost() {
 		alpha = clamp(alpha, 0, .9);
 
 		drawRect(mainCanvasSize.scale(0.5), mainCanvasSize, new Color(1, 1, 1, alpha), 0, undefined, true);
+	}
+
+	function drawTopLineUI() {
+		gameDrawHudText("Level " + (level + 1) + " / 8", (overlayCanvas.width * 1) / 4, ySpacing);
+		gameDrawHudText("Score " + score, (overlayCanvas.width * 2) / 4, ySpacing);
+		gameDrawHudText("Lives " + lives, (overlayCanvas.width * 3) / 4, ySpacing);
 	}
 }
 

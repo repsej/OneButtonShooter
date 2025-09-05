@@ -27,7 +27,7 @@ function shipDrawHealthBar(){
 	let healtBarSize = vec2(shipHpMax / 5,.2);
 	let healthPerc = shipHp / shipHpMax;
 
-	drawBar(healtBarPos, healtBarSize, healthPerc, healtBarSize.x * .01, Colors.white, false);
+	drawBar(healtBarPos, healtBarSize, healthPerc, healtBarSize.x * .01, false);
 }
 
 class ShipPart extends Enemy {

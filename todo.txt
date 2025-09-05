@@ -14,6 +14,7 @@ TODO:
 
  - Add credits counter ?
 
+ - Should continue restart level - 1 ?
 
 
 
