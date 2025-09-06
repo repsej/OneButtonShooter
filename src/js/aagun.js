@@ -28,7 +28,7 @@ function aaUpdateCannon(gun) {
 
 	if (gun.pos.x < player.pos.x + 50 && gun.hp > 0) {
 		if (gun.framesToShoot-- < 0 && gun.shootOk()) {
-			gun.framesToShoot = rand(100, 150);
+			gun.framesToShoot = rand(100, 200);
 
 			let bulletSpeed = vec2(-.07, .07);
 			const bulletPos = gun.pos.add(bulletSpeed.normalize(1));

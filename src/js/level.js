@@ -155,7 +155,7 @@ function levelUpdate()
 
 	if (levelFramesUntilNextWave-- < 0)
 	{
-		levelFramesUntilNextWave = rand(200,400);
+		levelFramesUntilNextWave = rand(200,500);
 
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {

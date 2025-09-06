@@ -1,18 +1,12 @@
 TODO: 
 
- - Show player in middle on win screen
-
  - Better intro text ... how ? what ?
-
- - Bonus for lives at Game Won.  lives x 20000
 
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
  - Pause on game over before you can continue (to hear the slow music).  Most screens need a small pause before you can continue.
 
  - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
-
- - Time bonus for sinking ships
 
  - Add credits counter ?
 
@@ -23,7 +17,7 @@ TODO:
 
 MAYBE:
  - For every second level completed ... that can be chosen from start screen
- - Add smoldering wreckage of destroyed aa guns
+ - Add smoldering wreckage of destroyed aa guns (and ePlanes ?)
  - Player HP ?  And health bar ?
  - Water splash effect (things falling into water, wake after ship, etc.)
  - Enemy planes are behind the clouds
@@ -43,7 +37,7 @@ MAYBE:
 WONT:
 
  - Limit player bullets on screen (prevent fast tappers from having it too easy)
-   NAH .... doesnt work !
+   NAH .... doesn't work !
  
 
 
