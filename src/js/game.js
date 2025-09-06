@@ -25,7 +25,7 @@ let gameWhiteBlinkFrames = 0;
 
 const GAME_BLACK_ALPHA_NONE = 0;
 const GAME_BLACK_ALPHA_MEDIUM = 0.4;
-const GAME_BLACK_ALPHA_DARK = 0.8;
+const GAME_BLACK_ALPHA_DARK = 0.7;
 
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
@@ -137,7 +137,7 @@ function gameSetState(newState) {
 
 		case GameState.WON:
 		case GameState.GAME_OVER:
-			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
+			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_DARK;
 			gameWasNewHiscore = savefileHiscoreUpdate(score);
 			break;
 	}
@@ -533,7 +533,7 @@ function gameRenderPost() {
 	// Overlay w texts
 	mainContext.drawImage(overlayCanvas, 0, 0);
 
-	if (gameState == GameState.TRANSITION) player.render(); // Render player on top during transition
+	if (gameState == GameState.TRANSITION || gameState == GameState.WON) player.render(); // Render player on top during transition
 
 	//// White flash
 	if (gameWhiteBlinkFrames > 0) {

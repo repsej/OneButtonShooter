@@ -116,7 +116,7 @@ class Player extends EngineObject {
 			this.drawSize.x *= 1.005;
 			this.drawSize.y *= 1.005;
 
-			this.angle -= .025;
+			this.angle -= .02;
 			this.gravityScale = LOOP_GRAVITY;
 			this.yPower = MAX_YPOWER;
 
