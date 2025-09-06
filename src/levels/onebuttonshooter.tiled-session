@@ -64,8 +64,8 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2398,
-                "y": 152
+                "x": 2424,
+                "y": -170
             }
         },
         "tileset.tsx": {
