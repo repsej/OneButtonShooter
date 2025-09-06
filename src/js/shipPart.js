@@ -109,7 +109,7 @@ class ShipPart extends Enemy {
 		shipHp -= dam;
 		if (shipHp <= 0)
 		{
-			addScore(1000*level);
+			addScore((level+1) * 1000 - player.pos.x|0 * 10, true);
 			player.startTransition();
 
 			for (const s of shipParts) {

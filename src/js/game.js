@@ -469,14 +469,11 @@ function gameRenderPost() {
 
 			if (level % 2 == 0)
 			{
-				let distToTarget = (levelSize.x - 100 - player.pos.x) | 0;
 				drawBar(vec2(overlayCanvas.width / 2, ySpacing * 2), 
 					vec2(overlayCanvas.width / 4, ySpacing / 5), 
 					1 - (levelSize.x - 100 - player.pos.x) / (levelSize.x - 100 - PLAYER_START_TILES_FROM_LEFT),
 					2, 
 					true);
-
-				//gameDrawHudText("To target " + distToTarget, overlayCanvas.width /2, overlayCanvas.height - ySpacing);
 			}
 
 			if (player.isPaused())
