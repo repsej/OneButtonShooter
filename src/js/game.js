@@ -36,6 +36,7 @@ let forcePause = false;
 let moon = undefined;
 let gameStateChangedTime = time;
 
+let lifeBonus = 0
 // let gameZoomFactor = 1, gameZoomFactorTarget = 1;
 
 let introStory = [
@@ -136,6 +137,9 @@ function gameSetState(newState) {
 			break;
 
 		case GameState.WON:
+			lifeBonus = lives * 1000;
+			addScore(lifeBonus, true);
+			// fall through
 		case GameState.GAME_OVER:
 			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_DARK;
 			gameWasNewHiscore = savefileHiscoreUpdate(score);
@@ -504,8 +508,10 @@ function gameRenderPost() {
 		case GameState.WON:
 			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height * .7, 3);
-			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .8, 2);
+			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height * .2, 2.5);
+			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .7, 1.5);
+
+			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, overlayCanvas.height * .9, 1);
 
 			break;
 	}

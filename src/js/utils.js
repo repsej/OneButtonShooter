@@ -27,8 +27,8 @@ function drawBar(pos, size, fraction, frameThickness = 0.1, screenSpace = false)
 }
 
 
-function addScore(points, pos){
-	if (gameState != GameState.PLAY || !player.alive) return;
+function addScore(points, forced = false){
+	if (!forced && (gameState != GameState.PLAY || !player.alive)) return;
 
 	score += points;
 }

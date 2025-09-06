@@ -23,11 +23,11 @@ function savefileUpdateNumber(key, value, defaultValue = 0.0) {
 }
 
 function savefileHiscoreGet() {
-	return savefileGetNumber("blackcatsquardron_hs", 0);
+	return savefileGetNumber("bcsqr", 0);
 }
 
 function savefileHiscoreUpdate(score) {
-	return savefileUpdateNumber("blackcatsquardron_hs", score);
+	return savefileUpdateNumber("bcsqr", score);
 }
 
 // function savefileSet(key, val) {
