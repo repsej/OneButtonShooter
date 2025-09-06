@@ -9,6 +9,7 @@ class Enemy extends EngineObject {
 		this.hp = 3;
 		this.deathGravity = .5;
 		this.deathTimeSecs = 2;
+		this.framesToShoot = 0;
 	}
 
 	shootOk() {

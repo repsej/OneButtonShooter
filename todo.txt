@@ -1,12 +1,14 @@
 TODO: 
 
+ - Show player in middle on win screen
+
+ - Better intro text ... how ? what ?
+
  - Bonus for lives at Game Won.  lives x 20000
 
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
  - Pause on game over before you can continue (to hear the slow music).  Most screens need a small pause before you can continue.
-
- - Show player in middle on win screen
 
  - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
 

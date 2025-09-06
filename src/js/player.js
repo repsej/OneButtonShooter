@@ -44,6 +44,7 @@ class Player extends EngineObject {
 	startTransition() {
 		if (!this.alive) return;
 
+		this.gravityScale = PLAYER_GRAVITY
 		gameWhiteBlinkFrames = 10;
 		gameCameraShake();
 
@@ -58,16 +59,26 @@ class Player extends EngineObject {
 		if (gameState == GameState.GAME_OVER || gameState == GameState.INTRO_STORY) return;
 
 		super.update();
-	
 
 		cameraMicPos = this.pos;
 
-		if (gameState== GameState.TITLE) {
+		if (gameState == GameState.TITLE || gameState == GameState.WON) {
 			this.yPower = 0;
 			this.velocity.x = X_FLYING_SPEED;
+			this.velocity.y /= 1.1;
+			this.angle = 0;
+
 			this.gravityScale = .1;
-			this.pos.y = levelSize.y * 2 / 3;
+			this.pos.y = (this.pos.y + levelSize.y * 2 / 3) / 2;
 			this.setCollision(false, false, false);
+
+			if (gameState == GameState.WON)
+			{
+				this.velocity.y = rand(-.05,.05);
+				this.angle = rand(-.005,.005);
+				gameZoomFactorTarget = 1.5;
+			}
+
 			return;
 		}
 
@@ -109,7 +120,7 @@ class Player extends EngineObject {
 			this.gravityScale = LOOP_GRAVITY;
 			this.yPower = MAX_YPOWER;
 
-			cameraScale -= .02;
+			gameZoomFactorTarget += .002;
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
 			this.velocity.y += 0.02;
@@ -123,6 +134,8 @@ class Player extends EngineObject {
 
 			return;
 		}
+
+
 
 		this.angle = -this.velocity.y * 3;
 

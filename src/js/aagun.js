@@ -16,6 +16,11 @@ class AAGun extends Enemy {
 	}
 }
 
+/**
+ * 
+ * @param {Enemy} gun 
+ * @returns 
+ */
 function aaUpdateCannon(gun) {
 	if (player.isPaused()) return;
 

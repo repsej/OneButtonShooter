@@ -36,6 +36,8 @@ let forcePause = false;
 let moon = undefined;
 let gameStateChangedTime = time;
 
+let gameZoomFactor = 1, gameZoomFactorTarget = 1;
+
 let introStory = [
 	"=★=",
 	"",
@@ -110,6 +112,8 @@ function gameSetState(newState) {
 
 	gameStateChangedTime = time;
 
+	gameZoomFactorTarget = 1;		
+
 	switch (newState) {
 		case GameState.TITLE:
 			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
@@ -157,28 +161,34 @@ function gameStartNextLevel()
 
 
 function gameUpdate() {
-	cameraScale = mainCanvas.height / showHeight;
+	gameZoomFactor = gameZoomFactor * 0.95 + gameZoomFactorTarget * 0.05;
+	console.log("gameZoomFactor", gameZoomFactor);
+
+	cameraScale = gameZoomFactor * mainCanvas.height / showHeight;
 
 	inputUpdateXXX();
 	musicUpdate();
 
-	if (gameState == GameState.TRANSITION) {
- 		let followPos = vec2(player.pos.x, player.pos.y /2);
-		cameraPos = cameraPos.lerp(followPos, 0.01);
+	// Clamp camera's y position downwards (dont see below the sea)
+	
+	if (gameState == GameState.TRANSITION || gameState == GameState.WON) {
+ 		let followPos = vec2(player.pos.x, player.pos.y);
+		cameraPos = cameraPos.lerp(followPos, 0.05);
 
-		// Clamp camera's y position downwards (dont see below the sea)
-		//cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
-
+		// dont show below sea level
+		cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
 	} else {
 		// Player should always be placed a set number of tiles in from the left side of the screen
 		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-PLAYER_START_TILES_FROM_LEFT, 0)), 0.1);
 	}
 
-	cameraPos.y = cameraSize.y / 2;
+	if (gameState != GameState.WON) 
+	{
+		cameraPos.y = cameraSize.y / 2;
 
-
-	// Clamp camera's x position
-	cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
+		// Clamp camera's x position
+		cameraPos.x = clamp(cameraPos.x, cameraSize.x / 2, levelSize.x - cameraSize.x / 2);
+	}
 
 	if (!moon || moon.destroyed) {
 		moon = new EngineObject(vec2(1), vec2(2), spriteAtlas.moon);
@@ -258,6 +268,12 @@ function gameUpdate() {
 
 		// Retry level
 		if (keyWasPressed("KeyR")) gameSkipToLevel(level);
+
+		// Win
+		if (keyWasPressed("KeyW")){
+			gameSkipToLevel(levelData.length-1);
+			player.startTransition();
+		}
 	}
 
 	if (!IS_RELEASE || gameState == GameState.WON) {
@@ -487,8 +503,8 @@ function gameRenderPost() {
 		case GameState.WON:
 			gameDrawScoreStuff(ySpacing);
 
-			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 8, 3);
-			gameDrawHudText("YOU SANK ALL SHIPS", overlayCanvas.width / 2, overlayCanvas.height - ySpacing * 5, 2);
+			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height * .7, 3);
+			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .8, 2);
 
 			break;
 	}
