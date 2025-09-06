@@ -109,13 +109,8 @@ class ShipPart extends Enemy {
 		shipHp -= dam;
 		if (shipHp <= 0)
 		{
-			player.startTransition();
-
-			// setTimeout( () => {
-			// 	player.startTransition();
-			// }, 1500);
-
 			addScore(1000*level);
+			player.startTransition();
 
 			for (const s of shipParts) {
 				s.velocity.x = 0;
