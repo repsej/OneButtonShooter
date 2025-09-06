@@ -36,7 +36,7 @@ let forcePause = false;
 let moon = undefined;
 let gameStateChangedTime = time;
 
-let gameZoomFactor = 1, gameZoomFactorTarget = 1;
+// let gameZoomFactor = 1, gameZoomFactorTarget = 1;
 
 let introStory = [
 	"=★=",
@@ -112,7 +112,7 @@ function gameSetState(newState) {
 
 	gameStateChangedTime = time;
 
-	gameZoomFactorTarget = 1;		
+	// gameZoomFactorTarget = 1;		
 
 	switch (newState) {
 		case GameState.TITLE:
@@ -161,10 +161,11 @@ function gameStartNextLevel()
 
 
 function gameUpdate() {
-	gameZoomFactor = gameZoomFactor * 0.95 + gameZoomFactorTarget * 0.05;
-	console.log("gameZoomFactor", gameZoomFactor);
+	// gameZoomFactor = gameZoomFactor * 0.95 + gameZoomFactorTarget * 0.05;
+	// console.log("gameZoomFactor", gameZoomFactor);
+	// cameraScale = gameZoomFactor * mainCanvas.height / showHeight;
 
-	cameraScale = gameZoomFactor * mainCanvas.height / showHeight;
+	cameraScale = mainCanvas.height / showHeight;
 
 	inputUpdateXXX();
 	musicUpdate();

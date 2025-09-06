@@ -3,5 +3,6 @@
 rm -rf docs/
 mkdir docs/
 cd docs/
-unzip ../dist/a.zip
+cp ../dist/a.zip .
+unzip a.zip
 http-server

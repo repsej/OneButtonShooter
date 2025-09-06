@@ -76,7 +76,7 @@ class Player extends EngineObject {
 			{
 				this.velocity.y = rand(-.05,.05);
 				this.angle = rand(-.005,.005);
-				gameZoomFactorTarget = 1.5;
+				// gameZoomFactorTarget = 1.5;
 			}
 
 			return;
@@ -120,7 +120,7 @@ class Player extends EngineObject {
 			this.gravityScale = LOOP_GRAVITY;
 			this.yPower = MAX_YPOWER;
 
-			gameZoomFactorTarget += .002;
+			// gameZoomFactorTarget += .002;
 
 			this.velocity = vec2().setAngle(this.angle - PI * 3 / 2, .2);
 			this.velocity.y += 0.02;
