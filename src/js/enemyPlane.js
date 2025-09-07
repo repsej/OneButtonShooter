@@ -12,12 +12,12 @@ class EnemyPlane extends Enemy {
 		this.frame = 0;
 	}
 
-	destroy(){
-		// shoot just before leaving the screen
-		if (this.framesToShoot < 0 && this.hp > 0) this.shoot();
+	// destroy(){
+	// 	// shoot just before leaving the screen
+	// 	if (this.framesToShoot < 0 && this.hp > 0) this.shoot();
 
-		super.destroy();
-	}
+	// 	super.destroy();
+	// }
 
 
 	update() {

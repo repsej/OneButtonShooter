@@ -13,7 +13,7 @@ let GameState = {
 
 let gameState = GameState.PLAY;
 const LIVE_BONUS_SCORE = 5000;
-const LIVES_START = 3;
+const LIVES_START = 5;
 
 const PLAYER_START_TILES_FROM_LEFT = 8;
 
