@@ -23,7 +23,7 @@ class Bullet extends EngineObject {
 
 		if (this.maxLifeSecs > 0 && time - this.spawnTime > this.maxLifeSecs) this.destroy();
 
-		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.x > cameraPos.x + cameraSize.x/2 + 2 || this.pos.y > cameraSize.y + 2) 
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.y > cameraSize.y + 2) 
 			this.destroy();
 	}
 

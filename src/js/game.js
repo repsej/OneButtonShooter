@@ -15,7 +15,7 @@ let gameState = GameState.PLAY;
 const LIVE_BONUS_SCORE = 5000;
 const LIVES_START = 5;
 
-const PLAYER_START_TILES_FROM_LEFT = 8;
+const PLAYER_START_TILES_FROM_LEFT = 4;
 
 
 let gameBottomText = undefined;
@@ -26,6 +26,7 @@ let gameWhiteBlinkFrames = 0;
 const GAME_BLACK_ALPHA_NONE = 0;
 const GAME_BLACK_ALPHA_MEDIUM = 0.4;
 const GAME_BLACK_ALPHA_DARK = 0.7;
+
 const LEVEL_RIGHT_MARGIN = 140;
 
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;

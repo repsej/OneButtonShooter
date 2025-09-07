@@ -55,7 +55,7 @@ function levelBuild(level) {
 	levelSpawnPlayer();
 	levelStartTime = time;
 
-	levelFramesUntilNextWave = rand(100,200);
+	levelFramesUntilNextWave = rand(50,100);
 }
 
 function levelSpawnPlayer() {
@@ -157,9 +157,11 @@ function levelUpdate()
 	{
 		levelFramesUntilNextWave = rand(200,500);
 
+		let spawnX = min(cameraPos.x + cameraSize.x/2 + 2, player.pos.x + 50 );
+
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {
-			const spawnPos = vec2(cameraPos.x + cameraSize.x/2 + rand(5,10), rand(10, levelSize.y));
+			const spawnPos = vec2(spawnX + rand(5,10), rand(10, levelSize.y));
 			new EnemyPlane(spawnPos);
 		}
 	}

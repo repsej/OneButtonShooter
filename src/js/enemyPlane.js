@@ -29,7 +29,9 @@ class EnemyPlane extends Enemy {
 			return;
 		}
 
-		if (this.pos.x < cameraPos.x + cameraSize.x/2 + 2 )
+		let startPosX = max(player.pos.x + 50, cameraPos.x + cameraSize.x/2 + 2);
+
+		if (this.pos.x < startPosX )
 		{
 			if (this.velocity.x == 0) this.velocity.x = rand(-0.05, -0.1);
 
