@@ -459,7 +459,7 @@ function gameRenderPost() {
 
 			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
 			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
-			gameDrawHudText("Tap to start", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+			gameDrawHudText("[Tap to start]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 
 			gameDrawHudText("a Js13kGames 2025 entry by Jesper Rasmussen", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .5);
 			break;
@@ -488,7 +488,9 @@ function gameRenderPost() {
 			if (player.isPaused())
 			{
 				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-				gameDrawHudText("Tap when ready", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+				gameDrawHudText("[Tap when ready]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+
+				gameDrawHudText("Controls: Tap to shoot. Hold to pull up.", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .8);
 			}
 
 			shipDrawHealthBar();
@@ -506,7 +508,7 @@ function gameRenderPost() {
 				gameDrawHudText("Timer", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 2);
 				gameDrawHudText((10 - t|0), overlayCanvas.width / 2, overlayCanvas.height * 0.6, 3);
 
-				gameDrawHudText("Tap to continue", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+				gameDrawHudText("[Tap to continue]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 			}
 
 			break;

@@ -1,6 +1,7 @@
 TODO: 
 
- - Make level shorter
+ - Add short controls text:  "Controls: Tap to shoot. Hold to pull up."
+
 
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
