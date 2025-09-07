@@ -26,6 +26,7 @@ let gameWhiteBlinkFrames = 0;
 const GAME_BLACK_ALPHA_NONE = 0;
 const GAME_BLACK_ALPHA_MEDIUM = 0.4;
 const GAME_BLACK_ALPHA_DARK = 0.7;
+const LEVEL_RIGHT_MARGIN = 140;
 
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
@@ -42,26 +43,33 @@ let lifeBonus = 0
 let introStory = [
 	"=★=",
 	"",
-	"World War II",
-	"PACIFIC THEATER, 1944",
+	"South Pacific - 1943",
 	"",
-	"As a pilot in a secret navy",
-	"squadron your task is to sink",
-	"enemy ships.",
+	"No lights. No backup.",
 	"",
-	"Your aircraft is the old",
-	"slow PBY Catalina.  Lightly",
-	"armed, but painted matte",
-	"black ... perfect for night",
-	"operations.",
-	"",	
-	"You are part of the secret",
+	"You fly an old patrol bomber",
+	"an PBY Catalina",
+	"painted jet black.",
+	"",
+	"Too slow, they said.",
+	"An easy target.",
+	"",
+	"But in the dark,",
+	"you're the hunter.",
+	"",
+	"You strike at night",
+	"— low, slow and unseen.",
+	"",
+	"You vanish before they",
+	"know what hit them.",
+	"",
+	"You are part of",
+	"the legendary",
+	"",
 	"BLACK CAT SQUADRON",
 	"",
-	"Now give them hell!",
-	"",
 	"=★=",
-];
+]
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameInit() {
@@ -247,7 +255,7 @@ function gameUpdate() {
 
 		case GameState.PLAY:
 			levelUpdate();
-			if (player.pos.x > levelSize.x - 100) {
+			if (player.pos.x > levelSize.x - LEVEL_RIGHT_MARGIN) {
 				player.startTransition();
 			}
 			break;
@@ -429,6 +437,7 @@ let levelTexts = [
 
 let scrollTextY = 1;
 
+
 function gameRenderPost() {
 	let ySpacing = overlayCanvas.height / 20;
 
@@ -471,7 +480,7 @@ function gameRenderPost() {
 			{
 				drawBar(vec2(overlayCanvas.width / 2, ySpacing * 2), 
 					vec2(overlayCanvas.width / 4, ySpacing / 5), 
-					1 - (levelSize.x - 100 - player.pos.x) / (levelSize.x - 100 - PLAYER_START_TILES_FROM_LEFT),
+					1 - (levelSize.x - LEVEL_RIGHT_MARGIN - player.pos.x) / (levelSize.x - LEVEL_RIGHT_MARGIN - PLAYER_START_TILES_FROM_LEFT),
 					2, 
 					true);
 			}

@@ -1,6 +1,6 @@
 TODO: 
 
- - Better intro text ... how ? what ?
+ - Make level shorter
 
  - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 

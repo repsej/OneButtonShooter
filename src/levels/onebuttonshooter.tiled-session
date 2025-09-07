@@ -8,64 +8,64 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400.5,
-                "y": 146
+                "x": 712,
+                "y": 124.5
             }
         },
         "level-01.tmj": {
-            "scale": 0.75,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2400.6666666666665,
-                "y": 152
+                "x": 991.5,
+                "y": 209.75
             }
         },
         "level-02.tmj": {
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2401,
-                "y": 152
+                "x": 2915,
+                "y": 131.5
             }
         },
         "level-03.tmj": {
-            "scale": 0.5,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2401,
-                "y": 152
+                "x": 921,
+                "y": 184.5
             }
         },
         "level-04.tmj": {
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2401,
-                "y": 152
+                "x": 2904,
+                "y": 143.5
             }
         },
         "level-05.tmj": {
-            "scale": 0.5,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2401,
-                "y": 152
+                "x": 964.6666666666665,
+                "y": 253.83333333333334
             }
         },
         "level-06.tmj": {
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2401,
-                "y": 152
+                "x": 2134.6666666666665,
+                "y": -35.33333333333337
             }
         },
         "level-07.tmj": {
-            "scale": 0.25,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2424,
-                "y": -170
+                "x": 1017,
+                "y": 202.75
             }
         },
         "tileset.tsx": {
