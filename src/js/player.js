@@ -62,10 +62,25 @@ class Player extends EngineObject {
 
 		cameraMicPos = this.pos;
 
+		//// Sound and particle effects
+		if (frame % 17 == 0 )
+		{
+			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
+		}
+
+		if (frame % 13 == 0)
+		{
+			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
+		}
+
+		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
+
+		//// Title and Won state
 		if (gameState == GameState.TITLE || gameState == GameState.WON) {
 			this.yPower = 0;
 			this.velocity.x = X_FLYING_SPEED;
 			this.velocity.y /= 1.1;
+			this.yPower = MAX_YPOWER / 5;
 			this.angle = 0;
 
 			this.gravityScale = .1;
@@ -81,21 +96,6 @@ class Player extends EngineObject {
 
 			return;
 		}
-
-
-		//// Sound and particle effects
-		if (frame % 17 == 0 )
-		{
-			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
-		}
-
-		if (frame % 13 == 0)
-		{
-			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
-		}
-
-		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
-
 
 
 		//// Transtition state
@@ -195,8 +195,6 @@ class Player extends EngineObject {
 		this.velocity.x = this.xSpeed;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
-
-
 
 		if (gameState == GameState.PLAY )
 		{

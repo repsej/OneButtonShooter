@@ -13,7 +13,7 @@ class Enemy extends EngineObject {
 	}
 
 	shootOk() {
-		if (!player || !player.alive || gameState == GameState.TRANSITION) return false;
+		if (!player || !player.alive || gameState == GameState.TRANSITION || gameState == GameState.WON) return false;
 
 		return this.pos.x - player.pos.x > 15; // only shoot when to the right of the player (and not too close)
 	}

@@ -187,10 +187,17 @@ function gameUpdate() {
 	
 	if (gameState == GameState.TRANSITION || gameState == GameState.WON) {
  		let followPos = vec2(player.pos.x, player.pos.y);
+		
+		// During transition, follow the sinking ship too
+		if (gameState == GameState.TRANSITION && shipParts.length > 0) {
+			followPos.x += shipX;
+			followPos.x /= 2;
+		}
+		
 		cameraPos = cameraPos.lerp(followPos, 0.05);
 
 		// dont show below sea level
-		cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
+		//cameraPos.y = max(cameraPos.y, cameraSize.y / 1.99); 
 	} else {
 		// Player should always be placed a set number of tiles in from the left side of the screen
 		cameraPos = cameraPos.lerp(player.pos.add(vec2(cameraSize.x/2-PLAYER_START_TILES_FROM_LEFT, 0)), 0.1);
@@ -214,7 +221,7 @@ function gameUpdate() {
 
 	switch (gameState) {
 		case GameState.TITLE:
-			if (player.pos.x > levelSize.x - cameraSize.x / 2 - LEVEL_RIGHT_MARGIN) {
+			if (player.pos.x > levelSize.x - LEVEL_RIGHT_MARGIN) {
 				levelBuild(level);
 			}
 
