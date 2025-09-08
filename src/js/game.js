@@ -214,8 +214,7 @@ function gameUpdate() {
 
 	switch (gameState) {
 		case GameState.TITLE:
-			levelUpdate();
-			if (player.pos.x > levelSize.x - cameraSize.x / 2) {
+			if (player.pos.x > levelSize.x - cameraSize.x / 2 - LEVEL_RIGHT_MARGIN) {
 				levelBuild(level);
 			}
 
@@ -228,7 +227,7 @@ function gameUpdate() {
 			scrollTextY -= .001;
 
 			if (inputButtonReleased()){
-				levelBuild(level);
+				//levelBuild(level);
 				gameSetState(GameState.PLAY);
 			} 	
 			break;
@@ -255,7 +254,6 @@ function gameUpdate() {
 		 	break;
 
 		case GameState.PLAY:
-			levelUpdate();
 			if (player.pos.x > levelSize.x - LEVEL_RIGHT_MARGIN) {
 				player.startTransition();
 			}

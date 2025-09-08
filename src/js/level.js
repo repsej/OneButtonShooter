@@ -42,8 +42,6 @@ const levelSetTileData = (pos, layer, data) =>
 const levelGetTileData = (pos, layer) =>
 	pos.arrayCheck(tileCollisionSize) ? tileData[layer][((pos.y | 0) * tileCollisionSize.x + pos.x) | 0] : 0;
 
-let levelFramesUntilNextWave;
-
 function levelBuild(level) {
 	tileData = undefined;
 	tileLayers = undefined;
@@ -54,8 +52,6 @@ function levelBuild(level) {
 	sky = new Sky();
 	levelSpawnPlayer();
 	levelStartTime = time;
-
-	levelFramesUntilNextWave = rand(50,100);
 }
 
 function levelSpawnPlayer() {
@@ -145,25 +141,17 @@ function levelLoad(levelNumber) {
 			}
 		}
 	}
+
 	tileLayer.redraw();
-}
 
+	//// Insert enemy planes
 
-function levelUpdate()
-{
-	if (!player || player.isPaused()) return;
-
-	if (levelFramesUntilNextWave-- < 0)
-	{
-		levelFramesUntilNextWave = rand(200,500);
-
-		let spawnX = min(cameraPos.x + cameraSize.x/2 + 2, player.pos.x + 50 );
-
+	for (let x = rand(50,60); x < levelSize.x; x += rand(30, 40)) {
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {
-			const spawnPos = vec2(spawnX + rand(5,10), rand(10, levelSize.y));
+			const spawnPos = vec2(x + rand(5,10), rand(10, levelSize.y));
 			new EnemyPlane(spawnPos);
 		}
 	}
-
 }
+
