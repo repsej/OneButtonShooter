@@ -53,7 +53,7 @@ function unfoldPattern(instrument, pan, startnode, pattern, starts, altPattern=u
 }
 
 
-function createMusic(level) {
+function createMusic() {
 	const p = undefined;
 	const root = 26;
 
@@ -149,13 +149,11 @@ let musicOn = true;
 
 let musicStartTime = 0;
 
-function musicInit(level) {
-	createMusic(level);
+function musicInit() {
+	createMusic();
 	musicStartTime = time;
 	musicLastPlayedBeat = -1;
 }
-
-
 
 let musicLastPlayedBeat = -1;
 let musicTempo = tempo;

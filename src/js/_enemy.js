@@ -32,7 +32,7 @@ class Enemy extends EngineObject {
 
 		this.hp -= damage;
 		if (this.hp <= 0) {
-			addScore(10);
+			addScore(50);
 			
 			this.setCollision(false, false, false);
 

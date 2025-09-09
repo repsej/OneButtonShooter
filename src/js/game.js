@@ -12,8 +12,7 @@ let GameState = {
 };
 
 let gameState = GameState.PLAY;
-const LIVE_BONUS_SCORE = 5000;
-const LIVES_START = 5;
+const LIVES_START = 3;
 
 const PLAYER_START_TILES_FROM_LEFT = 4;
 
@@ -31,12 +30,14 @@ const LEVEL_RIGHT_MARGIN = 140;
 
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
-let showHeight = 20;
 
 let forcePause = false;
 
 let moon = undefined;
 let gameStateChangedTime = time;
+
+let gameLevelFraction = 0;
+let gameShipBonus = 0;
 
 let lifeBonus = 0
 // let gameZoomFactor = 1, gameZoomFactorTarget = 1;
@@ -91,21 +92,14 @@ function gameInit() {
 	touchGamepadEnable = true;
 	gameWasNewHiscore = undefined;
 
-	score = level = 0;
+	score = 0;
 	gravity = -0.01;
-
-	lives = LIVES_START;
-
 	musicOn = true;
-
-	levelBuild(level);
-	musicInit(level);
+	musicInit();
 	
-	showHeight = levelSize.y * 1.2; // Show some more air above the level
-
 	cameraSize = getCameraSize();
 
-	if (isTouchDevice) particleEmitRateScale = 0.5;
+	// if (isTouchDevice) particleEmitRateScale = 0.5;
 
 	gameSetState(GameState.TITLE);
 }
@@ -127,9 +121,9 @@ function gameSetState(newState) {
 	switch (newState) {
 		case GameState.TITLE:
 			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_MEDIUM;
-			player.velocity = vec2(.1,0);
 			level = 6;
 			levelBuild(level);
+			player.velocity = vec2(.1,0);
 			break;
 		
 		case GameState.INTRO_STORY:
@@ -142,6 +136,7 @@ function gameSetState(newState) {
 			break;
 
 		case GameState.PLAY:
+			gameShipBonus = 0;
 			gameBlackOverlayAlphaTarget = GAME_BLACK_ALPHA_NONE;
 			break;
 
@@ -176,8 +171,9 @@ function gameStartNextLevel()
 function gameUpdate() {
 	// gameZoomFactor = gameZoomFactor * 0.95 + gameZoomFactorTarget * 0.05;
 	// console.log("gameZoomFactor", gameZoomFactor);
-	// cameraScale = gameZoomFactor * mainCanvas.height / showHeight;
+	// cameraScale = gameZoomFactor * mainCanvas.height / <showHeight>;
 
+	let showHeight = levelSize.y * 1.2; // Show some more air above the level
 	cameraScale = mainCanvas.height / showHeight;
 
 	inputUpdateXXX();
@@ -475,18 +471,25 @@ function gameRenderPost() {
 			break			
 
 		case GameState.TRANSITION:
-			gameDrawHudText("Level cleared!", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
+			gameDrawHudText("Level cleared!", overlayCanvas.width / 2, overlayCanvas.height * 0.35, 2);
+
+			if (gameShipBonus > 0) {
+				gameDrawHudText("Ship bonus " + gameShipBonus, overlayCanvas.width / 2, overlayCanvas.height * 0.65, 1);
+			}
+
 			drawTopLineUI();
 			break;
 
 		case GameState.PLAY:
 			drawTopLineUI();
 
+			gameLevelFraction = 1 - (levelSize.x - LEVEL_RIGHT_MARGIN - player.pos.x) / (levelSize.x - LEVEL_RIGHT_MARGIN - PLAYER_START_TILES_FROM_LEFT)
+
 			if (level % 2 == 0)
 			{
 				drawBar(vec2(overlayCanvas.width / 2, ySpacing * 2), 
 					vec2(overlayCanvas.width / 4, ySpacing / 5), 
-					1 - (levelSize.x - LEVEL_RIGHT_MARGIN - player.pos.x) / (levelSize.x - LEVEL_RIGHT_MARGIN - PLAYER_START_TILES_FROM_LEFT),
+					gameLevelFraction,
 					2, 
 					true);
 			}
