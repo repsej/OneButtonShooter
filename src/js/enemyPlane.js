@@ -54,7 +54,7 @@ class EnemyPlane extends Enemy {
 		}
 	}
 
-	collideWithTile(tileData, pos) {
+	collideWithTile() {
 		this.hit(this.hp);
 		return false;
 	}

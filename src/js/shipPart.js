@@ -75,7 +75,7 @@ class ShipPart extends Enemy {
 		this.angle = 0;
 		this.velocity.y = max(this.velocity.y, -.01);
 
-		this.velocity.x = min(this.velocity.x + this.xAccel, .07);
+		this.velocity.x = min(this.velocity.x + this.xAccel, X_FLYING_SPEED - 0.007);
 
 		if(shipHp <= 0 && this.pos.y > 1 && rand(1) < .004) makeExplosion(this.pos, rand(1,3));
 
@@ -102,9 +102,9 @@ class ShipPart extends Enemy {
 		}
 
 		// Slow down ship a bit when hit
-		for (const s of shipParts) {
-			s.velocity.x /= 1.05;
-		}
+		// for (const s of shipParts) {
+		// 	s.velocity.x /= 1.05;
+		// }
 
 		shipHp -= dam;
 		if (shipHp <= 0)

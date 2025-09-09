@@ -476,7 +476,7 @@ function gameRenderPost() {
 			gameDrawHudText("Level cleared!", overlayCanvas.width / 2, overlayCanvas.height * 0.35, 2);
 
 			if (gameShipBonus > 0) {
-				gameDrawHudText("Ship bonus " + gameShipBonus, overlayCanvas.width / 2, overlayCanvas.height * 0.65, 1);
+				gameDrawHudText("Ship bonus " + gameShipBonus, overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 			}
 
 			drawTopLineUI();

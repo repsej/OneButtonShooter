@@ -146,7 +146,7 @@ function levelLoad(levelNumber) {
 
 	//// Insert enemy planes
 
-	for (let x = rand(50,60); x < levelSize.x; x += rand(30, 40)) {
+	for (let x = rand(50,60); x < levelSize.x; x += rand(35, 45) - lives * 5) {
 		const enemyCount = rand(1, 3);
 		for (let i = 0; i < enemyCount; i++) {
 			const spawnPos = vec2(x + rand(5,10), rand(10, levelSize.y));

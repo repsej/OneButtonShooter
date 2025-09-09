@@ -68,12 +68,12 @@ class Player extends EngineObject {
 			sound_wind.play(this.pos, 2*(.01 + this.velocity.length() / 10));
 		}
 
-		if (frame % 13 == 0)
+		if (this.alive && frame % 13 == 0)
 		{
 			sound_engine.play(this.pos, .05 + this.yPower / (MAX_YPOWER * 2));
 		}
 
-		if (this.yPower > .0001 && frame % 2 == 0)	makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
+		if (this.yPower > .0001 && frame % 2 == 0) makeSmoke(this.pos, .01 + this.yPower / MAX_YPOWER);
 
 		//// Title and Won state
 		if (gameState == GameState.TITLE || gameState == GameState.WON) {
@@ -149,17 +149,18 @@ class Player extends EngineObject {
 		
 		if (!this.alive){
 
+			this.gravityScale = PLAYER_GRAVITY / 2;
+
 			if (frame - this.deathFrame > 180) {
 				return;
 			}
 
 			if (frame % 3 == 0){
 				makeSmoke(this.pos, rand(1,4));
-				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0, 0.2));
+				if(rand() < 0.3) sound_explosion.play(this.pos, rand(0.2, 0.6));
 			} 			
 
 			while (rand() < 0.2) makeFire(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
-
 
 			return;
 		} 
