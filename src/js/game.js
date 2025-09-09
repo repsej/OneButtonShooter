@@ -243,6 +243,8 @@ function gameUpdate() {
 
 
 		case GameState.GAME_OVER:
+			musicTargetTempo = tempoSlow;
+			
 			if (time - gameStateChangedTime < 10){
 				if (inputButtonReleased()) gameStartGame(level)
 			}

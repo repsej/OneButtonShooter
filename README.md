@@ -5,24 +5,28 @@ A Js13KGames 2025 entry by Jesper Rasmussen
 
 Back some 20 years ago when I did the GameMaker 8.1 demo that became "The Way of the Dodo" (last years' entry) I also did a one button shooter demo.
 
-At the company where I worked (NDS Denmark) we were experimenting with making one button games.  We looked into this because our user played our games with a tv remote control.  Remote controls back then were very bad ... eg. if you pressed two buttons at the same time, no button would register.
+At the company where I worked (NDS Denmark) we were experimenting with making one button games.  We looked into this because we made games for set top boxes (tv decoder boxes) and our user played our games with a tv remote control.  Remote controls (back then) were quite bad as game controllers ... eg. if you pressed two buttons at the same time, no button would register.
 
 I've wanted to make a full game out of that demo ever since.  So when I heard this year's theme "Black Cat" my first idea was to see if there was any squadrons with that nickname ... and there was ... and by pure luck, the plane they flew back then was a great fit to how my shooter would behave :)
 
 
 ## Tricks and fun stuff
 
- - Your plane shoots both when you press and when you lift/depress.  It makes it possible to shoot quite fast without too much tapping :)  I don't think I've ever experienced that in a game before.
+ - Your plane shoots both when you press and when you lift/depress.  It makes it possible to shoot quite fast with only half the tapping :)  I don't think I've ever experienced that in a game before.
 
  - Enemies stop shooting when you get too close (15 tiles) ... else the game was too difficult.
 
  - I've limited the number of shoots per second the player can spawn.  Else the game was too easy when you rapid fired with multiple fingers.  It made it impossible to tweak the difficulty.
 
+ - Making sure the game was fair to all screen aspect ratios took a lot of work.
+
+ - Making the tile image gray scale (+ red and yellow) made it compress much better :)
+
 ## Music
 
 I've reused the live music player I made for the Dodo game.
 
-This time it also has a swing to the rhythm - and it accentuates every odd measure.  As you do in jazz / blues / swing music.
+This time it also has a swing to the rhythm - and it accentuates beat 2 and 4.  As you do in jazz / blues / swing music.
 
 I wanted to use a popular song of the era: "In the mood", "Flying home", etc.
 
