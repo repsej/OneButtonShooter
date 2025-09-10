@@ -167,7 +167,7 @@ class Player extends EngineObject {
 
 		if (this.gravityScale == 0)
 		{
-			if (inputButtonReleased()){
+			if (inputButtonReleased() && time - gameStateChangedTime > PAUSE_BEFORE_NEXT){
 				musicPlayCrash(2);
 				gameWhiteBlinkFrames = 10;
 
@@ -252,6 +252,7 @@ class Player extends EngineObject {
 			}
 
 			levelBuild(level);
+			gameSetState(GameState.PLAY);
 		}, 3000);
 	}
 

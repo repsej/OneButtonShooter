@@ -15,7 +15,7 @@ let gameState = GameState.PLAY;
 const LIVES_START = 3;
 
 const PLAYER_START_TILES_FROM_LEFT = 4;
-
+const PAUSE_BEFORE_NEXT = 1; // seconds
 
 let gameBottomText = undefined;
 let lives = undefined;
@@ -31,7 +31,7 @@ const LEVEL_RIGHT_MARGIN = 140;
 let gameBlackOverlayAlpha = 0, gameBlackOverlayAlphaTarget = 0;
 let cameraShake = vec2();
 
-let forcePause = false;
+//let forcePause = false;
 
 let moon = undefined;
 let gameStateChangedTime = time;
@@ -49,8 +49,8 @@ let introStory = [
 	"",
 	"No lights. No backup.",
 	"",
-	"You fly an old patrol bomber",
-	"an PBY Catalina",
+	"You fly an old patrol",
+	"plane, a PBY Catalina",
 	"painted jet black.",
 	"",
 	"Too slow, they said.",
@@ -165,8 +165,26 @@ function gameStartNextLevel()
 	gameSetState(GameState.PLAY);
 }
 
+/**
+ * @param {number|function} next 
+ * @returns 
+ */
+function nextPressed(next) {
+	if (time - gameStateChangedTime < PAUSE_BEFORE_NEXT) return; 
+	if (!inputButtonReleased()) return;
 
+	if (typeof next == "function") {
+		next();	
+	} else {			
+		gameSetState(next);
+	}
+}
 
+function nextShowMessage(message) {
+	if (time - gameStateChangedTime < PAUSE_BEFORE_NEXT) return; 
+
+	gameDrawHudText(message, overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+}
 
 function gameUpdate() {
 	// gameZoomFactor = gameZoomFactor * 0.95 + gameZoomFactorTarget * 0.05;
@@ -221,35 +239,24 @@ function gameUpdate() {
 				levelBuild(level);
 			}
 
-			if (inputButtonReleased()){
-				gameStartGame(0);
-			} 	
+			nextPressed(() => gameStartGame(0));
 			break;
 
 		case GameState.INTRO_STORY:
 			scrollTextY -= .001;
-
-			if (inputButtonReleased()){
-				//levelBuild(level);
-				gameSetState(GameState.PLAY);
-			} 	
+			nextPressed(GameState.PLAY);
 			break;
 
 		case GameState.WON:
-			if (inputButtonReleased()){
-				gameSetState(GameState.TITLE);
-			} 	
+			nextPressed(GameState.TITLE);
 			break;
-
 
 		case GameState.GAME_OVER:
 			musicTargetTempo = tempoSlow;
 			
 			if (time - gameStateChangedTime < 10){
-				if (inputButtonReleased()) gameStartGame(level)
-			}
-			else
-			{
+				nextPressed(() => gameStartGame(level));
+			} else {
 				gameSetState(GameState.TITLE);
 			}
 			break;
@@ -265,38 +272,38 @@ function gameUpdate() {
 			break;
 	}
 
-	if (!IS_RELEASE) {
-		// Toggle music on
-		if (keyWasPressed("KeyM")) {
-			musicOn = !musicOn;
-		}
+	// if (!IS_RELEASE) {
+	// 	// Toggle music on
+	// 	if (keyWasPressed("KeyM")) {
+	// 		musicOn = !musicOn;
+	// 	}
 
-		// GAME OVER
-		if (keyWasPressed("KeyG")) {
-			lives = 1;
-			player?.hit();
-		}
+	// 	// GAME OVER
+	// 	if (keyWasPressed("KeyG")) {
+	// 		lives = 1;
+	// 		player?.hit();
+	// 	}
 
-		// KILL
-		if (keyWasPressed("KeyK")) player.hit();
+	// 	// KILL
+	// 	if (keyWasPressed("KeyK")) player.hit();
 
-		// Next level
-		if (keyWasPressed("KeyN")) player.startTransition();
+	// 	// Next level
+	// 	if (keyWasPressed("KeyN")) player.startTransition();
 
-		// Retry level
-		if (keyWasPressed("KeyR")) gameSkipToLevel(level);
+	// 	// Retry level
+	// 	if (keyWasPressed("KeyR")) gameSkipToLevel(level);
 
-		// Win
-		if (keyWasPressed("KeyW")){
-			gameSkipToLevel(levelData.length-1);
-			player.startTransition();
-		}
-	}
+	// 	// Win
+	// 	if (keyWasPressed("KeyW")){
+	// 		gameSkipToLevel(levelData.length-1);
+	// 		player.startTransition();
+	// 	}
+	// }
 
-	if (!IS_RELEASE || gameState == GameState.WON) {
-		if (keyWasPressed("PageUp")) gameSkipToLevel(++level);
-		if (keyWasPressed("PageDown")) gameSkipToLevel(--level);
-	}
+	// if (!IS_RELEASE || gameState == GameState.WON) {
+	// 	if (keyWasPressed("PageUp")) gameSkipToLevel(++level);
+	// 	if (keyWasPressed("PageDown")) gameSkipToLevel(--level);
+	// }
 
 	cameraShake = cameraShake.scale(-0.9);
 	cameraPos = cameraPos.add(cameraShake);
@@ -327,25 +334,25 @@ function gameUpdatePost() {
 	// Pause when not in landscape mode
 	paused = window.innerHeight > window.innerWidth
 
-	if (forcePause) paused = true;
+	// if (forcePause) paused = true;
 
-	if (!IS_RELEASE)
-	{
-		if (keyWasPressed("KeyP")) {
-			forcePause = !forcePause;
-		}
-	}
+	// if (!IS_RELEASE)
+	// {
+	// 	if (keyWasPressed("KeyP")) {
+	// 		forcePause = !forcePause;
+	// 	}
+	// }
 }
 
-function gameSkipToLevel(newLevel) {
-	gameBottomText = undefined;
-	gameWhiteBlinkFrames = 15;
+// function gameSkipToLevel(newLevel) {
+// 	gameBottomText = undefined;
+// 	gameWhiteBlinkFrames = 15;
 
-	level = mod(newLevel, levelData.length);
-	levelBuild(level);
+// 	level = mod(newLevel, levelData.length);
+// 	levelBuild(level);
 
-	gameSetState(GameState.PLAY);
-}
+// 	gameSetState(GameState.PLAY);
+// }
 
 // Arial (sans-serif)
 // Verdana (sans-serif)
@@ -368,7 +375,6 @@ function gameDrawHudTextMultilines(
 	for (let i = 0; i < texts.length; i++) {
 		gameDrawHudText(texts[i], x, y + i * (overlayCanvas.height / 20) * lineSpacing * sizeFactor, sizeFactor, fontName, fillColor, outlineColor);
 	}
-
 }
 
 function gameDrawHudText(
@@ -441,11 +447,11 @@ let levelTexts = [
 
 let scrollTextY = 1;
 
-
 function gameRenderPost() {
 	let ySpacing = overlayCanvas.height / 20;
 
-	if (paused && !forcePause)
+//	if (paused && !forcePause)
+	if (paused)
 	{
 		gameDrawHudText("PAUSED", overlayCanvas.width / 2, overlayCanvas.height * 0.4, 1);
 		gameDrawHudText("⟲", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 3);		
@@ -463,13 +469,18 @@ function gameRenderPost() {
 
 			gameDrawHudText("BLACK CAT", overlayCanvas.width / 2, overlayCanvas.height * 0.3, 4);
 			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
-			gameDrawHudText("[Tap to start]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+			
+			
+			//gameDrawHudText("[Tap to start]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+
+			nextShowMessage("[Tap to start]");
 
 			gameDrawHudText("a Js13kGames 2025 entry by Jesper Rasmussen", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .5);
 			break;
 
 		case GameState.INTRO_STORY:
 			gameDrawHudTextMultilines(introStory, overlayCanvas.width / 2, overlayCanvas.height * scrollTextY, 1.5);
+			nextShowMessage("[Tap to continue]");
 			break			
 
 		case GameState.TRANSITION:
@@ -499,7 +510,8 @@ function gameRenderPost() {
 			if (player.isPaused())
 			{
 				gameDrawHudText(levelTexts[level], overlayCanvas.width / 2, overlayCanvas.height * 0.4, 2);
-				gameDrawHudText("[Tap when ready]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+				
+				if (time - gameStateChangedTime > PAUSE_BEFORE_NEXT) gameDrawHudText("[Tap when ready]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
 
 				gameDrawHudText("Controls: Tap to shoot. Hold to pull up.", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .8);
 			}
@@ -519,7 +531,7 @@ function gameRenderPost() {
 				gameDrawHudText("Timer", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 2);
 				gameDrawHudText((10 - t|0), overlayCanvas.width / 2, overlayCanvas.height * 0.6, 3);
 
-				gameDrawHudText("[Tap to continue]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
+				nextShowMessage("[Tap to continue]");
 			}
 
 			break;
@@ -531,6 +543,8 @@ function gameRenderPost() {
 			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .7, 1.5);
 
 			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, overlayCanvas.height * .9, 1);
+
+			nextShowMessage("[Tap to continue]");
 
 			break;
 	}

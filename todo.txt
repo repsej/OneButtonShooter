@@ -1,9 +1,9 @@
 TODO: 
 
 
- - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
+ - How much is the intro story ? ~260 bytes !!
 
- - Pause on game over before you can continue (to hear the slow music).  Most screens need a small pause before you can continue.
+ - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
 
  - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
 

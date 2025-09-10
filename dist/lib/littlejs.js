@@ -2097,7 +2097,7 @@ let mainCanvasSize = vec2();
 let textureInfos = [];
 
 // Keep track of how many draw calls there were each frame for debugging
-let drawCount;
+//let drawCount;
 
 ///////////////////////////////////////////////////////////////////////////////
 

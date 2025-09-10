@@ -5,11 +5,11 @@
  * @param {boolean} test
  * @param {string} text
  */
-function assert(test, text = "[Like, some error]") {
-	if (IS_RELEASE) return;
+// function assert(test, text = "[Like, some error]") {
+// 	if (IS_RELEASE) return;
 
-	if (!test) {
-		console.error("ASSERT FAILED: ", text);
-		debugger; // NOFIX - NEEDS BE HERE !
-	}
-}
+// 	// if (!test) {
+// 	// 	console.error("ASSERT FAILED: ", text);
+// 	// 	debugger; // NOFIX - NEEDS BE HERE !
+// 	// }
+// }
