@@ -3,8 +3,6 @@ TODO:
 
  - How much is the intro story ? ~260 bytes !!
 
- - How would it work with "realistic" xspeed ... aka the real x speed of the angle of the player plane
-
  - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
 
  - Add credits counter ?
@@ -34,6 +32,8 @@ MAYBE:
   - Get bonus life after each sinking ?
 
 WONT:
+
+ - Removing all semi colons did nothing for zip size
 
  - Limit player bullets on screen (prevent fast tappers from having it too easy)
    NAH .... doesn't work !

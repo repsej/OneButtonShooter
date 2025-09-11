@@ -193,7 +193,7 @@ class Player extends EngineObject {
 
 		this.yPower = clamp(this.yPower, 0, MAX_YPOWER);
 		this.velocity.y += this.yPower;
-		this.velocity.x = this.xSpeed;
+		this.velocity.x = Math.cos(this.angle) * X_FLYING_SPEED;
 
 		this.velocity.y = clamp(this.velocity.y, -MAX_YSPEED, MAX_YSPEED);
 
