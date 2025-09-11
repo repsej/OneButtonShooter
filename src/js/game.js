@@ -18,7 +18,7 @@ const PLAYER_START_TILES_FROM_LEFT = 4;
 const PAUSE_BEFORE_NEXT = 1; // seconds
 
 let gameBottomText = undefined;
-let lives = undefined;
+let lives = LIVES_START;
 let gameWasNewHiscore = undefined;
 let gameWhiteBlinkFrames = 0;
 
@@ -235,7 +235,7 @@ function gameUpdate() {
 
 	switch (gameState) {
 		case GameState.TITLE:
-			if (player.pos.x > levelSize.x - LEVEL_RIGHT_MARGIN) {
+			if (player.pos.x > levelSize.x - LEVEL_RIGHT_MARGIN + cameraSize.x/2) {
 				levelBuild(level);
 			}
 
@@ -471,16 +471,14 @@ function gameRenderPost() {
 			gameDrawHudText("SQUADRON", overlayCanvas.width / 2, overlayCanvas.height * 0.5, 4);
 			
 			
-			//gameDrawHudText("[Tap to start]", overlayCanvas.width / 2, overlayCanvas.height * 0.8, 1);
-
-			nextShowMessage("[Tap to start]");
+			nextShowMessage("[Tap to start game]");
 
 			gameDrawHudText("a Js13kGames 2025 entry by Jesper Rasmussen", overlayCanvas.width / 2, overlayCanvas.height * 0.9, .5);
 			break;
 
 		case GameState.INTRO_STORY:
 			gameDrawHudTextMultilines(introStory, overlayCanvas.width / 2, overlayCanvas.height * scrollTextY, 1.5);
-			nextShowMessage("[Tap to continue]");
+			// nextShowMessage("[Tap to continue]");
 			break			
 
 		case GameState.TRANSITION:
