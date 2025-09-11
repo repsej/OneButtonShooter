@@ -1,6 +1,6 @@
 /** @format */
 
-const MAX_YSPEED = .2;
+const MAX_YSPEED = .22;
 const MAX_YPOWER = .01;
 const DY_POWER = .00175;
 const PLAYER_GRAVITY = .5;
@@ -118,7 +118,7 @@ class Player extends EngineObject {
 
 			this.angle -= .02;
 			this.gravityScale = LOOP_GRAVITY;
-			this.yPower = MAX_YPOWER;
+			this.yPower = MAX_YPOWER / 2;
 
 			// gameZoomFactorTarget += .002;
 
