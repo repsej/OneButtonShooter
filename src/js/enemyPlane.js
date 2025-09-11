@@ -26,6 +26,9 @@ class EnemyPlane extends Enemy {
 		if (this.hp <= 0)
 		{
 			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
+			
+			while (rand() < 0.2) makeFire(this.pos.add(randInCircle(.2,0)), rand(.2,.5));
+			
 			return;
 		}
 

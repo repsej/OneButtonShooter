@@ -17,7 +17,13 @@ class Balloon extends Enemy {
 	{
 		super.update();
 
-		if (this.hp <= 0) return;
+		if (this.hp <= 0){
+			if (frame % 2 == 0) makeSmoke(this.pos, rand(1,2));
+
+			while (rand() < 0.2) makeFire(this.pos.add(randInCircle(.5,0)), rand(.2,.5));
+
+			return;
+		} 
 
 		// Kill player hitting the wire
 		if (abs(player.pos.x - this.pos.x) < .5 && player.pos.y < this.pos.y)
