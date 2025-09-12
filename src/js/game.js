@@ -232,7 +232,7 @@ function gameUpdate() {
 		moon.gravityScale = 0;
 	}
 
-	moon.pos = cameraPos.add(vec2(cameraSize.x/3 - cameraPos.x / 20, cameraSize.y/3));
+	moon.pos = cameraPos.add(vec2(cameraSize.x/3 - cameraPos.x / 20, cameraSize.y /2.3));
 
 	switch (gameState) {
 		case GameState.TITLE:

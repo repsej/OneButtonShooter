@@ -85,7 +85,7 @@ class Sky extends EngineObject {
 
 			const screenPos = vec2(
 				mod(random.float(w) - cameraPos.x * camMult * 10, w),
-				h*2 - (size * h/2)
+				h*1.5 - (size * h/2)
 			);
 
 			//screenPos.y -= mainCanvas.height * 0.5;
