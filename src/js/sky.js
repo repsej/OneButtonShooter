@@ -18,7 +18,10 @@ class Sky extends EngineObject {
 		// this.skyMiddleColor = rgb(0, .25, .5);
 		// this.skyBottomColor = rgb(1, 0.5, .5);
 
-		this.cloudCount = mainCanvas.width / 150;
+		this.cloudCount = mainCanvas.width / 100;
+
+		//console.log(`xxx Cloud count: ${this.cloudCount}`);
+
 		this.clouds = [];
 
 		for (let i = 0; i < this.cloudCount; i++ ) {
@@ -79,7 +82,7 @@ class Sky extends EngineObject {
 			//const size = random.float() * random.float() + 1.5;
 			
 			const w = mainCanvas.width * 2,
-				h = mainCanvas.height / 10;
+				h = mainCanvas.height / 8;
 
 			let camMult = size;
 
