@@ -19,7 +19,7 @@ class Enemy extends EngineObject {
 	}
 
 	update() {
-		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 2 || this.pos.y < -2 ) {
+		if (this.pos.x < cameraPos.x - cameraSize.x/2 - 12 || this.pos.y < -2 ) {
 			this.destroy();
 		}
 

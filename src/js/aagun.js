@@ -7,7 +7,7 @@ class AAGun extends Enemy {
 		this.setCollision(true, true, false);
 		this.hp = 1;
 		this.deathGravity = 0;
-		this.deathTimeSecs = 0;
+		this.deathTimeSecs = 60;
 	}
 
 	update() {
@@ -23,6 +23,15 @@ class AAGun extends Enemy {
  */
 function aaUpdateCannon(gun) {
 	if (player.isPaused()) return;
+
+	if (gun.hp <= 0) {
+		gun.tileInfo = spriteAtlas.wreck;
+
+		if (rand() < 0.1) {
+			makeSmoke(gun.pos, rand(.5, 1));
+		}
+		return;
+	}
 
 	if (gun.framesToShoot === undefined) gun.framesToShoot = rand(50,100);
 

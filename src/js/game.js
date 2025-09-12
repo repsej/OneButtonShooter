@@ -85,7 +85,8 @@ function gameInit() {
 		enemyPlane: tile(vec2(12*16, 0), vec2(32, 16)),
 		explosion: tile(14),
 		aaGun: tile(15),
-		moon: tile(23)
+		moon: tile(23),
+		wreck: tile(24),
 	};
 
 	// enable touch gamepad on touch devices

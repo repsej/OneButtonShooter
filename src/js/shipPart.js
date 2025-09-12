@@ -95,9 +95,8 @@ class ShipPart extends Enemy {
 			if (this.hp <= 0){
 				makeExplosion(this.pos, 1);
 
-				if (this.isAAGun) this.size = vec2(0); // destroy gun
-
-				this.isAAGun = false; // disable gun
+				//if (this.isAAGun) this.size = vec2(0); // destroy gun
+				//this.isAAGun = false; // disable gun
 			}
 		}
 
