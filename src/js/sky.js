@@ -71,20 +71,21 @@ class Sky extends EngineObject {
 
 		mainContext.restore();
 
-
-		// draw clouds
+		// place clouds
 
 		for (let i = 0; i < this.cloudCount; i++ ) {
-			const size = random.float(1, 2) ** 2;
-			const speed = random.float(-.05,-.025) * mainCanvas.width;
+			const size = random.float(1, 2) * random.float(.5, 1.5);
+			
+			//const size = random.float() * random.float() + 1.5;
+			
 			const w = mainCanvas.width * 2,
 				h = mainCanvas.height / 10;
 
 			let camMult = size;
 
 			const screenPos = vec2(
-				mod(random.float(w) + time * speed - cameraPos.x * camMult * 10, w),
-				random.float(h) * random.float() + cameraPos.y * camMult - size
+				mod(random.float(w) - cameraPos.x * camMult * 10, w),
+				h*2 - (size * h/2)
 			);
 
 			//screenPos.y -= mainCanvas.height * 0.5;
@@ -101,7 +102,7 @@ class Sky extends EngineObject {
 			let cloud = this.clouds[i];
 			cloud.pos = screenToWorld(screenPos);
 			cloud.size = vec2(size * random.float(0.8, 2), size);
-			cloud.renderOrder = size;
+			cloud.renderOrder = size - 100;
 
 			//drawTile(screenPos, vec2(size * random.float(0.8, 2), size), spriteAtlas.cloud, undefined, 0, undefined, undefined, true, true);
 		}

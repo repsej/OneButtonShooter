@@ -17,8 +17,6 @@ MAYBE:
  - Add smoldering wreckage of destroyed aa guns (and ePlanes ?)
  - Player HP ?  And health bar ?
  - Water splash effect (things falling into water, wake after ship, etc.)
- - Enemy planes are behind the clouds
- - Clouds could be nicer ...
  - Title screen: select level
  - Title screen: toggle music
 
