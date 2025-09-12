@@ -2,8 +2,6 @@ TODO:
 
  - How much is the intro story ? ~260 bytes !!
 
- - Test on mobiles.  Works fine on Android :) ... but what about Apple ?  It does run horrible in Safari ...
-
  - Add credits counter ?
 
  - Should continue restart level - 1 ?
