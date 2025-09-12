@@ -273,6 +273,22 @@ function gameUpdate() {
 			break;
 	}
 
+	cameraShake = cameraShake.scale(-0.9);
+	cameraPos = cameraPos.add(cameraShake);
+
+	/////////////
+	// DEBUG KEYS ... DO NOT RELEASE WITH THESE ENABLED !!
+
+	// function gameSkipToLevel(newLevel) {
+	// 	gameBottomText = undefined;
+	// 	gameWhiteBlinkFrames = 15;
+
+	// 	level = mod(newLevel, levelData.length);
+	// 	levelBuild(level);
+
+	// 	gameSetState(GameState.PLAY);
+	// }
+
 	// if (!IS_RELEASE) {
 	// 	// Toggle music on
 	// 	if (keyWasPressed("KeyM")) {
@@ -305,10 +321,8 @@ function gameUpdate() {
 	// 	if (keyWasPressed("PageUp")) gameSkipToLevel(++level);
 	// 	if (keyWasPressed("PageDown")) gameSkipToLevel(--level);
 	// }
-
-	cameraShake = cameraShake.scale(-0.9);
-	cameraPos = cameraPos.add(cameraShake);
 }
+
 
 function gameStartGame(startLevel) {
 	level = startLevel;
@@ -345,15 +359,6 @@ function gameUpdatePost() {
 	// }
 }
 
-// function gameSkipToLevel(newLevel) {
-// 	gameBottomText = undefined;
-// 	gameWhiteBlinkFrames = 15;
-
-// 	level = mod(newLevel, levelData.length);
-// 	levelBuild(level);
-
-// 	gameSetState(GameState.PLAY);
-// }
 
 // Arial (sans-serif)
 // Verdana (sans-serif)
@@ -537,11 +542,11 @@ function gameRenderPost() {
 
 		case GameState.WON:
 			gameDrawScoreStuff(ySpacing);
-			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, ySpacing*2, .5);
 
 			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height * .2, 2.5);
 			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .7, 1.5);
 
+			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, overlayCanvas.height * .9, 1);
 
 			nextShowMessage("[Tap to continue]");
 
