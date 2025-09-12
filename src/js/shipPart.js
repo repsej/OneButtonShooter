@@ -109,7 +109,7 @@ class ShipPart extends Enemy {
 		if (shipHp <= 0)
 		{
 			gameShipBonus = ((level+1) * 100 * (1- gameLevelFraction) | 0) * 10;
-			addScore(gameShipBonus, true);
+			addScore(gameShipBonus);
 
 			player.startTransition();
 
