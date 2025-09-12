@@ -537,11 +537,11 @@ function gameRenderPost() {
 
 		case GameState.WON:
 			gameDrawScoreStuff(ySpacing);
+			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, ySpacing*2, .5);
 
 			gameDrawHudText("CONGRATULATIONS", overlayCanvas.width / 2, overlayCanvas.height * .2, 2.5);
 			gameDrawHudText("All missions completed", overlayCanvas.width / 2, overlayCanvas.height * .7, 1.5);
 
-			gameDrawHudText("Life bonus "+lifeBonus, overlayCanvas.width / 2, overlayCanvas.height * .9, 1);
 
 			nextShowMessage("[Tap to continue]");
 
