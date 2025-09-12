@@ -24,7 +24,6 @@ class Player extends EngineObject {
 		// gameBottomText = "[Click to start]";
 
 		this.yPower = 0;
-		this.xSpeed = 0;
 		this.gravityScale = 0;
 		gameWhiteBlinkFrames = 15;
 
@@ -175,7 +174,6 @@ class Player extends EngineObject {
 
 				this.yPower = MAX_YPOWER / 2;
 				this.gravityScale = PLAYER_GRAVITY; 
-				this.xSpeed = X_FLYING_SPEED;
 			}
 
 			return;
